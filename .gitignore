@@ -1,0 +1,11 @@
+.DS_Store
+*~
+
+.bundle
+log/*.log
+tmp/
+.sass-cache/
+
+config/mongoid.yml
+
+public/stylesheets
