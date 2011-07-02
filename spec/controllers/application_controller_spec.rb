@@ -67,4 +67,33 @@ describe ApplicationController do
     end
     
   end
+  
+  describe "#authenticate_user!" do
+  
+    controller do
+      before_filter :authenticate_user!
+      
+      def index
+        render :text => 'ok'
+      end
+    end
+    
+    it "should show forbidden page for unauthenticated users" do
+      get :index
+      
+      response.should render_template('errors/forbidden')
+      response.should be_forbidden
+    end
+    
+    it "should show forbidden page for unauthenticated users" do
+      user = Fabricate(:user)
+      session[:session_token] = user.session_token
+      
+      get :index
+      
+      response.body.should == 'ok'
+    end
+    
+  end
+  
 end

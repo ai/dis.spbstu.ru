@@ -24,4 +24,10 @@ class ApplicationController < ActionController::Base
     @current_user = user
     session[:session_token] = user.session_token
   end
+  
+  # Фильтр, который показывает страницу только редакторам. Обычные посетители
+  # увидеят сообщение, что страница закрыта и нужно войти.
+  def authenticate_user!
+    render 'errors/forbidden', status: :forbidden unless signed_in?
+  end
 end

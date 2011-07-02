@@ -12,10 +12,13 @@ class SessionsController < ApplicationController
     user = User.where(auth_provider: provider, auth_uid: uid).first
     
     if user
+      # Если у нас есть такой редактор
       user.signin_at = Time.now
       user.save
       self.current_user = user
     else
+      # Если нет — ставим переменную только на следующую сессию, чтобы вывести
+      # сообщение об ошибке
       flash[:wrong_user] = auth_hash['user_info']['email']
     end
     
