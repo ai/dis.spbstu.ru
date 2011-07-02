@@ -1,1 +1,16 @@
-%h1 Пользователи
+%h1 Редакторы
+
+%ul
+  - @users.each do |user|
+    %li
+      - if signed_in?
+        = form_for user do |f|
+          = f.text_field :name
+          = f.email_field :email
+          = submit_tag 'Изменить'
+        = form_for user, :method => :delete do
+          = submit_tag 'Удалить'
+        - unless user.confirmed?
+          ни разу не входил
+      - else
+        = user.name

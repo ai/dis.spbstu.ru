@@ -3,7 +3,7 @@ Dis::Application.routes.draw do
   match '/auth/:provider/callback', to: 'sessions#create'
   match '/auth/failure', to: 'sessions#failure'
   
-  resources :users
+  resources :users, only: [:index, :destroy, :update]
   
   root to: 'contents#show'
 end

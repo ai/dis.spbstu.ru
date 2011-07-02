@@ -18,4 +18,17 @@ describe User do
     
   end
   
+  describe "#confirmed?" do
+    it "should be true for users with auth_provider and auth_uid" do
+      user = Fabricate(:user)
+      user.should_not be_confirmed
+      
+      user.auth_provider = 'fake'
+      user.should_not be_confirmed
+      
+      user.auth_uid = 'ivan'
+      user.should be_confirmed
+    end
+  end
+  
 end

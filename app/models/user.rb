@@ -32,4 +32,10 @@ class User
     self.session_token = SecureRandom.base64
     self.save!
   end
+  
+  # Указал ли пользователь свой способ входа на сайт из ссылки в
+  # в пригласительном письме
+  def confirmed?
+    auth_uid and auth_provider
+  end
 end
