@@ -13,9 +13,13 @@ gem 'coffee-script'
 gem 'uglifier'
 gem 'therubyracer'
 
+gem 'oa-openid'
+gem 'email_validator'
+
 group :development do
   gem 'oily_png'
   gem 'wirble'
+  gem 'thin'
 end
 
 group :test, :development do

@@ -47,6 +47,6 @@
    
 9. Запустите встроенный веб-сервер:
    
-        bundle exec rails server
+        bundle exec thin start
    
 10. Откройте в браузере <http://localhost:3000>.
