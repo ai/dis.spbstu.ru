@@ -58,6 +58,7 @@ describe SessionsController do
   
     it "should logout user" do
       user = Fabricate(:user)
+      old_session = user.session_token
       session[:session_token] = user.session_token
       @request.env['HTTP_REFERER'] = 'http://example.com/one'
       
@@ -65,6 +66,7 @@ describe SessionsController do
       
       response.should redirect_to('http://example.com/one')
       session[:session_token].should be_nil
+      user.reload.session_token.should_not == old_session
     end
   
   end

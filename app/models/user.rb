@@ -20,7 +20,7 @@ class User
   validates :email, presence: true, email: true, uniqueness: true
   
   # Во время создания пользователя вызываем метод generate_session_token!
-  before_create :generate_session_token!
+  after_create :generate_session_token!
   
   # Создаём индексы, чтобы быстрее искать по каким-то полям
   index [:auth_provider, :auth_uid], unique: true
@@ -30,5 +30,6 @@ class User
   # что пользователь уже вошёл на сайт
   def generate_session_token!
     self.session_token = SecureRandom.base64
+    self.save!
   end
 end

@@ -30,6 +30,7 @@ class SessionsController < ApplicationController
   
   # Забываем, что пользователь вошёл на сайте
   def destroy
+    current_user.generate_session_token!
     session.delete :session_token
     redirect_to request.referer || root_path
   end
