@@ -18,19 +18,22 @@ describe SessionsController do
     
     it "should signin user" do
       user = Fabricate(:user, auth_provider: 'fake', auth_uid: 'ivan')
+      @request.env['omniauth.origin'] = 'http://example.com/one'
       
       get :create, provider: 'fake'
       
-      response.should redirect_to(root_url)
+      response.should redirect_to('http://example.com/one')
       assigns(:current_user).should  == user
       session[:session_token].should == user.session_token
       assigns(:current_user).signin_at.utc.should  == @time_now
     end
     
     it "should show error on unknow user" do
+      @request.env['omniauth.origin'] = 'http://example.com/one'
+      
       get :create, provider: 'fake'
       
-      response.should redirect_to(root_url)
+      response.should redirect_to('http://example.com/one')
       assigns(:current_user).should  be_nil
       session[:session_token].should be_nil
       flash[:wrong_user].should == 'ivan@examle.com'
@@ -41,9 +44,11 @@ describe SessionsController do
   describe "#failure" do
     
     it "should show error on failure" do
+      @request.env['omniauth.origin'] = 'http://example.com/one'
+      
       get :failure, message: 'invalid_response'
       
-      response.should redirect_to(root_url)
+      response.should redirect_to('http://example.com/one')
       flash[:wrong_auth].should == 'invalid_response'
     end
     
@@ -56,7 +61,7 @@ describe SessionsController do
       session[:session_token] = user.session_token
       @request.env['HTTP_REFERER'] = 'http://example.com/one'
       
-      post :destroy
+      delete :destroy
       
       response.should redirect_to('http://example.com/one')
       session[:session_token].should be_nil

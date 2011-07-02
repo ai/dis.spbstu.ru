@@ -19,13 +19,13 @@ class SessionsController < ApplicationController
       flash[:wrong_user] = auth_hash['user_info']['email']
     end
     
-    redirect_to root_path #TODO вернуть на последнюю страницу
+    redirect_to request.env['omniauth.origin'] || root_path
   end
   
   # Вызывается в случае ошибки на сайте аудентификации
   def failure
     flash[:wrong_auth] = params[:message]
-    redirect_to root_path #TODO вернуть на последнюю страницу
+    redirect_to request.env['omniauth.origin'] || root_path
   end
   
   # Забываем, что пользователь вошёл на сайте
