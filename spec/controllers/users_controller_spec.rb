@@ -168,6 +168,11 @@ describe UsersController do
       User.count.should == 1
     end
     
+    it "should not delete current user" do
+      delete :destroy, id: @user.id
+      response.should be_bad_request
+    end
+    
   end
   
   describe "#request_auth" do

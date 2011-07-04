@@ -13,8 +13,9 @@
           ни разу не входил
         = form_tag request_auth_user_path(user) do
           = submit_tag 'Изменить способ входа'
-        = form_for user, method: :delete do
-          = submit_tag 'Удалить'
+        - if user != current_user
+          = form_for user, method: :delete do
+            = submit_tag 'Удалить'
       - else
         = user.name
 

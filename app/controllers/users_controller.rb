@@ -34,6 +34,12 @@ class UsersController < ApplicationController
   
   # Удаление редактора
   def destroy
+    # Запрещаем редактору удалять самого себя
+    if @user == current_user
+      render text: "Нельзя удалить самого себя", status: :bad_request
+      return
+    end
+    
     mail = @user.email
     @user.destroy
     flash[:notice] = "Пользователь #{mail} удалён"
