@@ -5,15 +5,23 @@ describe SessionsController do
   describe "#create" do
     
     before :each do
-      @fake = {
-        'provider'  => 'fake',
-        'uid'       => 'ivan',
-        'user_info' => { 'email' => 'ivan@examle.com' }
-      }
+      @fake = { 'provider' => 'fake', 'uid' => 'ivan' }
       controller.stub!(:auth_hash).and_return(@fake)
       
       @time_now = Time.parse('2000-01-01').utc
       Time.stub!(:now).and_return(@time_now)
+    end
+    
+    it "should show error on unknow user" do
+      @fake['user_info'] = { 'email' => 'ivan@examle.com' }
+      @request.env['omniauth.origin'] = 'http://example.com/one'
+      
+      get :create, provider: 'fake'
+      
+      response.should redirect_to('http://example.com/one')
+      assigns(:current_user).should  be_nil
+      session[:session_token].should be_nil
+      flash[:wrong_user].should == 'ivan@examle.com'
     end
     
     it "should signin user" do
@@ -25,18 +33,38 @@ describe SessionsController do
       response.should redirect_to('http://example.com/one')
       assigns(:current_user).should  == user
       session[:session_token].should == user.session_token
-      assigns(:current_user).signin_at.utc.should  == @time_now
+      assigns(:current_user).signin_at.utc.should == @time_now
     end
     
-    it "should show error on unknow user" do
+    it "should not save auth if session contain wrong token" do
+      user = Fabricate(:user)
+      session[:reset_auth_token] = '123'
       @request.env['omniauth.origin'] = 'http://example.com/one'
       
       get :create, provider: 'fake'
       
       response.should redirect_to('http://example.com/one')
-      assigns(:current_user).should  be_nil
-      session[:session_token].should be_nil
-      flash[:wrong_user].should == 'ivan@examle.com'
+      flash[:error].should_not be_blank
+      session[:reset_auth_token].should be_nil
+    end
+    
+    it "should save auth if session contain token" do
+      user = Fabricate(:user)
+      session[:reset_auth_token] = user.reset_auth_token
+      
+      get :create, provider: 'fake'
+      
+      response.should redirect_to(start_users_path)
+      
+      user.reload
+      user.auth_provider.should == 'fake'
+      user.auth_uid = 'ivan'
+      user.reset_auth_token.should be_nil
+      session[:reset_auth_token].should be_nil
+      
+      assigns(:current_user).should  == user
+      session[:session_token].should == user.session_token
+      assigns(:current_user).signin_at.utc.should == @time_now
     end
     
   end

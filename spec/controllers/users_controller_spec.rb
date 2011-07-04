@@ -18,6 +18,96 @@ describe UsersController do
     
   end
   
+  describe "#auth" do
+  
+    before :each do
+      @user = Fabricate(:user)
+      session[:session_token] = @user.session_token
+    end
+    
+    it "should be accessed only for users" do
+      session.delete :session_token
+      put :update, id: @user.id
+      response.should be_forbidden
+    end
+  
+    it "should not allow to set auth without token" do
+      get :auth, id: @user.id
+      
+      response.should be_bad_request
+      response.body.should include('Не указан токен')
+      session[:reset_auth_token].should be_nil
+    end
+  
+    it "should not allow to set auth for user without token" do
+      @user.update_attribute :reset_auth_token, nil
+      
+      get :auth, id: @user.id, token: '123'
+      
+      response.should redirect_to(users_path)
+      flash[:error].should include('уже выбрал')
+      session[:reset_auth_token].should be_nil
+    end
+    
+    it "should not allow to set auth with wrong token" do
+      get :auth, id: @user.id, token: '123'
+      
+      response.should redirect_to(users_path)
+      flash[:error].should include('Неправильный ключ')
+      session[:reset_auth_token].should be_nil
+    end
+    
+    it "should set auth_for token to session" do
+      get :auth, id: @user.id, token: @user.reset_auth_token
+      
+      response.should be_success
+      session[:reset_auth_token].should == @user.reset_auth_token
+    end
+  
+  end
+  
+  describe "#create" do
+  
+    before :each do
+      @user = Fabricate(:user)
+      session[:session_token] = @user.session_token
+    end
+    
+    it "should be accessed only for users" do
+      session.delete :session_token
+      post :create, id: @user.id
+      response.should be_forbidden
+    end
+    
+    it "should not allow to set empty email" do
+      post :create, id: @user.id, user: { 'email' => '' }
+      
+      response.should redirect_to(users_path)
+      flash[:error].should_not be_blank
+      User.count.should == 1
+    end
+    
+    it "should create user and send welcome mail" do
+      mail = mock(:mail)
+      mail.should_receive(:deliver)
+      Mailer.should_receive(:welcome).with(@user, an_instance_of(User)).
+        and_return(mail)
+      
+      post :create, id: @user.id, user: { 'email' => 'test@example.com',
+                                          'name'  => 'Test' }
+      
+      response.should redirect_to(users_path)
+      flash[:notice].should_not be_blank
+      
+      User.count.should == 2
+      user = User.last
+      user.email.should == 'test@example.com'
+      user.name.should  == 'Test'
+      user.should_not be_confirmed
+    end
+    
+  end
+  
   describe "#update" do
   
     before :each do
@@ -33,7 +123,9 @@ describe UsersController do
     
     it "should not allow to set empty email" do
       put :update, id: @user.id, user: { 'email' => '' }
-      response.status.should == 400 # bad request
+      
+      response.should redirect_to(users_path)
+      flash[:error].should_not be_blank
       @user.reload.email.should_not be_blank
     end
     
@@ -70,6 +162,45 @@ describe UsersController do
       
       response.should redirect_to(users_path)
       User.count.should == 1
+    end
+    
+  end
+  
+  describe "#request_auth" do
+  
+    before :each do
+      @user = Fabricate(:user)
+      session[:session_token] = @user.session_token
+      @user.update_attribute :reset_auth_token, nil
+    end
+    
+    it "should be accessed only for users" do
+      session.delete :session_token
+      post :request_auth, id: @user.id
+      response.should be_forbidden
+    end
+    
+    it "should allow to change current user auth" do
+      post :request_auth, id: @user.id
+      
+      token = @user.reload.reset_auth_token
+      token.should_not be_nil
+      response.should redirect_to(auth_user_path(@user, token: token))
+    end
+    
+    it "should allow to change auth for another user" do
+      @another = Fabricate(:user)
+      @another.update_attribute :reset_auth_token, nil
+      
+      mail = mock(:mail)
+      mail.should_receive(:deliver)
+      Mailer.should_receive(:change_auth).with(@user, @another).and_return(mail)
+      
+      post :request_auth, id: @another.id
+      
+      @another.reload.reset_auth_token.should_not be_nil
+      response.should redirect_to(users_path)
+      flash[:notice].should_not be_blank
     end
     
   end

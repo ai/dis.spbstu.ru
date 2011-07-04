@@ -14,3 +14,15 @@ RSpec.configure do |config|
     Mongoid.master.collections.select { |i| i.name !~ /system/ }.each(&:drop)
   end
 end
+
+RSpec::Matchers.define :be_bad_request do
+  match do |response|
+    response.status == 400
+  end
+  failure_message_for_should do |response|
+    "excepted 400 response status, got #{response.status}"
+  end
+  failure_message_for_should_not do |response|
+    "excepted response not to have 400 status, got #{response.status}"
+  end
+end

@@ -1,5 +1,9 @@
+# encoding: utf-8
 # Аудентификация редакторов
 class SessionsController < ApplicationController
+  # Отключаем защиту от XSRF для create действия, чтобы побороть ошибку OmniAuth
+  protect_from_forgery except: :create
+  
   # Аудентификация пользователя.
   # 
   # Сначала вызывается OmniAuth, который перенаправляет пользователя на
@@ -7,39 +11,76 @@ class SessionsController < ApplicationController
   # то пользователь перенаправляется обратно на наш сайт и вызывается
   # этот метод.
   def create
-    provider = auth_hash['provider']
-    uid      = auth_hash['uid']
-    user = User.where(auth_provider: provider, auth_uid: uid).first
+    provider = auth_hash['provider'] # Сервис, с помощью которого пользователь
+                                     # вошёл на сайт (например, с помощью своего
+                                     # аккаунта на Google)
+    uid = auth_hash['uid']           # ID пользователя в этом сервисе
     
-    if user
-      # Если у нас есть такой редактор
-      user.signin_at = Time.now
-      user.save
-      self.current_user = user
+    if session[:reset_auth_token]
+      # Если пользователь вошёл на сайт первый раз и нам нужно запомнить его
+      # сервис и ID пользователя
+      user = User.where(reset_auth_token: session[:reset_auth_token]).first
+      session.delete :reset_auth_token
+      if user
+        user.auth_provider    = provider
+        user.auth_uid         = uid
+        user.reset_auth_token = nil
+        sign_in! user
+        redirect_to start_users_path
+        return
+      else
+        flash[:error] = 'Сменить способ входа уже нельзя'
+      end
     else
-      # Если нет — ставим переменную только на следующую сессию, чтобы вывести
-      # сообщение об ошибке
-      flash[:wrong_user] = auth_hash['user_info']['email']
+      user = User.where(auth_provider: provider, auth_uid: uid).first
+      if user
+        # Если у нас есть такой редактор
+        sign_in! user
+      else
+        # Если нет — ставим переменную только на следующую сессию, чтобы вывести
+        # сообщение об ошибке
+        flash[:wrong_user] = auth_hash['user_info']['email']
+      end
     end
     
+    # Возвращаем пользователя на страницу, где он последний раз был или на
+    # главную страницу сайта
     redirect_to request.env['omniauth.origin'] || root_path
   end
   
-  # Вызывается в случае ошибки на сайте аудентификации
+  # Вызывается, если сервис не смог проверить пользователя. Например, если
+  # пользователь забыл пароль от своего аккаунта на Google.
   def failure
     flash[:wrong_auth] = params[:message]
+    # Возвращаем пользователя на страницу, где он последний раз был или на
+    # главную страницу сайта
     redirect_to request.env['omniauth.origin'] || root_path
   end
   
-  # Забываем, что пользователь вошёл на сайте
+  # Выход с нашего сайта — забываем, что пользователь вошёл на сайте
   def destroy
+    # Меняем session_token пользователя, чтобы он вышел с нашего сайта и с
+    # других своих компьютеров (например, если зашёл с компьютера друга и забыл
+    # выйти)
     current_user.generate_session_token!
+    # Стираем session_token пользователя из сессии
     session.delete :session_token
+    # Возвращаем пользователя на страницу, где он последний раз был или на
+    # главную страницу сайта
     redirect_to request.referer || root_path
   end
   
   private
   
+  # Запоминаем, что пользователь вошёл на сайт
+  def sign_in!(user)
+    user.signin_at = Time.now # Запоминаем время, когда он вошёл на сайт
+    user.save
+    self.current_user = user  # Ставим session_token
+  end
+  
+  # Для удобства тестирования сделаем отдельный метод, из которого create берёт
+  # данные
   def auth_hash
     request.env['omniauth.auth'] 
   end

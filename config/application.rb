@@ -9,7 +9,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Dis
   class Application < Rails::Application
-    if Rails.env.development?
+    if Rails.env.development? and !defined? Rake and !defined? Rails::Console
       config.mongoid.logger = Logger.new($stdout, :debug)
       config.mongoid.persist_in_safe_mode = true
     end
@@ -18,6 +18,8 @@ module Dis
       g.test_framework      :rspec, :fixture => true
       g.fixture_replacement :fabrication
     end
+    
+    config.i18n.default_locale = :ru
 
     config.encoding = "utf-8"
 

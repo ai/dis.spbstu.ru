@@ -5,12 +5,15 @@ class User
   
   field :name                  # Имя редактора
   field :email                 # Эл. почта редактора
-  field :auth_provider         # Сервис, который аудентифицирует пользователя
-  field :auth_uid              # ID пользователя в сервисе, который его
-                               # аудентификацию
+  field :auth_provider         # Сервис, с помощью котого пользователь входит на
+                               # сайт (например, с помощью аккаунта Google)
+  field :auth_uid              # ID пользователя в сервисе, с помощью которого
+                               # пользователь входит на сайт
+  field :reset_auth_token      # Случайная строка, чтобы пользователь мог
+                               # изменить свои auth_provider и auth_uid
   field :session_token         # Случайная строка, которую мы записываем в
                                # сессию, чтобы знать, что пользователь уже
-                               # вошёл на сайт. Как бы «пароль» от сайта.
+                               # вошёл на сайт. Как бы «пароль» от сайта
   field :signin_at, type: Time # Когда пользователь последний раз входил на сайт
   include Mongoid::Timestamps  # Добавляет поля created_at и updated_at, чтобы
                                # знать когда мы создали пользователя, и когда
@@ -19,8 +22,9 @@ class User
   # Проверяем, что эл. почту указали, указали правиль, и что она уникальна
   validates :email, presence: true, email: true, uniqueness: true
   
-  # Во время создания пользователя вызываем метод generate_session_token!
+  # Во время создания пользователя генерируем токены
   after_create :generate_session_token!
+  after_create :generate_reset_auth_token!
   
   # Создаём индексы, чтобы быстрее искать по каким-то полям
   index [:auth_provider, :auth_uid], unique: true
@@ -33,8 +37,15 @@ class User
     self.save!
   end
   
-  # Указал ли пользователь свой способ входа на сайт из ссылки в
-  # в пригласительном письме
+  # Генерирует новый случайный reset_auth_token, чтобы пользователь мог
+  # доказать, что это он, ещё до того, как выставил auth_provider и auth_uid.
+  def generate_reset_auth_token!
+    self.reset_auth_token = SecureRandom.base64
+    self.save!
+  end
+  
+  # Открыл ли пользователь ссылку из пригласительно письма и выбрал ли способ
+  # входа на сайт
   def confirmed?
     auth_uid and auth_provider
   end
