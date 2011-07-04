@@ -10,6 +10,9 @@ class Content
   include Mongoid::Timestamps   # Добавляет поля created_at и updated_at,
                                 # чтобы знать когда мы создали страницу,
                                 # и когда последний раз изменили
+  include Mongoid::Versioning   # Добавляем поддержку старых версий страницы.
+                                # При сохранении, текущие данные будут
+                                # копироваться в массив versions.
   
   # Проверяем, что указали уникальный путь
   validates :path, presence: true, uniqueness: true

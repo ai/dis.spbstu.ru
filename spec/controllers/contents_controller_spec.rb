@@ -150,6 +150,19 @@ describe ContentsController do
       response.should redirect_to(content.path)
     end
     
+    it "should save previous version" do
+      content = Fabricate(:content, text: 'Old text')
+      
+      post :update, path: content.path, text: 'New text'
+      
+      content.reload
+      content.version.should  == 2
+      
+      previous = content.versions[0]
+      previous.version.should == 1
+      previous.text.should    == 'Old text'
+    end
+    
     it "should show form if content doesn't exists" do
       post :update, path: 'page/404', text: 'New text for 404'
       
