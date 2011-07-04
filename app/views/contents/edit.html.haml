@@ -1,0 +1,5 @@
+%h1 Изменение страницы
+
+= form_tag @content.path, method: :put do
+  = text_area @content, :text
+  = submit_tag 'Сохранить'

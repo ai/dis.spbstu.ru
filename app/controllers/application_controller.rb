@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  # Если запроненных данных нет в БД, то показываем ошибку 404
+  rescue_from Mongoid::Errors::DocumentNotFound do
+    render 'errors/not_found', status: :not_found
+  end
+  
   protected
   
   # Возвращает текущего пользователя, если он вошёл на сайт
