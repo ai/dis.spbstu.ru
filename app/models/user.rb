@@ -5,6 +5,7 @@ class User
   
   field :name                  # Имя редактора
   field :email                 # Эл. почта редактора
+  field :role                  # Сфера деятельности редактора.
   field :auth_provider         # Сервис, с помощью котого пользователь входит на
                                # сайт (например, с помощью аккаунта Google)
   field :auth_uid              # ID пользователя в сервисе, с помощью которого
@@ -15,9 +16,9 @@ class User
                                # сессию, чтобы знать, что пользователь уже
                                # вошёл на сайт. Как бы «пароль» от сайта
   field :signin_at, type: Time # Когда пользователь последний раз входил на сайт
-  include Mongoid::Timestamps  # Добавляет поля created_at и updated_at, чтобы
-                               # знать когда мы создали пользователя, и когда
-                               # последний раз изменили
+  include Mongoid::Timestamps  # Добавляет поля created_at и updated_at,
+                               # чтобы знать когда мы создали пользователя,
+                               # и когда последний раз изменили
   
   # Проверяем, что эл. почту указали, указали правиль, и что она уникальна
   validates :email, presence: true, email: true, uniqueness: true
@@ -27,8 +28,9 @@ class User
   after_create :generate_reset_auth_token!
   
   # Создаём индексы, чтобы быстрее искать по каким-то полям
-  index [:auth_provider, :auth_uid], unique: true
   index :session_token,              unique: true
+  index [:auth_provider, :auth_uid], unique: true
+  index :name
 
   # Генерируемновый новый случайный session_token, по которому проверяем,
   # что пользователь уже вошёл на сайт

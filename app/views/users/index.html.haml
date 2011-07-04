@@ -5,8 +5,9 @@
     %li
       - if signed_in?
         = form_for user do |f|
-          = f.text_field :name
-          = f.email_field :email
+          = f.text_field  :name,  placeholder: 'Имя'
+          = f.email_field :email, placeholder: 'Эл. почта'
+          = f.text_field  :role,  placeholder: 'Сфера деятельности'
           = submit_tag 'Изменить'
         - unless user.confirmed?
           ни разу не входил
@@ -19,6 +20,7 @@
 
 - if signed_in?
   = form_for User.new do |f|
-    = f.text_field :name
-    = f.email_field :email
+    = f.text_field  :name,  placeholder: 'Имя'
+    = f.email_field :email, placeholder: 'Эл. почта'
+    = f.text_field  :role,  placeholder: 'Сфера деятельности'
     = submit_tag 'Добавить'

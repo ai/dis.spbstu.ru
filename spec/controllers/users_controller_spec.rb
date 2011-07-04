@@ -94,7 +94,8 @@ describe UsersController do
         and_return(mail)
       
       post :create, id: @user.id, user: { 'email' => 'test@example.com',
-                                          'name'  => 'Test' }
+                                          'name'  => 'Test',
+                                          'role'  => 'Sample' }
       
       response.should redirect_to(users_path)
       flash[:notice].should_not be_blank
@@ -103,6 +104,7 @@ describe UsersController do
       user = User.last
       user.email.should == 'test@example.com'
       user.name.should  == 'Test'
+      user.role.should  == 'Sample'
       user.should_not be_confirmed
     end
     
@@ -130,13 +132,15 @@ describe UsersController do
     end
     
     it "should update user" do
-      put :update, id: @user.id,
-                   user: { 'email' => 'new@example.com', 'name' => 'New' }
+      put :update, id: @user.id, user: { 'email' => 'new@example.com',
+                                         'name'  => 'New',
+                                         'role'  => 'Test user' }
       
       response.should redirect_to(users_path)
       @user.reload
       @user.email.should == 'new@example.com'
       @user.name.should  == 'New'
+      @user.role.should  == 'Test user'
     end
     
   end

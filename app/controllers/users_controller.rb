@@ -80,6 +80,7 @@ class UsersController < ApplicationController
   def save_user(user)
     user.name  = params[:user]['name']
     user.email = params[:user]['email']
+    user.role  = params[:user]['role']
     if user.save
       true
     else
