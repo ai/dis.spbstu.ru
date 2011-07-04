@@ -12,7 +12,7 @@ describe ApplicationController do
           @current_user = User.where(email: params[:cache]).first
         end
         
-        render :text => current_user.email
+        render text: current_user.email
       end
     end
   
@@ -53,7 +53,7 @@ describe ApplicationController do
         if params[:user]
           self.current_user = User.where(email: params[:user]).first
         end
-        render :text => signed_in? ? 'true' : 'false'
+        render text: signed_in? ? 'true' : 'false'
       end
     end
   
@@ -74,7 +74,7 @@ describe ApplicationController do
       before_filter :authenticate_user!
       
       def index
-        render :text => 'ok'
+        render text: 'ok'
       end
     end
     
