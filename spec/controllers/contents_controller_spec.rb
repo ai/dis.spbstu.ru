@@ -146,12 +146,15 @@ describe ContentsController do
       
       post :update, path: content.path, text: 'New text'
       
-      content.reload.text.should == 'New text'
+      content.reload
+      content.text.should   == 'New text'
+      content.author.should == @user
       response.should redirect_to(content.path)
     end
     
     it "should save previous version" do
-      content = Fabricate(:content, text: 'Old text')
+      prev_user = Fabricate(:user)
+      content   = Fabricate(:content, text: 'Old text', author: prev_user)
       
       post :update, path: content.path, text: 'New text'
       
@@ -161,6 +164,7 @@ describe ContentsController do
       previous = content.versions[0]
       previous.version.should == 1
       previous.text.should    == 'Old text'
+      previous.author.should  == prev_user
     end
     
     it "should show form if content doesn't exists" do

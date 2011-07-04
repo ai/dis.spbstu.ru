@@ -14,6 +14,9 @@ class Content
                                 # При сохранении, текущие данные будут
                                 # копироваться в массив versions.
   
+  # Редактор, который отредактировал эту версию страницы
+  belongs_to :author, class_name: 'User'
+  
   # Проверяем, что указали уникальный путь
   validates :path, presence: true, uniqueness: true
   

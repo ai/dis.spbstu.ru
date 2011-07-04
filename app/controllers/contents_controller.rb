@@ -22,7 +22,8 @@ class ContentsController < ApplicationController
   # Сохраняем вики-страницу
   def update
     content = Content.find_or_initialize_by(path: params[:path])
-    content.text = params[:text]
+    content.text   = params[:text]
+    content.author = current_user
     content.save
     redirect_to content.path
   end
