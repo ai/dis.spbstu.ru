@@ -9,10 +9,10 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Dis
   class Application < Rails::Application
-    if Rails.env.development? and !defined? Rake and !defined? Rails::Console
-      config.mongoid.logger = Logger.new($stdout, :debug)
-      config.mongoid.persist_in_safe_mode = true
-    end
+#    if Rails.env.development? and !defined? Rake and !defined? Rails::Console
+#      config.mongoid.logger = Logger.new($stdout, :debug)
+#      config.mongoid.persist_in_safe_mode = true
+#    end
     
     config.generators do |g|
       g.test_framework      :rspec, fixture: true

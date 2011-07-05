@@ -137,14 +137,14 @@ describe ContentsController do
     
     it "should be accessed only for users" do
       session.delete :session_token
-      post :update, path: 'page/404', text: 'New text'
+      post :update, path: 'page/404', content: { 'text' => 'New text' }
       response.should be_forbidden
     end
     
     it "should save content" do
       content = Fabricate(:content)
       
-      post :update, path: content.path, text: 'New text'
+      post :update, path: content.path, content: { 'text' => 'New text' }
       
       content.reload
       content.text.should   == 'New text'
@@ -156,7 +156,7 @@ describe ContentsController do
       prev_user = Fabricate(:user)
       content   = Fabricate(:content, text: 'Old text', author: prev_user)
       
-      post :update, path: content.path, text: 'New text'
+      post :update, path: content.path, content: { 'text' => 'New text' }
       
       content.reload
       content.version.should  == 2
@@ -168,19 +168,19 @@ describe ContentsController do
     end
     
     it "should show form if content doesn't exists" do
-      post :update, path: 'page/404', text: 'New text for 404'
+      post :update, path: 'page/404', content: { 'text' => 'New text' }
       
       content = Content.last
       content.path.should == '/page/404'
-      content.text.should == 'New text for 404'
+      content.text.should == 'New text'
     end
     
     it "should show form for deleted page" do
       content = Fabricate(:deleted_content)
       
-      post :update, path: content.path, text: 'New text for deleted'
+      post :update, path: content.path, content: { 'text' => 'New text' }
       
-      content.reload.text.should == 'New text for deleted'
+      content.reload.text.should == 'New text'
       response.should redirect_to(content.path)
     end
     

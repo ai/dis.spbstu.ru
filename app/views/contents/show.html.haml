@@ -1,1 +1,3 @@
 = @content.text
+- if signed_in?
+  = link_to 'Править', edit_content_path(@content)
