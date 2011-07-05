@@ -84,6 +84,25 @@ describe ContentsController do
       response.status.should == 404
     end
     
+    it "should load version of content" do
+      content = Fabricate(:content, text: 'First')
+      content.text = 'Current'
+      content.save
+      
+      get :show, path: content.path
+      assigns(:version).should == content
+      
+      get :show, path: content.path, version: 1
+      assigns(:content).should == content
+      assigns(:version).should == content.versions.first
+      
+      get :show, path: content.path, version: 2
+      assigns(:version).should == content
+      
+      get :show, path: content.path, version: 999
+      response.status.should == 404
+    end
+    
   end
   
   describe "#edit" do

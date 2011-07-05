@@ -1,3 +1,10 @@
-= @content.text
+= @version.text
 - if signed_in?
   = link_to 'Править', edit_content_path(@content)
+  %h2 Версии
+  %ul
+    - @content.versions.each_with_index do |version|
+      %li
+        = link_to version.version, "?version=#{version.version}"
+    %li
+      = link_to 'Последняя', '?'

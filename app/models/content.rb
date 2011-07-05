@@ -56,4 +56,12 @@ class Content
   def deleted?
     not self.deleted_at.nil?
   end
+  
+  def get_version(number)
+    number = number.to_i if number
+    return self if number.nil? or self.version == number
+    version = self.versions[number - 1]
+    raise Mongoid::Errors::DocumentNotFound.new(self.class, []) unless version
+    version
+  end
 end

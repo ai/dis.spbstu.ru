@@ -79,4 +79,37 @@ describe Content do
     
   end
   
+  describe "#get_version" do
+  
+    before :each do
+      @content = Fabricate(:content, text: 'First')
+      @content.text = 'Current'
+      @content.save
+    end
+    
+    it "should return old version" do
+      @content.get_version(1).should == @content.versions[0]
+      @content.get_version(1).version.should == 1
+    end
+    
+    it "should receive string as version number" do
+      @content.get_version('1').should == @content.versions[0]
+    end
+    
+    it "should return current version" do
+      @content.get_version(2).should == @content
+    end
+    
+    it "should return current version, when version is nil" do
+      @content.get_version(nil).should == @content
+    end
+    
+    it "should raise 404, when it can find version" do
+      lambda {
+        @content.get_version(999)
+      }.should raise_error(Mongoid::Errors::DocumentNotFound)
+    end
+  
+  end
+  
 end

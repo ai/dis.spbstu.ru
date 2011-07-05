@@ -12,6 +12,7 @@ class ContentsController < ApplicationController
     # Ищем страницу по текущему пути. Если страницу не будет найдена, то будет
     # выброшена ошибка 404 (Mongoid::Errors::DocumentNotFound).
     @content = Content.by_path_without_deleted(params[:path])
+    @version = @content.get_version(params[:version])
   end
   
   # Страница редактирования
