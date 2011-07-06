@@ -7,4 +7,15 @@ module ApplicationHelper
     content.path + '/edit'
   end
   
+  # Добавляет ссылку на jQuery. В production использует сервера Яндекс, во время
+  # разработки использует локальную версию.
+  def include_jquery
+    if Rails.env.production?
+      url = 'http://yandex.st/jquery/1.6.2/jquery.min.js'
+    else
+      url = 'lib/development/jquery-1.6.2.js'
+    end
+    javascript_include_tag(url)
+  end
+  
 end
