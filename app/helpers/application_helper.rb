@@ -1,3 +1,4 @@
+# encoding: utf-8
 module ApplicationHelper
   
   # Возвращает путь, по которому можно исправить содержимое страницы

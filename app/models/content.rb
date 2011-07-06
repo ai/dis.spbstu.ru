@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Модель (класс для работы с данными из базы данных) вики-страницы.
 class Content
   include Mongoid::Document
@@ -57,6 +58,8 @@ class Content
     not self.deleted_at.nil?
   end
   
+  # Возвращает страницу нужной версии. Если указанной версии нет,
+  # то выкинет ошибку 404.
   def get_version(number)
     number = number.to_i if number
     return self if number.nil? or self.version == number

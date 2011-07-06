@@ -1,7 +1,8 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe ContentsController do
-
+  
   describe "routes" do
     
     it "should route content" do

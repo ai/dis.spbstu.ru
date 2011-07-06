@@ -1,3 +1,4 @@
+# encoding: utf-8
 Dis::Application.routes.draw do
   # Авторизация редактора
   match '/auth/:provider/callback', to: 'sessions#create'

@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 namespace :users do
   
   desc "Создать нового пользователя"
