@@ -31,4 +31,16 @@ module ApplicationHelper
     '<![endif]-->'.html_safe
   end
   
+  # В HTML5 больше не нужно писать type="text/javascript" для <script>.
+  # Добавляем хак, который вырезает лишний type из встроенного хелпера.
+  def javascript_include_tag(*params)
+    super.sub(' type="text/javascript"', '').html_safe
+  end
+  
+  # В HTML5 больше не нужно писать type="text/css" для <link rel="stylesheet">.
+  # Добавляем хак, который вырезает лишний type из встроенного хелпера.
+  def stylesheet_link_tag(*params)
+    super.sub(' type="text/css"', '').html_safe
+  end
+  
 end
