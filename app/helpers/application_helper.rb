@@ -18,4 +18,10 @@ module ApplicationHelper
     javascript_include_tag(url)
   end
   
+  # Добавляет дополнительные шрифты
+  def include_fonts
+    stylesheet_link_tag('http://fonts.googleapis.com/css?family=' +
+      'PT+Sans:400,400italic,700&subset=cyrillic,latin&v2')
+  end
+  
 end
