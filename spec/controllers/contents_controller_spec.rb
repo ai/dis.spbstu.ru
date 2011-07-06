@@ -2,6 +2,7 @@
 require 'spec_helper'
 
 describe ContentsController do
+  render_views # Проверяет, что в шаблонах нет синтаксических ошибок
   
   describe "routes" do
     

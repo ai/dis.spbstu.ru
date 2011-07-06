@@ -2,6 +2,7 @@
 require 'spec_helper'
 
 describe UsersController do
+  render_views # Проверяет, что в шаблонах нет синтаксических ошибок
   
   describe "#index" do
   
