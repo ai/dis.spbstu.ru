@@ -16,6 +16,8 @@ gem 'therubyracer'
 gem 'oa-openid'
 gem 'email_validator'
 
+gem 'kramdown'
+
 group :development do
   gem 'oily_png'
   gem 'wirble'

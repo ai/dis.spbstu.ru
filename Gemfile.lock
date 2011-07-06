@@ -58,6 +58,7 @@ GEM
     hike (1.1.0)
     i18n (0.6.0)
     json (1.5.3)
+    kramdown (0.13.3)
     libv8 (3.3.10.2)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -161,6 +162,7 @@ DEPENDENCIES
   fabrication
   haml
   json
+  kramdown
   mongoid
   oa-openid
   oily_png

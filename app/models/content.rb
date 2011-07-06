@@ -67,4 +67,34 @@ class Content
     raise Mongoid::Errors::DocumentNotFound.new(self.class, []) unless version
     version
   end
+  
+  # Запускает рендер и возвращает HTML-версию страницы
+  def html
+    render
+    @html
+  end
+  
+  # Если мы изменили текст, то текущий ренденр устарел и страницу нужно будет
+  # перерендерить
+  def text=(text)
+    @rendered = false
+    super # Вызываем оргинальный метод, который выставит новое значение text
+  end
+  
+  private
+  
+  # Рендерить HTML из markdown-синтаксиса
+  def render_html
+    @html = Kramdown::Document.new(@text).to_html
+  end
+  
+  # Запускает рендер страницы, если она ещё не рендерилась раньше
+  def render
+    unless @rendered
+      @rendered = true
+      @text = self.text
+      
+      render_html
+    end
+  end
 end

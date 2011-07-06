@@ -113,4 +113,33 @@ describe Content do
   
   end
   
+  describe "#html" do
+  
+    it "should render HTML from Markdown" do
+      content = Fabricate(:content, text: '*Warning*')
+      content.html.should == "<p><em>Warning</em></p>\n"
+      
+      content.text = "**New** value"
+      content.html.should == "<p><strong>New</strong> value</p>\n"
+    end
+  
+  end
+  
+  describe "#render" do
+    
+    it "should cache rendering" do
+      content = Fabricate(:content, text: 'First')
+      content.should_receive(:render_html).twice
+      
+      content.html
+      content.path = 'path/new'
+      content.html
+      
+      content.text = 'Second'
+      content.html
+      content.html
+    end
+    
+  end
+  
 end
