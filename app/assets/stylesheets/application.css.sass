@@ -8,16 +8,32 @@ body
 
 $root-width: 900px
 
+@mixin shadow
+  +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 3px)
+
 #root
   width: $root-width
   margin: 0 auto
   position: relative
 
+#subroot
+  padding-top: 1px
+
+#menu
+  margin-top: 19px
+  height: 40px
+  line-height: 40px
+  margin-bottom: 20px
+  background: #80ac0d
+  border-bottom: 1px solid darken(#80ac0d, 7%)
+  +border-radius(2px)
+  +shadow
+
 article.page
   padding: 18px 20px
   background: white
   +border-radius(2px)
-  +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 3px)
+  +shadow
   z-index: 2
 
 @import 'footer'

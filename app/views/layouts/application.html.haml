@@ -19,9 +19,10 @@
           = flash[type]
       
     #root
-      = render 'shared/menu'
-    
-      = yield
+      #subroot
+        = render 'shared/menu'
+      
+        = yield
       
       #root_footer
     
