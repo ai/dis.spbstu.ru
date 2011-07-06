@@ -24,4 +24,11 @@ module ApplicationHelper
       'PT+Sans:400,400italic,700&subset=cyrillic,latin&v2')
   end
   
+  # JS-хак, который включает поддержку HTML5-тегов для IE 6—8
+  def enable_html5_for_ie
+    '<!--[if lt IE 9]>'.html_safe +
+      javascript_include_tag('//html5shim.googlecode.com/svn/trunk/html5.js') +
+    '<![endif]-->'.html_safe
+  end
+  
 end
