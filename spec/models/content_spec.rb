@@ -168,6 +168,12 @@ describe Content do
       content.description.should == 'Тест'
       content.keywords.should    == 'один, два'
       content.html.should        == "<p>Текст\nстатьи</p>\n"
+      
+      content.text = 'Текст'
+      content.title.should       be_nil
+      content.description.should be_nil
+      content.keywords.should    be_nil
+      content.html.should        == "<p>Текст</p>\n"
     end
     
     it "should cache meta" do
