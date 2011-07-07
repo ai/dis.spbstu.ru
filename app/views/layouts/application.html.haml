@@ -19,6 +19,7 @@
     = include_jquery
     = javascript_include_tag 'application'
     - if signed_in?
+      = javascript_include_tag 'user'
       = csrf_meta_tags
     
     = yield :head

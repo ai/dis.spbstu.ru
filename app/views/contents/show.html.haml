@@ -14,11 +14,15 @@
 
 - if signed_in?
   - content_for :controls do
-    = link_to 'Править', edit_content_path(@content)
-    %h2 Версии
-    %ul
-      - @content.versions.each_with_index do |version|
-        %li
-          = link_to version.version, "?version=#{version.version}"
-      %li
-        = link_to 'Последняя', '?'
+    .edit-content
+      .shadowed-button
+        %a.styled-button{ href: edit_content_path(@content) }
+          %span Изменить
+      .history
+        %h2 Версии
+        %ul
+          %li
+            = link_to 'Последняя', '?'
+          - @content.versions.reverse_each do |version|
+            %li
+              = link_to version.version, "?version=#{version.version}"

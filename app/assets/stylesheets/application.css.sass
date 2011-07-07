@@ -1,4 +1,4 @@
-@import 'compass/css3'
+@import 'base'
 
 @import 'common'
 
@@ -6,26 +6,21 @@ body
   font-family: 'PT Sans', sans-serif
   background: #f2f2f2
 
-$root-width: 900px
-
-@mixin shadow
-  +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 3px)
-
 #root
   width: $root-width
   margin: 0 auto
   position: relative
+  z-index: 2
 
 #subroot
   padding-top: 1px
 
 #menu
   margin-top: 19px
-  height: 40px
-  line-height: 40px
+  +line-height(40px)
   margin-bottom: 20px
-  background: #80ac0d
-  border-bottom: 1px solid darken(#80ac0d, 7%)
+  background: $green
+  border-bottom: 1px solid darken($green, 7%)
   +border-radius(2px)
   +shadow
   
@@ -36,7 +31,10 @@ $root-width: 900px
   top: 0
   z-index: 1
   padding: 20px 0 0 20px
+  height: 100%
+  width: 300px
   
+@import 'button'
 @import 'signin'
 @import 'article'
 @import 'footer'

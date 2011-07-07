@@ -1,1 +1,64 @@
+@import 'base'
+
 #controls.user
+  .signed-in
+    position: absolute
+    top: 20px
+    +line-height(40px)
+    font-size: 15px
+    +transition(color, 200ms)
+    input
+      background: $green
+      width: 20px
+      height: 20px
+      text-align: center
+      +border-radius(10px)
+      border: 1px solid darken($green, 5%)
+      +transition(opacity, 200ms)
+      color: white
+      padding: 0
+      margin-left: 3px
+      font-weight: bold
+      text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0
+      +shadow
+      cursor: pointer
+      &:hover
+        background: lighten($green, 3%)
+      &:active
+        background: darken($green, 1%)
+        +box-shadow(rgba(0, 0, 0, 0) 0 0 0)
+      
+  .edit-content
+    position: absolute
+    top: 130px
+    .history
+      +transition(opacity, 200ms)
+      
+  .shadowed-button
+    position: relative
+    +line-height(30px)
+    border: 1px solid #d8d8d8
+    color: #c8c8c8
+    padding: 0 15px
+    +border-radius(15px)
+    .styled-button
+      position: absolute
+      top: 0
+      left: 0
+      +transition(opacity, 200ms)
+  
+  .history
+    margin-top: 15px
+
+#controls.user.unhover
+  .signed-in
+    color: #bfbfbf
+    input
+      opacity: 0
+  .edit-content
+    .styled-button
+    .history
+      opacity: 0
+  .shadowed-button
+    .styled-button
+      opacity: 0

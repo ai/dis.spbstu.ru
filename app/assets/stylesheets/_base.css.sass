@@ -1,0 +1,22 @@
+@import 'compass/css3'
+
+$root-width: 900px
+$green: #80ac0d
+
+@mixin shadow
+  +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 3px)
+
+@mixin line-height($height)
+  height: $height
+  line-height: $height
+
+@mixin half-background($color)
+  background: $color
+  +background(linear-gradient($color 0, $color 50%, darken($color, 3%) 50%, darken($color, 4%) 100%))
+
+@mixin user-select($select)
+  -moz-user-select: -moz-#{$select}
+  -khtml-user-select: $select
+  -webkit-user-select: $select
+  -o-user-select: $select
+  user-select: $select
