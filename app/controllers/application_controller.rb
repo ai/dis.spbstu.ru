@@ -42,4 +42,10 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     render 'errors/forbidden', status: :forbidden unless signed_in?
   end
+  
+  # Красивый вывод даты или времени
+  def l(*params)
+    ::R18n.get.l(*params)
+  end
+  helper_method :l # Добавляем метод в шаблоны представления
 end

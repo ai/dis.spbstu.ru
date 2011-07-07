@@ -18,6 +18,7 @@ gem 'oa-openid'
 gem 'email_validator'
 
 gem 'kramdown'
+gem 'r18n-core'
 
 group :development do
   gem 'oily_png'
@@ -29,3 +30,5 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'fabrication'
 end
+
+YAML::ENGINE.yamler = 'psych' # Исправляем ошибку Bundler

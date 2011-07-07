@@ -133,7 +133,11 @@ class Content
   
   # Рендерить HTML из markdown-синтаксиса
   def render_html
-    @html = Kramdown::Document.new(@text).to_html
+    if @text
+      @html = Kramdown::Document.new(@text).to_html
+    else
+      @html = ''
+    end
   end
   
   # Обрабатывает текст страницы — извлекает мета-информацию и

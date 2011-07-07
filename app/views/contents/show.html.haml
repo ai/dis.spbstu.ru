@@ -8,7 +8,10 @@
     %meta{ name: 'description', content: @version.description }
 
 %article
-  %h1= @version.title
+  %h1
+    = @version.title
+    - if @version != @content
+      .old старая версия
   .page
     = @version.html.html_safe
 
@@ -19,10 +22,11 @@
         %a.styled-button{ href: edit_content_path(@content) }
           %span Изменить
       .history
-        %h2 Версии
-        %ul
-          %li
-            = link_to 'Последняя', '?'
-          - @content.versions.reverse_each do |version|
-            %li
-              = link_to version.version, "?version=#{version.version}"
+        %h2 Версии ↓
+        %ol
+          - (@content.versions + [@content]).reverse_each do |i|
+            %li{ class_if('current', @version == i), class_if('last', @content == i) }
+              .number #{i.version}.
+              %a{ href: @content == i ? request.path : "?version=#{i.version}" }
+                = l i.updated_at, :human
+              %span.author= i.author.title

@@ -29,12 +29,12 @@
         +box-shadow(rgba(0, 0, 0, 0) 0 0 0)
       
   .edit-content
-    position: absolute
-    top: 130px
+    padding-top: 130px
     .history
       +transition(opacity, 200ms)
       
   .shadowed-button
+    display: inline-block
     position: relative
     +line-height(30px)
     border: 1px solid #d8d8d8
@@ -48,7 +48,44 @@
       +transition(opacity, 200ms)
   
   .history
-    margin-top: 15px
+    margin-top: 24px
+    +transition(color, 200ms)
+    h2
+      margin-bottom: 14px
+      padding-left: 18px
+    ol
+      width: auto
+      +transition(opacity, 200ms)
+      margin-left: -3px
+    li
+      width: auto
+      font-size: 14px
+      color: #999
+      padding-bottom: 8px
+      position: relative
+      padding-left: 21px
+      width: 130px
+      &.current
+        .number
+          color: $green
+          font-weight: bold
+    .author
+      font-size: 12px
+      position: absolute
+      width: 150px
+      left: 100%
+      top: 1px
+    .number
+      position: absolute
+      top: 3px
+      left: 0
+      font-size: 10px
+    a
+      text-decoration: none
+      color: black
+      &:hover
+        text-decoration: underline
+        color: darken($green, 10%)
 
 #controls.user.unhover
   .signed-in
@@ -58,7 +95,9 @@
   .edit-content
     .styled-button
     .history
-      opacity: 0
+      color: #d8d8d8
+      ol
+        opacity: 0
   .shadowed-button
     .styled-button
       opacity: 0

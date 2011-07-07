@@ -55,4 +55,9 @@ class User
   def confirmed?
     auth_uid and auth_provider
   end
+  
+  # Возвращает имя редактора или его эл. почту
+  def title
+    self.name || self.email
+  end
 end

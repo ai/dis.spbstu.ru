@@ -43,4 +43,9 @@ module ApplicationHelper
     super.sub(' type="text/css"', '').html_safe
   end
   
+  # Вставляет в HAML класс, если условие в check верное
+  def class_if(cls, check)
+    check ? { class: cls } : { }
+  end
+  
 end

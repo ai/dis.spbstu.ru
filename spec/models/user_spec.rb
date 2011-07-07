@@ -35,6 +35,7 @@ describe User do
   end
   
   describe "#confirmed?" do
+  
     it "should be true for users with auth_provider and auth_uid" do
       @user.should_not be_confirmed
       
@@ -44,6 +45,7 @@ describe User do
       @user.auth_uid = 'ivan'
       @user.should be_confirmed
     end
+    
   end
   
 end

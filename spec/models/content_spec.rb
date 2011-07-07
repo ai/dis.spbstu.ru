@@ -122,6 +122,11 @@ describe Content do
       content.text = "**New** value"
       content.html.should == "<p><strong>New</strong> value</p>\n"
     end
+    
+    it "should render page without text" do
+      content = Fabricate(:content, text: nil)
+      content.html.should == ''
+    end
   
   end
   
