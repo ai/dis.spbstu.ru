@@ -3,7 +3,7 @@
 @import 'common'
 
 body
-  font-family: 'PT Sans', sans-serif
+  +standard-font
   background: #f2f2f2
 
 #root
@@ -13,10 +13,9 @@ body
   z-index: 2
 
 #subroot
-  padding-top: 1px
+  padding: 20px 0
 
 #menu
-  margin-top: 19px
   +line-height(40px)
   margin-bottom: 20px
   background: $green
@@ -36,8 +35,7 @@ body
   padding: $footer 0 0 20px
   .wrap
     position: relative
-  
-@import 'button'
+
 @import 'signin'
 @import 'article'
 @import 'footer'

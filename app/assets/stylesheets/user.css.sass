@@ -1,5 +1,7 @@
 @import 'base'
 
+@import 'button'
+
 #controls.user
   .signed-in
     position: absolute
@@ -28,10 +30,8 @@
         background: darken($green, 1%)
         +box-shadow(rgba(0, 0, 0, 0) 0 0 0)
       
-  .edit-content
+  .show-content, .edit-content
     padding-top: 130px
-    .history
-      +transition(opacity, 200ms)
       
   .shadowed-button
     display: inline-block
@@ -49,7 +49,7 @@
   
   .history
     margin-top: 24px
-    +transition(color, 200ms)
+    +transition("color opacity", 200ms)
     h2
       margin-bottom: 14px
       padding-left: 18px
@@ -86,18 +86,37 @@
       &:hover
         text-decoration: underline
         color: darken($green, 10%)
+  
+  .edit-content
+    .cancel
+      font-size: 15px
+      margin-left: 7px
+      color: #666
+      +transition(color, 200ms)
 
 #controls.user.unhover
   .signed-in
     color: #bfbfbf
     input
       opacity: 0
-  .edit-content
-    .styled-button
-    .history
-      color: #d8d8d8
-      ol
-        opacity: 0
+  .history
+    color: #d8d8d8
+    ol
+      opacity: 0
   .shadowed-button
     .styled-button
       opacity: 0
+  .edit-content
+    .cancel
+      color: #bfbfbf
+
+article.edit-content
+  textarea
+    border: none
+    background: transparent
+    width: 100%
+    height: 210px
+    resize: none
+    +standard-font
+    &:focus
+      outline: none

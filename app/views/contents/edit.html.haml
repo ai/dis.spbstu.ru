@@ -1,5 +1,18 @@
-%h1 Изменение страницы
+- content_for :title do
+  = "Правка — #{@content.title || @content.path}"
 
-= form_tag @content.path, method: :put do
-  = text_area :content, :text
-  = submit_tag 'Сохранить'
+%article.edit-content
+  %h1
+    Изменение страницы
+    - if @content.title
+      «<a href="#{@content.path}">#{@content.title}</a>»
+
+  .page
+    = form_tag @content.path, method: :put do
+      = text_area :content, :text
+  
+- content_for :controls do
+  .edit-content
+    %a.styled-button( href="#" role="save-content" )
+      %span Сохранить
+    %a.cancel{ href: @content.path } Отмена
