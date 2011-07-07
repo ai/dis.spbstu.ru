@@ -1,8 +1,19 @@
-%article.page
-  = @version.html.html_safe
+- content_for :title do
+  = @version.title
+
+- content_for :head do
+  - if @version.keywords
+    %meta{ name: 'keywords', content: @version.keywords }
+  - if @version.description
+    %meta{ name: 'description', content: @version.description }
+
+%article
+  %h1= @version.title
+  .page
+    = @version.html.html_safe
 
 - if signed_in?
-  - content_for :administration do
+  - content_for :controls do
     = link_to 'Править', edit_content_path(@content)
     %h2 Версии
     %ul

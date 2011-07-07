@@ -138,6 +138,59 @@ describe Content do
       content.text = 'Second'
       content.html
       content.html
+      
+      content.text = 'Third'
+    end
+    
+  end
+  
+  describe "#load_meta" do
+    
+    it "should get title, keywords and description from text" do
+      content = Fabricate(:content, text: "Текст")
+      content.title.should       be_nil
+      content.description.should be_nil
+      content.keywords.should    be_nil
+      
+      content.text = " \n" +
+                     "Заголовок: Имя \n" +
+                     "Описание:  Тест\n" +
+                     "\n \n" +
+                     "Ключевые слова: один, два" +
+                     "\n" +
+                     "Текст\nстатьи"
+      content.title.should       == 'Имя'
+      content.description.should == 'Тест'
+      content.keywords.should    == 'один, два'
+      content.html.should        == "<p>Текст\nстатьи</p>\n"
+    end
+    
+    it "should cache meta" do
+      content = Fabricate(:content)
+      content.should_receive(:parse_meta).twice
+      content.should_not_receive(:render_html)
+      
+      content.text = "Заголовок: Тест\nТекст статьи"
+      content.title
+      content.keywords
+      content.keywords
+      
+      content.text = ''
+      content.title
+      content.title
+    end
+    
+  end
+  
+  describe "#title" do
+    
+    it "should cache title from text" do
+      content = Fabricate(:content, text: "Заголовок: Один")
+      content.reload.title.should == 'Один'
+      
+      content.text = 'Заголовок: Два'
+      content.save
+      content.reload.title.should == 'Два'
     end
     
   end

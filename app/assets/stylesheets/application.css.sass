@@ -28,14 +28,15 @@ $root-width: 900px
   border-bottom: 1px solid darken(#80ac0d, 7%)
   +border-radius(2px)
   +shadow
-
-article.page
-  padding: 18px 20px
-  background: white
-  +border-radius(2px)
-  +shadow
-  z-index: 2
-
+  
+#controls
+  position: fixed
+  left: 50%
+  margin-left: $root-width / 2
+  top: 0
+  z-index: 1
+  padding: 20px 0 0 20px
+  
+@import 'signin'
+@import 'article'
 @import 'footer'
-
-@import 'administration'

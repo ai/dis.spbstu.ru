@@ -1,0 +1,11 @@
+%aside#controls{ class: signed_in? ? 'user' : 'signin' }
+  - unless signed_in?
+    %div= 'Unknown ' + flash[:wrong_user] if flash[:wrong_user]
+    %div= 'Error '   + flash[:wrong_auth] if flash[:wrong_auth]
+    %a( href="/auth/google" ) Войти через Google
+  - else 
+    = current_user.email
+    = form_tag session_path, method: :delete do
+      = submit_tag 'Выход'
+
+  = yield :controls

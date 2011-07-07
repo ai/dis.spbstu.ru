@@ -1,17 +1,30 @@
 !!! 5
 %html
   %head
-    %title Кафедра РИС
+    %meta( charset='UTF-8' )
+    %title
+      - @title = yield :title
+      - if @title
+        = @title + ' — Кафедра РИС'
+      - else
+        Кафедра РИС
+    
     = enable_html5_for_ie
     
     = include_fonts
     = stylesheet_link_tag 'application'
+    - if signed_in?
+      = stylesheet_link_tag 'user'
     
     = include_jquery
     = javascript_include_tag 'application'
-    = csrf_meta_tags
+    - if signed_in?
+      = csrf_meta_tags
     
-    = render 'shared/counter' if Rails.env.production?
+    = yield :head
+    
+    - if Rails.env.production?
+      = render 'shared/counter'
   %body
     - [:error, :alert, :notice].each do |type|
       - if flash[type]
@@ -26,5 +39,5 @@
       
       #root_footer
     
-    = render 'shared/administration'
+    = render 'shared/controls'
     = render 'shared/footer'
