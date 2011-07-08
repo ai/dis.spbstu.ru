@@ -26,7 +26,7 @@
         %a.styled-button( href="#" role="submit" )
           %span Удалить
     .history
-      %h2 Версии ↓
+      %h2 История ↓
       %ol
         - (@content.versions + [@content]).reverse_each do |i|
           %li{ class_if('current', @version == i), class_if('last', @content == i) }
