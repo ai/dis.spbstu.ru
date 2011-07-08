@@ -1,6 +1,21 @@
+@import 'compass/typography/text/nowrap'
+
 #controls.signin
   +user-select(none)
   .signin-form
-    margin-top: 120px
+    margin-top: 117px
     position: relative
-    left: -200px
+    background: white
+    +shadow
+    width: 173px
+    left: -220px
+    padding: 12px 0 52px 0
+    +border-radius(2px)
+    font-size: 20px
+    text-align: center
+    display: none
+    .go-button
+      +nowrap
+      position: absolute
+      left: 8px
+      bottom: 10px

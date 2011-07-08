@@ -1,17 +1,13 @@
-.styled-button
+.go-button, .styled-button
   display: inline-block
   text-decoration: none
   +half-background($green)
   color: white
-  +shadow
-  border: 1px solid darken($green, 5%)
-  +border-radius(16px)
   font-size: 17px
+  border: 1px solid darken($green, 5%)
   span
     display: inline-block
-    +border-radius(15px)
     +line-height(28px)
-    padding: 0 15px
     border: 1px solid lighten($green, 4%)
     text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0
     text-align: center
@@ -25,3 +21,83 @@
     +box-shadow(rgba(0, 0, 0, 0) 0 0 0, rgba(0, 0, 0, 0.2) 0 3px 5px 0 inset)
     span
       border-color: transparent
+
+.styled-button
+  +border-radius(16px)
+  +shadow
+  span
+    +border-radius(15px)
+    padding: 0 15px
+
+.go-button
+  position: relative
+  span
+    padding: 0 22px 0 8px
+  .shadow
+    position: absolute
+    top: -3px
+    left: -15px
+    width: 100%
+    height: 38px
+    overflow: hidden
+    div
+      position: absolute
+      left: 14px
+      right: 0
+      top: 2px
+      height: 32px
+      +shadow
+  .top, .bottom
+    position: absolute
+    width: 16px
+    height: 16px
+    overflow: hidden
+    div
+      position: absolute
+      left: 3px
+      width: 24px
+      height: 24px
+      border-width: 1px 0 0 0 
+      background: $body-color
+      border: 1px solid darken($green, 5%)
+  .top
+    right: -1px
+    top: -1px
+    div
+      +rotate(-135deg)
+      top: -13px
+  .bottom
+    right: -1px
+    bottom: -1px
+    div
+      +rotate(-45deg)
+      +inset-shadow
+      top: 4px
+  .top-inset, .bottom-inset
+    position: absolute
+    height: 21px
+    width: 21px
+    z-index: 100
+    border-top: 1px solid lighten($green, 4%)
+  .top-inset
+    top: 4px
+    right: 6px
+    +rotate(45deg)
+  .bottom-inset
+    bottom: 4px
+    right: 5px
+    +rotate(135deg)
+  &:hover
+    .top-inset, .bottom-inset
+      border-color: lighten($green, 6%)
+  &:active
+    .top div, .bottom div
+      border-color: darken($green, 13%)
+    .shadow div, .bottom div
+      +box-shadow(rgba(0, 0, 0, 0) 0 0 0)
+    .top-inset, .bottom-inset
+      border-color: transparent
+    .top-inset
+      top: 3px
+      right: 5px
+      +background(linear-gradient(rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0) 5px))

@@ -2,9 +2,19 @@
   .wrap
     - unless signed_in?
       .signin-form
-        %div= 'Unknown ' + flash[:wrong_user] if flash[:wrong_user]
-        %div= 'Error '   + flash[:wrong_auth] if flash[:wrong_auth]
-        %a.signin-button( href="/auth/google" )
+        - if flash[:wrong_user]
+        - elsif flash[:wrong_auth]
+        - else
+          Редакция
+        %a.go-button( href="/auth/google" )
+          .top-inset
+          .top
+            %div
+          .bottom-inset
+          .bottom
+            %div
+          .shadow
+            %div
           %span Войти через Google
     - else
       .signed-in

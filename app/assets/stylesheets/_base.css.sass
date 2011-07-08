@@ -1,16 +1,19 @@
 @import 'compass/css3'
 
 $root-width: 900px
-$green: #80ac0d
-$red: #ac0d0d
-$footer: 200px
+$body-color: #f4f5f9
+$green:      #80ac0d
+$red:        #ac0d0d
+$footer:     200px
 
 @mixin standard-font
   font-family: 'PT Sans', sans-serif
   font-size: 16px
 
-@mixin shadow
+@mixin shadow()
   +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 3px)
+@mixin inset-shadow()
+  +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 3px 0 inset)
 
 @mixin line-height($height)
   height: $height
