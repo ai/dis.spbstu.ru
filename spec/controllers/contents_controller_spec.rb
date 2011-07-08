@@ -56,6 +56,7 @@ describe ContentsController do
     
     it "should load content" do
       content = Fabricate(:content)
+      content.update_text! ''
       
       get :show, path: content.path
       
@@ -65,13 +66,19 @@ describe ContentsController do
     
     it "should show add first slash to path" do
       content = Fabricate(:content, path: '/path/to/page')
+      content.update_text! ''
+      
       get :show, path: 'path/to/page'
+      
       assigns(:content).should == content
     end
     
     it "should show root page" do
       content = Fabricate(:content, path: '/')
+      content.update_text! ''
+      
       get :show, path: ''
+      
       assigns(:content).should == content
     end
     
@@ -88,19 +95,19 @@ describe ContentsController do
     end
     
     it "should load version of content" do
-      content = Fabricate(:content, text: 'First')
-      content.text = 'Current'
-      content.save
+      content = Fabricate(:content)
+      content.update_text! 'First'
+      content.update_text! 'Current'
       
       get :show, path: content.path
-      assigns(:version).should == content
+      assigns(:version).should == content.versions.last
       
       get :show, path: content.path, version: 1
       assigns(:content).should == content
       assigns(:version).should == content.versions.first
       
       get :show, path: content.path, version: 2
-      assigns(:version).should == content
+      assigns(:version).should == content.versions.last
       
       get :show, path: content.path, version: 999
       response.status.should == 404
@@ -159,51 +166,45 @@ describe ContentsController do
     
     it "should be accessed only for users" do
       session.delete :session_token
-      post :update, path: 'page/404', content: { 'text' => 'New text' }
+      post :update, path: 'page/404', text: 'New text'
       response.should be_forbidden
     end
     
-    it "should save content" do
-      content = Fabricate(:content)
+    it "should save new pages" do
+      post :update, path: 'page/404', text: 'New text'
       
-      post :update, path: content.path, content: { 'text' => 'New text' }
+      content = Content.last
+      content.path.should == '/page/404'
+      content.versions.last.text.should == 'New text'
+    end
+    
+    it "should edit deleted pages" do
+      content = Fabricate(:deleted_content)
+      
+      post :update, path: content.path, text: 'New text'
       
       content.reload
-      content.text.should   == 'New text'
-      content.author.should == @user
+      content.versions.last.text.should == 'New text'
       response.should redirect_to(content.path)
     end
     
     it "should save previous version" do
       prev_user = Fabricate(:user)
-      content   = Fabricate(:content, text: 'Old text', author: prev_user)
+      content   = Fabricate(:content)
+      content.update_text! 'Old text', prev_user
       
-      post :update, path: content.path, content: { 'text' => 'New text' }
+      post :update, path: content.path, text: 'New text'
       
       content.reload
-      content.version.should  == 2
+      content.should have(2).versions
       
-      previous = content.versions[0]
-      previous.version.should == 1
-      previous.text.should    == 'Old text'
-      previous.author.should  == prev_user
-    end
-    
-    it "should show form if content doesn't exists" do
-      post :update, path: 'page/404', content: { 'text' => 'New text' }
+      content.versions[0].version.should == 1
+      content.versions[0].text.should    == 'Old text'
+      content.versions[0].author.should  == prev_user
       
-      content = Content.last
-      content.path.should == '/page/404'
-      content.text.should == 'New text'
-    end
-    
-    it "should show form for deleted page" do
-      content = Fabricate(:deleted_content)
-      
-      post :update, path: content.path, content: { 'text' => 'New text' }
-      
-      content.reload.text.should == 'New text'
-      response.should redirect_to(content.path)
+      content.versions[1].version.should == 2
+      content.versions[1].text.should    == 'New text'
+      content.versions[1].author.should  == @user
     end
     
   end

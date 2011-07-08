@@ -67,126 +67,104 @@ describe Content do
     
   end
   
-  describe "#get_version" do
+  describe "#update_text!" do
   
     before :each do
-      @content = Fabricate(:content, text: 'First')
-      @content.text = 'Current'
-      @content.save
+      @content = Fabricate(:content)
+      @author  = Fabricate(:user)
+      @another = Fabricate(:user)
+    end
+    
+    it "should create new version" do
+      @content.versions.should be_empty
+      
+      @content.update_text! 'One', @author
+      @content.should have(1).versions
+      @content.versions.first.version       == 1
+      @content.versions.first.text.should   == 'One'
+      @content.versions.first.author.should == @author
+      
+      @content.update_text! 'Two', @another
+      @content.should have(2).versions
+      @content.versions.first.version    == 2
+      @content.versions[1].text.should   == 'Two'
+      @content.versions[1].author.should == @another
+    end
+    
+    it "should create new version without author" do
+      @content.update_text! 'Text'
+      @content.versions.first.text.should == 'Text'
+      @content.versions.first.author.should be_nil
+    end
+    
+    it "should not create new version with same text" do
+      @content.update_text! 'Text', @author
+      @content.should have(1).versions
+      
+      @content.update_text! 'Text', @another
+      @content.should have(1).versions
+    end
+    
+    it "should update updated_at" do
+      time_now = Time.parse('2000-01-01').utc
+      Time.stub!(:now).and_return(time_now)
+      
+      @content.update_text! 'Text'
+      @content.updated_at.utc.should == time_now
+    end
+    
+  end
+  
+  describe "#version" do
+  
+    before :each do
+      @content = Fabricate(:content)
+      @content.update_text! 'First'
+      @content.update_text! 'Current'
     end
     
     it "should return old version" do
-      @content.get_version(1).should == @content.versions[0]
-      @content.get_version(1).version.should == 1
+      @content.version(1).should == @content.versions.first
+      @content.version(1).version.should == 1
     end
     
     it "should receive string as version number" do
-      @content.get_version('1').should == @content.versions[0]
+      @content.version('1').should == @content.versions.first
     end
     
-    it "should return current version" do
-      @content.get_version(2).should == @content
+    it "should return last version" do
+      @content.version(2).should == @content.versions.last
     end
     
-    it "should return current version, when version is nil" do
-      @content.get_version(nil).should == @content
+    it "should return last version, when version is nil" do
+      @content.version(nil).should == @content.versions.last
     end
     
-    it "should raise 404, when it can find version" do
+    it "should return last version, when version is passed" do
+      @content.version.should == @content.versions.last
+    end
+    
+    it "should raise 404, when it is no versions" do
       Content.should_receive(:raise404)
-      @content.get_version(999)
-    end
-  
-  end
-  
-  describe "#html" do
-  
-    it "should render HTML from Markdown" do
-      content = Fabricate(:content, text: '*Warning*')
-      content.html.should == "<p><em>Warning</em></p>\n"
-      
-      content.text = "**New** value"
-      content.html.should == "<p><strong>New</strong> value</p>\n"
-    end
-    
-    it "should render page without text" do
-      content = Fabricate(:content, text: nil)
-      content.html.should == ''
-    end
-  
-  end
-  
-  describe "#render" do
-    
-    it "should cache rendering" do
-      content = Fabricate(:content, text: 'First')
-      content.should_receive(:render_html).twice
-      
-      content.html
-      content.path = 'path/new'
-      content.html
-      
-      content.text = 'Second'
-      content.html
-      content.html
-      
-      content.text = 'Third'
-    end
-    
-  end
-  
-  describe "#load_meta" do
-    
-    it "should get title, keywords and description from text" do
-      content = Fabricate(:content, text: "Текст")
-      content.title.should       be_nil
-      content.description.should be_nil
-      content.keywords.should    be_nil
-      
-      content.text = " \n" +
-                     "Заголовок: Имя \n" +
-                     "Описание:  Тест\n" +
-                     "\n \n" +
-                     "Ключевые слова: один, два" +
-                     "\n" +
-                     "Текст\nстатьи"
-      content.title.should       == 'Имя'
-      content.description.should == 'Тест'
-      content.keywords.should    == 'один, два'
-      content.html.should        == "<p>Текст\nстатьи</p>\n"
-      
-      content.text = 'Текст'
-      content.title.should       be_nil
-      content.description.should be_nil
-      content.keywords.should    be_nil
-      content.html.should        == "<p>Текст</p>\n"
-    end
-    
-    it "should cache meta" do
       content = Fabricate(:content)
-      content.should_receive(:parse_meta).twice
-      content.should_not_receive(:render_html)
-      
-      content.text = "Заголовок: Тест\nТекст статьи"
-      content.title
-      content.keywords
-      content.keywords
-      
-      content.text = ''
-      content.title
-      content.title
+      content.version
     end
     
+    it "should raise 404, when it can not find version" do
+      Content.should_receive(:raise404)
+      @content.version(999)
+    end
+  
   end
   
   describe "#title" do
     
     it "should cache title from text" do
-      content = Fabricate(:content, text: "Заголовок: Один")
+      content = Fabricate(:content)
+      content.update_text! "Заголовок: Один"
       content.reload.title.should == 'Один'
       
-      content.text = 'Заголовок: Два'
-      content.save
+      content.update_text! 'Заголовок: Два'
       content.reload.title.should == 'Два'
     end
     

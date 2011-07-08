@@ -9,7 +9,7 @@
 
   .page
     = form_tag @content.path, method: :put do
-      = text_area :content, :text
+      %textarea( name="text" )= @content.versions.last.try(:text)
   
 - content_for :controls do
   .page-controls.edit-content

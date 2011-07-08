@@ -17,6 +17,7 @@
                 Восстановить
       - else
         .shadowed-button
-          %a.styled-button{ href: request.path + '/edit' }
+          - url = ('/' == request.path) ? '/edit' : request.path + '/edit'
+          %a.styled-button{ href: url }
             %span
               Создать

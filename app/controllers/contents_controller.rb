@@ -18,7 +18,7 @@ class ContentsController < ApplicationController
     # Ищем страницу по текущему пути. Если страницу не будет найдена, то будет
     # выброшена ошибка 404 (Mongoid::Errors::DocumentNotFound).
     Content.raise404 if @content.deleted?
-    @version = @content.get_version(params[:version])
+    @version = @content.version(params[:version])
   end
   
   # Страница редактирования
@@ -27,9 +27,7 @@ class ContentsController < ApplicationController
   
   # Сохраняем вики-страницу
   def update
-    @content.text   = params[:content]['text']
-    @content.author = current_user
-    @content.save
+    @content.update_text! params[:text], current_user
     redirect_to @content.path
   end
   
