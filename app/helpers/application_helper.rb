@@ -43,6 +43,11 @@ module ApplicationHelper
     super.sub(' type="text/css"', '').html_safe
   end
   
+  # Указывает заголовок веб-страницы. К нему будет ещё добавлено название сайта.
+  def title(title)
+    content_for(:title) { title }
+  end
+  
   # Вставляет в HAML класс, если условие в check верное
   def class_if(cls, check)
     check ? { class: cls } : { }

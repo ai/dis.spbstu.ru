@@ -1,6 +1,4 @@
-- if @version.title
-  - content_for :title do
-    = @version.title
+- title @version.title if @version.title
 
 - content_for :head do
   - if @version.keywords

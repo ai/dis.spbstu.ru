@@ -4,10 +4,10 @@
     %meta( charset='UTF-8' )
     %title
       - @title = yield :title
-      - if @title
-        = @title + ' — Кафедра РИС'
-      - else
+      - if @title.blank?
         Кафедра РИС
+      - else
+        = @title + ' — Кафедра РИС'
     
     = enable_html5_for_ie
     
