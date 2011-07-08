@@ -36,7 +36,7 @@ class ContentsController < ApplicationController
     # Так её всегда можно будет восстановить «из корзины».
     content.mark_as_deleted!
     flash[:notice] = "Страница #{content.path} была помещена в корзину"
-    redirect_to root_path
+    redirect_to content.path
   end
   
   # Восстановление страницы после удаления

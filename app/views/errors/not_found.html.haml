@@ -1,3 +1,22 @@
-%h1 404
+- content_for :title do
+  404
+
+%article
+  %h1 404
+  .page
+    Страница не найдена
+
 - if signed_in?
-  = link_to 'Создать', request.path + '/edit'
+  - content_for :controls do
+    .page-controls
+      - if @content
+        = form_tag request.path + '/restore' do
+          .shadowed-button
+            %a.styled-button( href="#" role="submit" )
+              %span
+                Восстановить
+      - else
+        .shadowed-button
+          %a.styled-button{ href: request.path + '/edit' }
+            %span
+              Создать

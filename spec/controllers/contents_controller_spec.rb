@@ -232,7 +232,7 @@ describe ContentsController do
       
       content.reload.should be_deleted
       flash[:notice].should_not be_blank
-      response.should redirect_to(root_path)
+      response.should redirect_to(content.path)
     end
     
   end

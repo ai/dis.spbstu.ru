@@ -17,16 +17,20 @@
 
 - if signed_in?
   - content_for :controls do
-    .show-content
+    .page-controls
       .shadowed-button
         %a.styled-button{ href: edit_content_path(@content) }
           %span Изменить
-      .history
-        %h2 Версии ↓
-        %ol
-          - (@content.versions + [@content]).reverse_each do |i|
-            %li{ class_if('current', @version == i), class_if('last', @content == i) }
-              .number #{i.version}.
-              %a{ href: @content == i ? request.path : "?version=#{i.version}" }
-                = l i.updated_at, :human
-              %span.author= i.author.title
+    = form_tag @content.path, method: :delete, class: 'delete-content' do
+      .shadowed-button
+        %a.styled-button( href="#" role="submit" )
+          %span Удалить
+    .history
+      %h2 Версии ↓
+      %ol
+        - (@content.versions + [@content]).reverse_each do |i|
+          %li{ class_if('current', @version == i), class_if('last', @content == i) }
+            .number #{i.version}.
+            %a{ href: @content == i ? request.path : "?version=#{i.version}" }
+              = l i.updated_at, :human
+            %span.author= i.author.title
