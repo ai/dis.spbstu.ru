@@ -26,20 +26,16 @@ class Content
   index :path, unique: true
   
   # Достаёт страницу (включая удалённые) по пути к ней. Если страницы с таким
-  # путём нет, то выкинет ошибку (Mongoid::Errors::DocumentNotFound).
+  # путём нет, то выкинет ошибку 404.
   def self.by_path(path)
     content = self.where(path: path).first
-    raise Mongoid::Errors::DocumentNotFound.new(self, []) unless content
+    raise404 unless content
     content
   end
   
-  # Достаёт страницу по пути к ней. Если страница отмечена как удалённая,
-  # то этот метод будет считать, что её нет.
-  # Если страницы нет, выкинет ошибку (Mongoid::Errors::DocumentNotFound).
-  def self.by_path_without_deleted(path)
-    content = self.by_path(path)
-    raise Mongoid::Errors::DocumentNotFound.new(self, []) if content.deleted?
-    content
+  # Выкидывает ошибку 404 (Mongoid::Errors::DocumentNotFound)
+  def self.raise404
+    raise Mongoid::Errors::DocumentNotFound.new(self.class, [])
   end
   
   # Переместить в корзину
@@ -65,7 +61,7 @@ class Content
     number = number.to_i if number
     return self if number.nil? or self.version == number
     version = self.versions[number - 1]
-    raise Mongoid::Errors::DocumentNotFound.new(self.class, []) unless version
+    self.class.raise404 unless version
     version
   end
   

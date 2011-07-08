@@ -84,6 +84,7 @@ describe ContentsController do
       content = Fabricate(:deleted_content)
       get :show, path: content.path
       response.status.should == 404
+      assigns(:content).should == content
     end
     
     it "should load version of content" do

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Content do
   
-  describe "#by_path" do
+  describe ".by_path" do
     
     it "should return content by path" do
       content = Fabricate(:content)
@@ -11,30 +11,17 @@ describe Content do
     end
     
     it "should raise 404 when path is not found" do
-      lambda {
-        Content.by_path('page/404')
-      }.should raise_error(Mongoid::Errors::DocumentNotFound)
+      Content.should_receive(:raise404)
+      Content.by_path('page/404')
     end
     
   end
   
-  describe "#by_path_without_deleted" do
+  describe ".raise404" do
     
-    it "should return content by path" do
-      content = Fabricate(:content)
-      Content.by_path_without_deleted(content.path).should == content
-    end
-    
-    it "should not return deleted content" do
-      content = Fabricate(:deleted_content)
+    it "should raise error" do
       lambda {
-        Content.by_path_without_deleted(content.path)
-      }.should raise_error(Mongoid::Errors::DocumentNotFound)
-    end
-    
-    it "should raise 404 when path is not found" do
-      lambda {
-        Content.by_path_without_deleted('page/404')
+        Content.raise404
       }.should raise_error(Mongoid::Errors::DocumentNotFound)
     end
     
@@ -106,9 +93,8 @@ describe Content do
     end
     
     it "should raise 404, when it can find version" do
-      lambda {
-        @content.get_version(999)
-      }.should raise_error(Mongoid::Errors::DocumentNotFound)
+      Content.should_receive(:raise404)
+      @content.get_version(999)
     end
   
   end

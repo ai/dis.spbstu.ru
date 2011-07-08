@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   
   # Если запроненных данных нет в БД, то показываем ошибку 404
   rescue_from Mongoid::Errors::DocumentNotFound do
-    @content = Content.where(path: params[:path]).first
     render 'errors/not_found', status: :not_found
   end
   
