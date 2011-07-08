@@ -9,7 +9,7 @@
     - else
       .signed-in
         = form_tag session_path, method: :delete do
-          = current_user.email
+          = current_user.title
           = submit_tag '×', title: 'Выйти'
 
       = yield :controls
