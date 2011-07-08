@@ -206,4 +206,16 @@ describe Content do
     
   end
   
+  describe "#root?" do
+    
+    it "should return true for root page" do
+      root   = Fabricate(:content, path: '/')
+      common = Fabricate(:content, path: '/common')
+      
+      root.should be_root
+      common.should_not be_root
+    end
+    
+  end
+  
 end
