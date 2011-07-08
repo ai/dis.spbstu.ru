@@ -1,5 +1,6 @@
-- content_for :title do
-  = @version.title
+- if @version.title
+  - content_for :title do
+    = @version.title
 
 - content_for :head do
   - if @version.keywords
@@ -7,13 +8,12 @@
   - if @version.description
     %meta{ name: 'description', content: @version.description }
 
-%article
+%article.page
   %h1
     = @version.title
     - unless @version.last?
       .old старая версия
-  .page
-    = @version.html.html_safe
+  = @version.html.html_safe
 
 - if signed_in?
   - content_for :controls do

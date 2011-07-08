@@ -1,15 +1,14 @@
 - content_for :title do
   = "Правка — #{@content.title || @content.path}"
 
-%article.edit-content
+%article.page.edit-content
   %h1
     Изменение страницы
     - if @content.title
       «<a href="#{@content.path}">#{@content.title}</a>»
 
-  .page
-    = form_tag @content.path, method: :put do
-      %textarea( name="text" )= @content.versions.last.try(:text)
+  = form_tag @content.path, method: :put do
+    %textarea( name="text" )= @content.versions.last.try(:text)
   
 - content_for :controls do
   .page-controls.edit-content

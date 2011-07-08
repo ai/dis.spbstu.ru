@@ -1,10 +1,9 @@
 - content_for :title do
   404
 
-%article
+%article.page
   %h1 404
-  .page
-    Страница не найдена
+  Страница не найдена
 
 - if signed_in?
   - content_for :controls do
