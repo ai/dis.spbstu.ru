@@ -7,15 +7,10 @@
         - else
           Редакция
         %a.go-button( href="/auth/google" )
-          .top-inset
-          .top
-            %div
-          .bottom-inset
-          .bottom
-            %div
-          .shadow
-            %div
           %span Войти через Google
+          .crop
+            .arrow
+              %div
     - else
       .signed-in
         = form_tag session_path, method: :delete do
