@@ -17,7 +17,8 @@
     border: 1px solid lighten($green, 4%)
     text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0
     text-align: center
-  &:hover
+  &:hover, &:focus
+    outline: none
     +half-background(lighten($green, 2%))
     span
       border-color: lighten($green, 6%)
@@ -59,7 +60,7 @@
       border: 1px solid lighten($green, 4%)
       width: 20px
       height: 20px
-  &:hover
+  &:hover, &:focus
     .arrow
       +half-background(lighten($green, 2%), -135deg)
       div
