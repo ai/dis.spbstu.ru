@@ -32,6 +32,6 @@
           - @content.versions.reverse_each do |i|
             %li{ class_if('current', @version == i), class_if('last', i.last?) }
               .number #{i.version}.
-              %a{ href: @content == i ? request.path : "?version=#{i.version}" }
+              %a{ href: i.last? ? request.path : "?version=#{i.version}" }
                 = l i.created_at, :human
               %span.author= i.author.title
