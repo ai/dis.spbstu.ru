@@ -1,0 +1,24 @@
+.flash
+  position: fixed
+  left: 0
+  top: 0
+  width: 100%
+  z-index: 50
+  div
+    width: $root-width + 2px - 50px
+    margin: 0 auto
+    line-height: 30px
+    padding: 16px 25px
+    +shadow
+    font-size: 20px
+    text-align: center
+    color: white
+    text-shadow: rgba(0, 0, 0, 0.5) 0 1px 1px
+    font-weight: bold
+    background-image: image-url("layout/alone/flash-pattern.png")
+  &.notice
+    div
+      background-color: darken($green, 5%)
+  &.error, &.alert
+    div
+      background-color: darken($red, 5%)

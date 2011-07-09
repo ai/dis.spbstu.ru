@@ -1,4 +1,6 @@
 # =require 'lib/jquery.easing'
+# =require 'core'
+# =require 'flash'
 
 jQuery ($) ->
   

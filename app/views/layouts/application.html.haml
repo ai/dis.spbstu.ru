@@ -30,7 +30,7 @@
     - [:error, :alert, :notice].each do |type|
       - if flash[type]
         .flash{ class: type }
-          = flash[type]
+          %div= flash[type]
       
     #root
       #subroot
