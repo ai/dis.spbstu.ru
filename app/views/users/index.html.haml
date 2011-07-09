@@ -23,7 +23,7 @@
               %a.styled-button( href="#" role="submit" title="#{title}" )
                 %span Сменить вход
             - else
-              %a.styled-button( href="#" role="submit" title="#{title}" )
+              %a.styled-button( href="#" role="submit" title="Повторно выслать приглашение, чтобы привязать аккаунт для выхода на сайт" )
                 %span Пригласить ещё раз
           - if user != current_user
             = form_for user, method: :delete, html: { role: 'delete' } do

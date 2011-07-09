@@ -1,4 +1,5 @@
 # =require 'lib/jquery.elastic'
+# =require 'flash'
 
 jQuery ($) ->
   # Изменение стиля панели инструментов, когда курсор на неё наводится
@@ -22,7 +23,7 @@ jQuery ($) ->
     $(@).closest('form').submit() if 13 == e.keyCode and e.metaKey
   
   # Показываем кнопку Сохранить при редактировании редакторов
-  userEdit = $('article.users input')
+  userEdit = $('article.users ul input')
   userEdit.focus ->
     $(@).closest('li').find('.controls').hide()
     $(@).closest('form').find('.styled-button').css(display: 'inline-block')

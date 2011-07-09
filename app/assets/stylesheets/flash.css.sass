@@ -5,20 +5,36 @@
   width: 100%
   z-index: 50
   div
-    width: $root-width + 2px - 50px
+    position: relative
+    width: $root-width - 50px
     margin: 0 auto
     line-height: 30px
-    padding: 16px 25px
+    padding: 15px 25px
     +shadow
+    +box-shadow(rgba(0, 0, 0, 0.5) 0 2px 7px)
     font-size: 20px
     text-align: center
     color: white
     text-shadow: rgba(0, 0, 0, 0.5) 0 1px 1px
     font-weight: bold
     background-image: image-url("layout/alone/flash-pattern.png")
+    border: 2px solid
+    border-width: 0 2px 2px 2px
   &.notice
     div
       background-color: darken($green, 5%)
+      border-color: darken($green, 7%)
   &.error, &.alert
     div
       background-color: darken($red, 5%)
+      border-color: darken($red, 7%)
+
+@media all and (transform-3d), all and (-moz-transform-3d), all and (-webkit-transform-3d)
+  .flash
+    perspective: 2000px
+    -webkit-perspective: 2000px
+    -moz-perspective: 2000px
+    div
+      backface-visibility: hidden
+      -webkit-backface-visibility: hidden
+      -moz-backface-visibility: hidden
