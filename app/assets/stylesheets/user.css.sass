@@ -1,4 +1,21 @@
 @import 'base'
+      
+.shadowed-button
+  display: inline-block
+  position: relative
+  +line-height(30px)
+  border: 1px solid #d8d8d8
+  color: #c8c8c8
+  padding: 0 16px
+  margin-bottom: 15px
+  font-size: 17px
+  text-align: center
+  +border-radius(15px)
+  .styled-button
+    position: absolute
+    top: 0
+    left: 0
+    +transition(opacity, 200ms)
 
 #controls.user
   .signed-in
@@ -30,23 +47,6 @@
       
   .page-controls
     padding-top: 130px
-      
-  .shadowed-button
-    display: inline-block
-    position: relative
-    +line-height(30px)
-    border: 1px solid #d8d8d8
-    color: #c8c8c8
-    padding: 0 16px
-    margin-bottom: 15px
-    font-size: 17px
-    text-align: center
-    +border-radius(15px)
-    .styled-button
-      position: absolute
-      top: 0
-      left: 0
-      +transition(opacity, 200ms)
   
   .delete-content
     .styled-button span, .shadowed-button
@@ -139,3 +139,5 @@ article.edit-content
     +standard-font
     &:focus
       outline: none
+
+@import 'users'

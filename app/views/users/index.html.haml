@@ -1,30 +1,40 @@
 - title 'Редакторы'
 
-%article.page
+%article.page.users
   %h1 Редакторы
 
   %ul
     - @users.each do |user|
       %li
-        - if signed_in?
+        .edit
           = form_for user do |f|
+            = f.email_field :email, placeholder: 'Эл. почта', required: true
             = f.text_field  :name,  placeholder: 'Имя'
-            = f.email_field :email, placeholder: 'Эл. почта'
             = f.text_field  :role,  placeholder: 'Сфера деятельности'
-            = submit_tag 'Изменить'
-          - unless user.confirmed?
-            ни разу не входил
+            %a.styled-button( href="#" role="submit" )
+              %span Сохранить
+        .controls
           = form_tag request_auth_user_path(user) do
-            = submit_tag 'Изменить способ входа'
+            - if user.confirmed?
+              - if user == current_user
+                - title = 'Привязать к другому аккаунту для входа на сайт'
+              - else
+                - title = 'Отправить письмо с ссылкой, чтобы привязать другой аккаунт для входа на сайт'
+              %a.styled-button( href="#" role="submit" title="#{title}" )
+                %span Сменить вход
+            - else
+              %a.styled-button( href="#" role="submit" title="#{title}" )
+                %span Пригласить ещё раз
           - if user != current_user
-            = form_for user, method: :delete do
-              = submit_tag 'Удалить'
-        - else
-          = user.name
-
-  - if signed_in?
-    = form_for User.new do |f|
-      = f.text_field  :name,  placeholder: 'Имя'
-      = f.email_field :email, placeholder: 'Эл. почта'
-      = f.text_field  :role,  placeholder: 'Сфера деятельности'
-      = submit_tag 'Добавить'
+            = form_for user, method: :delete, html: { role: 'delete' } do
+              .shadowed-button
+                %a.styled-button( href="#" )
+                  %span Удалить
+      
+  %h2 Новый пользователь
+  = form_for User.new do |f|
+    = f.email_field :email, placeholder: 'Эл. почта'
+    = f.text_field  :name,  placeholder: 'Имя'
+    = f.text_field  :role,  placeholder: 'Сфера деятельности'
+    %a.styled-button( href="#" role="submit" )
+      %span Пригласить

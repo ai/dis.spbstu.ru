@@ -1,0 +1,36 @@
+article.users
+  ul
+    margin-bottom: 10px
+  li
+    line-height: 33px
+    padding-bottom: 5px
+    position: relative
+    form
+      display: inline
+  input
+    border: none
+    +standard-font
+    width: 195px
+    margin-right: 5px
+    &:focus
+      background: #eee
+  .edit
+    display: inline
+    .styled-button
+      display: none
+  .controls
+    float: right
+    form
+      opacity: 0
+      +transition(opacity, 150ms)
+  li:hover .controls form
+    opacity: 1
+  .shadowed-button
+    position: absolute
+    top: 0
+    left: 100%
+    margin-left: 38px
+    .styled-button
+      opacity: 0
+    &:hover .styled-button
+      opacity: 1

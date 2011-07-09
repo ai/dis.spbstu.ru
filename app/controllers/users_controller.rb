@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # Запрещаем все действия посторонним посетителям.
   # Кроме просмотра списка редакторов и выбора способа входа для новых
   # пользователей (которые пока ещё не могут войти).
-  before_filter :authenticate_user!, except: [:index, :auth]
+  before_filter :authenticate_user!, except: :auth
   
   # Загружаем пользователя из БД для действий, где он нужен
   before_filter :load_user, only: [:update, :destroy, :request_auth, :auth]
