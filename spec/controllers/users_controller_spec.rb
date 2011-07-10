@@ -6,6 +6,17 @@ describe UsersController do
   
   describe "#index" do
   
+    before :each do
+      @user = Fabricate(:user)
+      session[:session_token] = @user.session_token
+    end
+    
+    it "should be accessed only for users" do
+      session.delete :session_token
+      get :index, id: @user.id
+      response.should be_forbidden
+    end
+  
     it "should display all users" do
       one = Fabricate(:user, name: 'Борис')
       two = Fabricate(:user, name: 'Андрей')
@@ -13,7 +24,7 @@ describe UsersController do
       get :index
       
       response.should be_success
-      assigns(:users).to_a.should == [two, one]
+      assigns(:users).to_a.should == [@user, two, one]
     end
     
   end
