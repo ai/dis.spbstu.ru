@@ -11,9 +11,9 @@
             = f.email_field :email, placeholder: 'Эл. почта', required: true
             = f.text_field  :name,  placeholder: 'Имя'
             = f.text_field  :role,  placeholder: 'Сфера деятельности'
-            %a.styled-button( href="#" role="submit" )
+            %a.styled-button( href="#" role="submit save-user" )
               %span Сохранить
-        .controls
+        .controls( role="user-controls" )
           = form_tag request_auth_user_path(user) do
             - if user.confirmed?
               - if user == current_user
@@ -26,9 +26,9 @@
               %a.styled-button( href="#" role="submit" title="Повторно выслать приглашение, чтобы привязать аккаунт для выхода на сайт" )
                 %span Пригласить ещё раз
           - if user != current_user
-            = form_for user, method: :delete, html: { role: 'delete' } do
+            = form_for user, method: :delete do
               .shadowed-button
-                %a.styled-button( href="#" )
+                %a.styled-button( href="#" role="delete-user" )
                   %span Удалить
       
   %h2 Новый пользователь

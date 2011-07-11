@@ -18,3 +18,16 @@ window.app =
     result = matchMedia("all and (#{media})")
     return true if result.matches
     matchMedia("all and (-#{app.prefix()}-#{media})").matches
+  
+  # Позволяет указать код, для какой-то конкретной страницы — выполянет
+  # `callback` только, если на странице есть selector. В `callback` первым
+  # параметром передаёт jQuery, вторым — фукнкцию jQuery-поиска только
+  # внутри `selector` (чтобы JS был быстрее), а третьим — jQuery-объект для
+  # `selector`.
+  for: (selector, callback) ->
+    jQuery ($) ->
+      content = $(selector)
+      if content.length
+        $$ = (selector) ->
+          $(selector, content)
+        callback.apply content, [ $, $$, content ]

@@ -1,20 +1,8 @@
-%aside#controls{ class: signed_in? ? 'user unhover' : 'signin' }
+%aside#controls.user.unhover
   .wrap
-    - unless signed_in?
-      .signin-form
-        - if flash[:wrong_user]
-        - elsif flash[:wrong_auth]
-        - else
-          Редакция
-        %a.go-button( href="/auth/google" )
-          %span Войти через Google
-          .crop
-            .arrow
-              %div
-    - else
-      .signed-in
-        = form_tag session_path, method: :delete do
-          = current_user.title
-          = submit_tag '×', title: 'Выйти'
+    .signed-in
+      = form_tag session_path, method: :delete do
+        = current_user.title
+        = submit_tag '×', title: 'Выйти'
 
-      = yield :controls
+    = yield :controls

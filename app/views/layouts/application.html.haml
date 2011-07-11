@@ -40,5 +40,8 @@
       
       #root_footer
     
-    = render 'shared/controls'
+    - if signed_in?
+      = render 'shared/controls'
+    - else
+      = render 'shared/signin'
     = render 'shared/footer'
