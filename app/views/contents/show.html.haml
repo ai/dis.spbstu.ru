@@ -16,15 +16,11 @@
 - if signed_in?
   - content_for :controls do
     .page-controls
-      .shadowed-button
-        %a.styled-button{ href: edit_content_path(@content) }
-          %span Изменить
+      = shadowed_button('Изменить', href: edit_content_path(@content))
       
       - unless @content.root?
         = form_tag @content.path, method: :delete, class: 'delete-content' do
-          .shadowed-button
-            %a.styled-button( href="#" role="submit" )
-              %span Удалить
+          = shadowed_button('Удалить', role: 'submit')
       
       .history
         %h2 История ↓

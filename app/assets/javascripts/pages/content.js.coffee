@@ -2,7 +2,7 @@ app.for 'article.edit-content', ($, $$) ->
   textarea = $$('@content-textarea')
   
   # Связываем кнопку сохранения страницы из панели инструментов с формой
-  $$('@save-content').click ->
+  $('@save-content').click ->
     textarea.submitForm()
     false
   

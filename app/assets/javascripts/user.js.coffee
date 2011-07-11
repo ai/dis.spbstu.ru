@@ -1,7 +1,7 @@
 # =require 'lib/jquery.elastic'
 #
 # =require 'core/flash'
-# =require 'core/user-controls'
 #
+# =require 'pages/control-panel'
 # =require 'pages/content'
 # =require 'pages/users'

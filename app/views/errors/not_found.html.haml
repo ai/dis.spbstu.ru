@@ -9,12 +9,6 @@
     .page-controls
       - if @content
         = form_tag request.path + '/restore' do
-          .shadowed-button
-            %a.styled-button( href="#" role="submit" )
-              %span
-                Восстановить
+          = shadowed_button('Восстановить', role: 'submit')
       - else
-        .shadowed-button
-          %a.styled-button{ href: request.path }
-            %span
-              Создать
+        = shadowed_button('Создать', href: edit_content_path(request.path))
