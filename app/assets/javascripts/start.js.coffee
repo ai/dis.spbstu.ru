@@ -6,6 +6,7 @@ jQuery ($) ->
   $('@test-signin a').click ->
     $('@signin-form').addClass('passed')
     $('@test-signin').addClass('passed')
+    $('.signin-help').hide()
     after '1sec', ->
       $('body').click()
       after '500ms', -> $('@signin-form').removeClass('passed')

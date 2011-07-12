@@ -18,7 +18,18 @@ article.start
       opacity: 0.3
 
 #controls.signin
+  .signin-help
+    position: absolute
+    top: 150px
+    left: 20px
+    color: #c0c0c0
+    +transition(opacity, 200ms)
+    z-index: 2
+  &.unhover
+    .signin-help
+      opacity: 0
   .signin-form
+    z-index: 3
     .ok
       position: absolute
       left: 0
