@@ -14,26 +14,28 @@ class SessionsController < ApplicationController
     provider = auth_hash['provider'] # Сервис, с помощью которого пользователь
                                      # вошёл на сайт (например, с помощью своего
                                      # аккаунта на Google)
-    uid = auth_hash['uid']           # ID пользователя в этом сервисе
+    uid  = auth_hash['uid']          # ID пользователя в этом сервисе
+    user = User.where(auth_provider: provider, auth_uid: uid).first
     
     if session[:reset_auth_token]
       # Если пользователь вошёл на сайт первый раз и нам нужно запомнить его
       # сервис и ID пользователя
-      user = User.where(reset_auth_token: session[:reset_auth_token]).first
+      reseter = User.where(reset_auth_token: session[:reset_auth_token]).first
       session.delete :reset_auth_token
-      if user
-        was_confirmed = user.confirmed?
-        user.auth_provider    = provider
-        user.auth_uid         = uid
-        user.reset_auth_token = nil
-        sign_in! user
+      if reseter.nil?
+        flash[:error] = 'Сменить способ входа уже нельзя'
+      elsif user and user != reseter
+        flash[:error] = "Этот способ входа уже использует #{user.title}"
+      else
+        was_confirmed = reseter.confirmed?
+        reseter.auth_provider    = provider
+        reseter.auth_uid         = uid
+        reseter.reset_auth_token = nil
+        sign_in! reseter
         redirect_to was_confirmed ? root_path : start_users_path
         return
-      else
-        flash[:error] = 'Сменить способ входа уже нельзя'
       end
     else
-      user = User.where(auth_provider: provider, auth_uid: uid).first
       if user
         # Если у нас есть такой редактор
         sign_in! user

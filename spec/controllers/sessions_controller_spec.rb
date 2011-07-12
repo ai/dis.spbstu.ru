@@ -49,6 +49,18 @@ describe SessionsController do
       session[:reset_auth_token].should be_nil
     end
     
+    it "should not save auth if it used for another user" do
+      user    = Fabricate(:user)
+      another = Fabricate(:user, auth_provider: 'fake', auth_uid: 'ivan')
+      session[:reset_auth_token] = user.reset_auth_token
+      
+      get :create, provider: 'fake'
+      
+      response.should redirect_to(root_path)
+      flash[:error].should include(another.title)
+      session[:reset_auth_token].should be_nil
+    end
+    
     it "should save new auth if session contain reset token" do
       user = Fabricate(:user)
       session[:reset_auth_token] = user.reset_auth_token
@@ -78,7 +90,7 @@ describe SessionsController do
       
       user.reload
       user.auth_provider.should == 'fake'
-      user.auth_uid.should == 'ivan'
+      user.auth_uid.should      == 'ivan'
     end
     
   end
