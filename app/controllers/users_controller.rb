@@ -75,6 +75,7 @@ class UsersController < ApplicationController
       flash[:error] = 'Неправильный ключ для смены способа входа на сайт'
       redirect_to users_path
     else
+      @no_signin_form = true
       session[:reset_auth_token] = params[:token]
     end
   end

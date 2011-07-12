@@ -72,6 +72,8 @@ describe UsersController do
       get :auth, id: @user.id, token: @user.reset_auth_token
       
       response.should be_success
+      assigns(:user).should == @user
+      assigns(:no_signin_form).should be_true
       session[:reset_auth_token].should == @user.reset_auth_token
     end
   

@@ -5,8 +5,4 @@
       - elsif flash[:wrong_auth]
       - else
         Редакция
-      %a.go-button( href="/auth/google" )
-        %span Войти через Google
-        .crop
-          .arrow
-            %div
+      = render 'shared/signin_methods'

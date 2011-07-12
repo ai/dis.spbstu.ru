@@ -42,6 +42,6 @@
     
     - if signed_in?
       = render 'shared/controls'
-    - else
+    - elsif not @no_signin_form
       = render 'shared/signin'
     = render 'shared/footer'
