@@ -49,7 +49,7 @@ describe SessionsController do
       session[:reset_auth_token].should be_nil
     end
     
-    it "should save auth if session contain token" do
+    it "should save new auth if session contain reset token" do
       user = Fabricate(:user)
       session[:reset_auth_token] = user.reset_auth_token
       
@@ -66,6 +66,19 @@ describe SessionsController do
       assigns(:current_user).should  == user
       session[:session_token].should == user.session_token
       assigns(:current_user).signin_at.utc.should == @time_now
+    end
+    
+    it "it should change auth if user have another auth" do
+      user = Fabricate(:user, auth_provider: 'fake', auth_uid: 'john')
+      session[:reset_auth_token] = user.reset_auth_token
+      
+      get :create, provider: 'fake'
+      
+      response.should redirect_to(root_path)
+      
+      user.reload
+      user.auth_provider.should == 'fake'
+      user.auth_uid.should == 'ivan'
     end
     
   end

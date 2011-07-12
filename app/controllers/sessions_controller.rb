@@ -22,11 +22,12 @@ class SessionsController < ApplicationController
       user = User.where(reset_auth_token: session[:reset_auth_token]).first
       session.delete :reset_auth_token
       if user
+        was_confirmed = user.confirmed?
         user.auth_provider    = provider
         user.auth_uid         = uid
         user.reset_auth_token = nil
         sign_in! user
-        redirect_to start_users_path
+        redirect_to was_confirmed ? root_path : start_users_path
         return
       else
         flash[:error] = 'Сменить способ входа уже нельзя'
