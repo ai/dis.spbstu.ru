@@ -1,9 +1,11 @@
 app.for '@signin-form', ($, $$, form) ->
   
   # Появление формы входа на сайт
-  $('@show-signin').dblclick ->
+  $('#controls').dblclick ->
+    return if form.is(':animated')
+    
     left = form.css('left')
-    height = $('#subroot').height() - parseInt(form.css('marginTop'))
+    height = $('#subroot').outerHeight() - parseInt(form.css('top'))
     if height > form.outerHeight()
       form.show().animate(left: 0, 500, 'easeOutBack')
     else
@@ -11,6 +13,7 @@ app.for '@signin-form', ($, $$, form) ->
       form.css(left: 0).fadeIn(500)
       
     $('body').bind 'click.hide-signin', (e) ->
+      return if form.is(':animated')
       unless $(e.target).closest('@signin-form').length
         $('body').unbind('click.hide-signin')
         if byFade

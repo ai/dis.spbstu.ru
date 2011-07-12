@@ -1,7 +1,7 @@
 %aside#controls.user.unhover
   .wrap
     .signed-in
-      = form_tag session_path, method: :delete do
+      = form_tag session_path, method: :delete, role: 'exit' do
         = current_user.title
         = submit_tag '×', title: 'Выйти'
 

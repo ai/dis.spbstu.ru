@@ -1,4 +1,37 @@
 - title 'Первые шаги редактора'
 
+- content_for :head do
+  = stylesheet_link_tag    'start'
+  = javascript_include_tag 'start'
+
 %article.page.start
   %h1 Теперь вы редактор
+  
+  %ol
+    %li( role="test-signin" )
+      %p
+        Чтобы потом войти на сайт дважды щёлкните справа от страницы
+        (по серому полю) — появится форма.
+      %p
+        Попробуйте прямо сейчас →
+    %li( role="test-exit" )
+      %p
+        Если вы работаете за чужим компьютером, то обязетельно выйдите с сайта,
+        как закончите работу.
+      %p
+        Выход с сайта находится в правом верхнем углу рядом
+        с вашим именем.
+      %p
+        Попробуйте прямо сейчас →
+    %li
+      Мы делаем самый лучший сайт кафедры, поэтому старайтесь писать
+      качественный текст, который поможет посетителям сайта.
+
+- content_for :controls do
+  .signin( role="show-signin" )
+    .signin-form( role="test-signin signin-form" )
+      .test
+        %h2 Редакция
+        = render 'shared/signin_methods'
+      .ok
+        Всё правильно

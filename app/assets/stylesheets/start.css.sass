@@ -1,0 +1,36 @@
+@import 'base'
+
+article.start
+  li p
+    padding: 0
+  ol
+    margin-top: 10px
+    display: inline-block
+    width: 100%
+  li
+    float: left
+    width: 29%
+    padding-right: 4%
+    +transition(opacity, 300ms)
+    &:last-child
+      padding-left: 0
+    &.passed
+      opacity: 0.3
+
+#controls.signin
+  .signin-form
+    .ok
+      position: absolute
+      left: 0
+      top: 20px
+      width: 100%
+      text-shadow: rgba(0, 0, 0, 0.5) 0 1px 1px
+      font-weight: bold
+      display: none
+    &.passed
+      background: $green image-url("layout/alone/flash-pattern.png")
+      color: white
+      .test
+        visibility: hidden
+      .ok
+        display: block
