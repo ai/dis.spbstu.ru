@@ -27,6 +27,12 @@
       Мы делаем самый лучший сайт кафедры, поэтому старайтесь писать
       качественный текст, который поможет посетителям сайта.
 
+  .old-browser
+    К сожалению, вы используете устарвеший браузер — вы не сможете с ним
+    комфортно изменять сайта. Скачайте, например,
+    <a href="http://www.google.com/chrome?hl=ru">Google Chrome</a> или
+    <a href="http://www.mozilla.com/ru/firefox/">Mozilla Firefox</a>.
+
 - content_for :controls do
   .signin-help щёлк-щёлк
   .signin( role="show-signin" )
@@ -36,3 +42,4 @@
         = render 'shared/signin_methods'
       .ok
         Всё правильно
+        %div Вы молодец!
