@@ -28,6 +28,7 @@ class SessionsController < ApplicationController
         flash[:error] = "Этот способ входа уже использует #{user.title}"
       else
         was_confirmed = reseter.confirmed?
+        reseter.name = auth_hash['user_info']['first_name'] unless reseter.name
         reseter.auth_provider    = provider
         reseter.auth_uid         = uid
         reseter.reset_auth_token = nil
