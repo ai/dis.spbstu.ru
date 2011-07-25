@@ -92,6 +92,26 @@ describe SessionsController do
       user.auth_provider.should == 'fake'
       user.auth_uid.should      == 'ivan'
     end
+
+    it "should set user name from new auth" do
+      user = Fabricate(:user, auth_provider: 'fake', auth_uid: 'ivan')
+      session[:reset_auth_token] = user.reset_auth_token
+      @fake['user_info'] = { 'first_name' => 'Ivan' }
+
+      get :create, provider: 'fake'
+
+      user.reload.name.should == 'Ivan'
+    end
+
+    it "should not change user name from new auth" do
+      user = Fabricate(:user, auth_provider: 'fake', auth_uid: 'i', name: 'I')
+      session[:reset_auth_token] = user.reset_auth_token
+      @fake['user_info'] = { 'first_name' => 'Ivan' }
+
+      get :create, provider: 'fake'
+
+      user.reload.name.should == 'I'
+    end
     
   end
   
