@@ -1,12 +1,13 @@
 #menu
   height: 50px
   margin-bottom: 20px
-  background: $green
-  +background(linear-gradient(lighten($green, 3%), darken($green, 3%)))
   border-bottom: 1px solid darken($green, 7%)
   +round
   +shadow
   position: relative
+  &, .full-name
+    background: $green
+    +background(linear-gradient(lighten($green, 3%), darken($green, 3%)))
   a
     display: block
     text-decoration: none
@@ -57,6 +58,17 @@
         +scale(1)
       .logo
         +scale(1.085)
+  .full-name
+    position: absolute
+    top: 0
+    left: 187px
+    +line-height(50px)
+    font-size: 20px
+    z-index: 5
+    width: 0
+    overflow: hidden
+    .wrap
+      padding-left: 25px
   ul
     float: left
     border-right: 1px solid rgba(255, 255, 255, 0.15)
@@ -65,12 +77,12 @@
   li a
     float: left
     +line-height(50px)
-    padding: 0 23px
     font-size: 20px
     border-left: 1px solid rgba(255, 255, 255, 0.15)
     border-right: 1px solid rgba(0, 0, 0, 0.15)
     position: relative
     .text
+      padding: 0 23px
       position: relative
       z-index: 2
   li a, a.home
@@ -82,7 +94,6 @@
       height: 100%
       z-index: 1
       background: yellow
-      background: white
       opacity: 0
       +transition(opacity, 150ms)
     &:hover
