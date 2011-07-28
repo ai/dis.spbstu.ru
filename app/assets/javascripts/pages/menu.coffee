@@ -8,10 +8,13 @@ app.for '#menu', ($, $$) ->
   naming = null
   home.mouseenter ->
     naming = after '0.5sec', ->
-      full.stop().animate(width: ul.width() - 4, 200)
+      full.width(ul.width() - 2)
+      full.addClass('show')
   home.mouseleave ->
     clearTimeout(naming)
-    full.stop().animate(width: 0, 200)
+    full.removeClass('show')
+  home.click ->
+    clearTimeout(naming)
 
   # Показывает подсказку в поиске, что надо нажать Enter
   

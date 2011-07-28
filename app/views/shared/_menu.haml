@@ -5,26 +5,28 @@
     .magnified
     .sup Кафедра
     .sub РИС
-  .full-name
-    .wrap
-      Распределённые интеллектуальные системы
-  %ul
-    %li
-      %a( href="/join/" )
-        .hover
-        .text Абитуриентам
-    %li
-      %a( href="/study/" )
-        .hover
-        .text Учёба
-    %li
-      %a( href="/science/" )
-        .hover
-        .text Наука
-    %li
-      %a( href="/#contacts" )
-        .hover
-        .text Контакты
+  .center
+    .full-name
+      .department Кафедра «Распределённых интеллектуальных систем»
+      .university
+        Санкт-Петербургского Государственного Политехнического Университета
+    %ul
+      %li
+        %a( href="/join/" )
+          .hover
+          .text Абитуриентам
+      %li
+        %a( href="/study/" )
+          .hover
+          .text Учёба
+      %li
+        %a( href="/science/" )
+          .hover
+          .text Наука
+      %li
+        %a( href="#contacts" )
+          .hover
+          .text Контакты
   = form_tag '#', method: 'get', class: 'search' do
     .position
       .icon

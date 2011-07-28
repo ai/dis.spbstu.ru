@@ -1,5 +1,5 @@
 #menu
-  height: 50px
+  height: $menu-height
   margin-bottom: 20px
   border-bottom: 1px solid darken($green, 7%)
   +round
@@ -58,17 +58,30 @@
         +scale(1)
       .logo
         +scale(1.085)
+  .center
+    float: left
+    position: relative
+    overflow: hidden
   .full-name
     position: absolute
     top: 0
-    left: 187px
-    +line-height(50px)
-    font-size: 20px
+    left: -100%
+    margin-left: 1px
+    height: $menu-height
     z-index: 5
     width: 0
     overflow: hidden
-    .wrap
-      padding-left: 25px
+    text-shadow: rgba(255, 255, 255, 0.4) 0 1px 2px
+    text-align: center
+    +transition(left, 300ms)
+    &.show
+      left: 0
+    .department
+      font-size: 18px
+      margin-top: 5px
+    .university
+      margin-top: 5px
+      font-size: 14px
   ul
     float: left
     border-right: 1px solid rgba(255, 255, 255, 0.15)
@@ -76,7 +89,7 @@
     float: left
   li a
     float: left
-    +line-height(50px)
+    +line-height($menu-height)
     font-size: 20px
     border-left: 1px solid rgba(255, 255, 255, 0.15)
     border-right: 1px solid rgba(0, 0, 0, 0.15)
@@ -106,7 +119,7 @@
       .hover
         display: none
   .search
-    +line-height(50px)
+    +line-height($menu-height)
     text-align: center
     line-height: 1
     input
