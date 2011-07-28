@@ -7,3 +7,4 @@
 # =require 'core/controls'
 #
 # =require 'pages/signin'
+# =require 'pages/menu'

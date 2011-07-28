@@ -7,8 +7,7 @@ gem 'bson_ext'
 
 gem 'json'
 gem 'haml'
-gem 'compass', git: 'https://github.com/chriseppstein/compass.git',
-               branch: 'rails31'
+gem 'compass', git: 'https://github.com/chriseppstein/compass.git'
 gem 'sass-rails', '~> 3.1.0.rc'
 gem 'coffee-script'
 gem 'uglifier'

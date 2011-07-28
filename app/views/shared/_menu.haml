@@ -1,1 +1,29 @@
 %nav#menu
+  %a.home( href="/" rel="home" )
+    .hover
+    .logo
+    .magnified
+    .sup Кафедра
+    .sub РИС
+  %ul
+    %li
+      %a( href="/join/" )
+        .hover
+        .text Абитуриентам
+    %li
+      %a( href="/study/" )
+        .hover
+        .text Учёба
+    %li
+      %a( href="/science/" )
+        .hover
+        .text Наука
+    %li
+      %a( href="/#contacts" )
+        .hover
+        .text Контакты
+  = form_tag '#', method: 'get', class: 'search' do
+    .position
+      .icon
+      %input( type="text" name="q" )
+      .submit-by-enter

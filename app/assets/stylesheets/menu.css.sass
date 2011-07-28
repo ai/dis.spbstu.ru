@@ -1,0 +1,130 @@
+#menu
+  height: 50px
+  margin-bottom: 20px
+  background: $green
+  +background(linear-gradient(lighten($green, 3%), darken($green, 3%)))
+  border-bottom: 1px solid darken($green, 7%)
+  +round
+  +shadow
+  position: relative
+  a
+    display: block
+    text-decoration: none
+    color: black
+    text-shadow: rgba(255, 255, 255, 0.4) 0 1px 2px
+    outline: none
+  a.home
+    width: 185px
+    height: 100%
+    float: left
+    border-right: 1px solid rgba(0, 0, 0, 0.15)
+    position: relative
+    +border-left-radius(2px)
+    .logo, .magnified
+      position: absolute
+      +image-size("layout/logo.png")
+      top: -10px
+      left: 17px
+      background: image-url("layout/logo.png")
+      border-radius: image-width("layout/logo.png") / 2
+      +box-shadow(rgba(0, 0, 0, 0.4) 0 1px 3px)
+      +transition(all, 150ms)
+      z-index: 2
+    .magnified
+      +image-size("layout/logo-magnified.png")
+      top: -13px
+      left: 14px
+      background: image-url("layout/logo-magnified.png")
+      border-radius: image-width("layout/logo-magnified.png") / 2
+      z-index: 3
+      opacity: 0
+      +scale(0.933)
+    .sup
+      position: absolute
+      left: 104px
+      top: 6px
+      font-size: 13px
+      z-index: 2
+    .sub
+      position: absolute
+      top: 17px
+      left: 102px
+      font-size: 30px
+      z-index: 2
+    &:hover
+      .magnified
+        opacity: 1
+        +scale(1)
+      .logo
+        +scale(1.085)
+  ul
+    float: left
+    border-right: 1px solid rgba(255, 255, 255, 0.15)
+  li
+    float: left
+  li a
+    float: left
+    +line-height(50px)
+    padding: 0 23px
+    font-size: 20px
+    border-left: 1px solid rgba(255, 255, 255, 0.15)
+    border-right: 1px solid rgba(0, 0, 0, 0.15)
+    position: relative
+    .text
+      position: relative
+      z-index: 2
+  li a, a.home
+    .hover
+      position: absolute
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      z-index: 1
+      background: yellow
+      background: white
+      opacity: 0
+      +transition(opacity, 150ms)
+    &:hover
+      .hover
+        opacity: 0.12
+    &:active
+      +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 5px 0 inset)
+      border-left-color: rgba(0, 0, 0, 0.3)
+      background: rgba(0, 0, 0, 0.05)
+      .hover
+        display: none
+  .search
+    +line-height(50px)
+    text-align: center
+    input
+      width: 120px
+      padding: 0 20px
+      font-size: 14px
+      +line-height(22px)
+      border: none
+      +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 2px 0 inset)
+      +border-radius(11px)
+    .position
+      display: inline-block
+      +line-height(22px)
+      position: relative
+      overflow: hidden
+    .icon
+      +image-size("layout/search.png")
+      background: image-url("layout/search.png") no-repeat
+      position: absolute
+      left: 4px
+      top: 4px
+      +transition(opacity, 100ms)
+      &.focus
+        opacity: 0.5
+    .submit-by-enter
+      +image-size("layout/enter.png")
+      background: image-url("layout/enter.png") no-repeat
+      position: absolute
+      right: -8px
+      top: 6px
+      +transition(right, 100ms)
+      &.focus
+        right: 8px

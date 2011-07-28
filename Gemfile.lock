@@ -1,9 +1,8 @@
 GIT
   remote: https://github.com/chriseppstein/compass.git
-  revision: 91a748a916360057b5caf6ea85cd38441d3b257a
-  branch: rails31
+  revision: 289c452d648764284d39beaa8e75d58ea5e85f62
   specs:
-    compass (0.12.0.alpha.0.91a748a)
+    compass (0.12.0.alpha.0.289c452)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
@@ -84,7 +83,7 @@ GEM
       ruby-openid-apps-discovery (~> 1.2.0)
     oily_png (1.0.1)
       chunky_png (~> 1)
-    polyglot (0.3.1)
+    polyglot (0.3.2)
     r18n-core (0.4.10)
     rack (1.3.2)
     rack-cache (1.0.2)
@@ -96,7 +95,7 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.0)
+    rack-test (0.6.1)
       rack (>= 1.0)
     rails (3.1.0.rc5)
       actionmailer (= 3.1.0.rc5)
@@ -149,7 +148,8 @@ GEM
       rack (>= 1.0.0)
     thor (0.14.6)
     tilt (1.3.2)
-    treetop (1.4.9)
+    treetop (1.4.10)
+      polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.29)
     uglifier (1.0.0)
