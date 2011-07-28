@@ -233,7 +233,7 @@ describe ContentsController do
       delete :destroy, path: content.path
       
       content.reload.should be_deleted
-      flash[:notice].should_not be_blank
+      flash[:notice].should be_present
       response.should redirect_to(content.path)
     end
     

@@ -96,7 +96,7 @@ describe UsersController do
       post :create, id: @user.id, user: { 'email' => '' }
       
       response.should redirect_to(users_path)
-      flash[:error].should_not be_blank
+      flash[:error].should be_present
       User.count.should == 1
     end
     
@@ -111,7 +111,7 @@ describe UsersController do
                                           'role'  => 'Sample' }
       
       response.should redirect_to(users_path)
-      flash[:notice].should_not be_blank
+      flash[:notice].should be_present
       
       User.count.should == 2
       user = User.last
@@ -140,8 +140,8 @@ describe UsersController do
       put :update, id: @user.id, user: { 'email' => '' }
       
       response.should redirect_to(users_path)
-      flash[:error].should_not be_blank
-      @user.reload.email.should_not be_blank
+      flash[:error].should be_present
+      @user.reload.email.should be_present
     end
     
     it "should update user" do
@@ -222,7 +222,7 @@ describe UsersController do
       
       @another.reload.reset_auth_token.should_not be_nil
       response.should redirect_to(users_path)
-      flash[:notice].should_not be_blank
+      flash[:notice].should be_present
     end
     
   end

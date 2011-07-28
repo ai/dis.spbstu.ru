@@ -45,7 +45,7 @@ describe SessionsController do
       get :create, provider: 'fake'
       
       response.should redirect_to('http://example.com/one')
-      flash[:error].should_not be_blank
+      flash[:error].should be_present
       session[:reset_auth_token].should be_nil
     end
     
