@@ -43,7 +43,7 @@ app.for '#menu', ($, $$) ->
     return if query == lastQuery
     lastQuery = query
     
-    searchKey.toggleClass('enter', (query != ''))
+    searchKey.removeClass('up').toggleClass('enter', (query != ''))
     app.search.query query, (pages) ->
       if 0 == pages.length
         quick.hide().find('ol').html('')
