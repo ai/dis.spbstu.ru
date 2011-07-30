@@ -1,4 +1,4 @@
-# =require 'lib/jquery.elastic'
+# =require 'jquery.elastic'
 #
 # =require 'core/flash'
 #

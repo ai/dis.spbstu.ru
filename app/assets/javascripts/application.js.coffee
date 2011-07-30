@@ -1,6 +1,6 @@
-# =require 'lib/jquery.easing'
-# =require 'lib/jquery.chrono'
-# =require 'lib/jquery.role'
+# =require 'jquery.easing'
+# =require 'jquery.chrono'
+# =require 'jquery.role'
 #
 # =require 'core/app'
 # =require 'core/ext'
