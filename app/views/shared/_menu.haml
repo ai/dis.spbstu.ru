@@ -11,26 +11,26 @@
       .university
         Санкт-Петербургского Государственного Политехнического Университета
     %ul
-      %li
+      %li.join
         %a( href="/join/" )
           .hover
           .text Абитуриентам
-      %li
+      %li.study
         %a( href="/study/" )
           .hover
           .text Учёба
-      %li
+      %li.science
         %a( href="/science/" )
           .hover
           .text Наука
-      %li
+      %li.contacts
         %a( href="#contacts" )
           .hover
           .text Контакты
   .search
     %form( action="/search" method="get" role="search-key" )
       .icon
-      %input( type="search" name="q" autocomplete="off" role="search" )
+      %input( type="search" name="q" autocomplete="off" role="search" placeholder="Поиск" )
     
     .quick-search( role="quick-search-results" )
       .fix
