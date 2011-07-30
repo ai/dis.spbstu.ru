@@ -6,7 +6,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+Bundler.require *Rails.groups(:assets) if defined?(Bundler)
 
 module Dis
   class Application < Rails::Application

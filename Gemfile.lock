@@ -45,6 +45,11 @@ GEM
     bson_ext (1.3.1)
     builder (3.0.0)
     chunky_png (1.2.0)
+    coffee-rails (3.1.0.rc.5)
+      actionpack (~> 3.1.0.rc1)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.1.0.rc1)
+      sprockets (>= 2.0.0.beta.9)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -162,7 +167,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
-  coffee-script
+  coffee-rails (~> 3.1.0.rc)
   compass!
   email_validator
   fabrication
