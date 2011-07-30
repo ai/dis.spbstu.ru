@@ -52,6 +52,20 @@ describe ContentsController do
     
   end
   
+  describe "#all" do
+  
+    it "should return all site pages" do
+      b = Fabricate(:content, title: 'B')
+      a = Fabricate(:content, title: 'A')
+      
+      get :all, format: 'json'
+      
+      response.should be_success
+      assigns(:all).should == [a, b]
+    end
+  
+  end
+  
   describe "#show" do
     
     it "should load content" do

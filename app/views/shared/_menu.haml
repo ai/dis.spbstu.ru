@@ -27,8 +27,11 @@
         %a( href="#contacts" )
           .hover
           .text Контакты
-  = form_tag '#', method: 'get', class: 'search' do
-    .position
+  .search
+    %form( action="/search" method="get" role="search-key" )
       .icon
-      %input( type="search" name="q" )
-      .submit-by-enter
+      %input( type="search" name="q" autocomplete="off" role="search" )
+    
+    .quick-search( role="quick-search-results" )
+      .fix
+      %ol

@@ -8,7 +8,7 @@
   &, .full-name
     background: $green
     +background(linear-gradient(lighten($green, 3%), darken($green, 3%)))
-  a
+  a.home, ul a
     display: block
     text-decoration: none
     color: black
@@ -85,20 +85,20 @@
   ul
     float: left
     border-right: 1px solid rgba(255, 255, 255, 0.15)
-  li
-    float: left
-  li a
-    float: left
-    +line-height($menu-height)
-    font-size: 20px
-    border-left: 1px solid rgba(255, 255, 255, 0.15)
-    border-right: 1px solid rgba(0, 0, 0, 0.15)
-    position: relative
-    .text
-      padding: 0 23px
+    a
+      float: left
+      +line-height($menu-height)
+      font-size: 20px
+      border-left: 1px solid rgba(255, 255, 255, 0.15)
+      border-right: 1px solid rgba(0, 0, 0, 0.15)
       position: relative
-      z-index: 2
-  li a, a.home
+      .text
+        padding: 0 23px
+        position: relative
+        z-index: 2
+    li
+      float: left
+  ul a, a.home
     .hover
       position: absolute
       left: 0
@@ -118,42 +118,87 @@
       background: rgba(0, 0, 0, 0.05)
       .hover
         display: none
-  .search
-    +line-height($menu-height)
-    text-align: center
-    line-height: 1
-    input
-      width: 120px
+
+#menu .search
+  +line-height($menu-height)
+  line-height: 1
+  position: relative
+  form
+    top: 14px
+    left: 25px
+    display: inline-block
+    +line-height(22px)
+    position: relative
+    background: white
+    +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 2px 0 inset)
+    +border-radius(11px)
+  form:after
+    font-size: 14px
+    position: absolute
+    right: -16px
+    top: 0
+  form.enter:after
+    content: "↲"
+  form.up:after
+    content: "↑"
+  input
+    width: 135px
+    +line-height(22px)
+    border: none
+    background: transparent
+    +border-radius(1px)
+    margin: 0 5px 0 20px
+    +standard-font
+    font-size: 14px
+  .icon
+    +image-size("layout/search.png")
+    background: image-url("layout/search.png") no-repeat
+    position: absolute
+    left: 4px
+    top: 4px
+    +transition(opacity, 100ms)
+  form.focused .icon
+    opacity: 0.5
+  .quick-search
+    display: none
+    position: absolute
+    top: $menu-height + 1
+    right: 0
+    width: 210px
+    background: black
+    background: rgba(0, 0, 0, 0.9)
+    z-index: 11
+    +border-bottom-radius(2px)
+    +box-shadow(rgba(0, 0, 0, 0.4) 0 1px 3px)
+    padding: 5px 0
+    .fix
+      width: 1px
+      height: 1px
+      background: darken($green, 7%)
+      position: absolute
+      right: 0
+      top: -1px
+    a
       font-size: 14px
-      +line-height(22px)
-      border: none
-      background: transparent
-      +border-radius(1px)
-      margin: 0 20px
-    .position
-      top: 14px
-      display: inline-block
-      +line-height(22px)
+      display: block
+      padding: 5px 0 5px 49px
+      color: white
+      text-decoration: none
       position: relative
-      overflow: hidden
-      background: white
-      +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 2px 0 inset)
-      +border-radius(11px)
-    .icon
-      +image-size("layout/search.png")
-      background: image-url("layout/search.png") no-repeat
-      position: absolute
-      left: 4px
-      top: 4px
-      +transition(opacity, 100ms)
-      &.focus
-        opacity: 0.5
-    .submit-by-enter
-      +image-size("layout/enter.png")
-      background: image-url("layout/enter.png") no-repeat
-      position: absolute
-      right: -8px
-      top: 6px
-      +transition(right, 100ms)
-      &.focus
-        right: 8px
+      &:after
+        position: absolute
+        top: 5px
+        right: 7px
+    .down a:after
+      content: "↓"
+    .selected a:after
+      content: "↲"
+    .up a:after
+      content: "↑"
+    strong
+      color: $green
+      font-weight: normal
+    .selected a, a:hover
+      background: darken($green, 7%)
+      strong
+        color: white

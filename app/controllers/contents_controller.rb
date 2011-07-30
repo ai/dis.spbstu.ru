@@ -2,10 +2,10 @@
 # Вики-страницы
 class ContentsController < ApplicationController
   # Запрещаем редактирование и удаление страниц посторонним посетителям
-  before_filter :authenticate_user!, except: :show
+  before_filter :authenticate_user!, except: [:show, :all]
   
   # Добавляем в самое начала параметра path ведущий /
-  before_filter :fix_path
+  before_filter :fix_path, except: :all
   
   # Загружаем страницу из БД для действий, где она нужна
   before_filter :load_content, only: [:show, :destroy, :restore]
@@ -44,6 +44,12 @@ class ContentsController < ApplicationController
   def restore
     @content.restore!
     redirect_to @content.path
+  end
+  
+  # Список всех вики-страниц сайта
+  def all
+    @all = Content.all.order_by(title: :asc)
+    render json: @all
   end
   
   private

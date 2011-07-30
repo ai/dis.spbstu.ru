@@ -73,4 +73,9 @@ class Content
     self.title = version.title
     self.save!
   end
+  
+  # В JSON-виде отдаём только заголовок и путь
+  def as_json(options = { })
+    { path: self.path, title: (root? ? 'Главная страница' : self.title) }
+  end
 end

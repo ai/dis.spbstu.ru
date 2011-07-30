@@ -17,6 +17,8 @@ Dis::Application.routes.draw do
   end
   
   # Вики-страницы
+  match '/all.json', to: 'contents#all'
+  
   root              via: :get,  to: 'contents#show',    defaults: { path: '' }
   root              via: :put,  to: 'contents#update',  defaults: { path: '' }
   match '/edit',                to: 'contents#edit',    defaults: { path: '' }

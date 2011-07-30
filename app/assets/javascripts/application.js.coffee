@@ -5,6 +5,7 @@
 # =require 'core/app'
 # =require 'core/ext'
 # =require 'core/controls'
+# =require 'core/search'
 #
 # =require 'pages/signin'
 # =require 'pages/menu'

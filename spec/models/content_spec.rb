@@ -182,4 +182,23 @@ describe Content do
     
   end
   
+  describe "#as_json" do
+    
+    it "should return only title and path in JSON" do
+      a = Fabricate(:content, path: '/a')
+      b = Fabricate(:content, path: '/b')
+      a.update_text! "Заголовок: A\nabc"
+      b.update_text! "Заголовок: B\ncba"
+      
+      [a, b].to_json.should == '[{"path":"/a","title":"A"},' +
+                                '{"path":"/b","title":"B"}]'
+    end
+    
+    it "should set title for root" do
+      a = Fabricate(:content, path: '/')
+      a.as_json.should == { path: '/', title: 'Главная страница' }
+    end
+    
+  end
+  
 end
