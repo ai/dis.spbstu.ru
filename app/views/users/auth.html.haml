@@ -1,9 +1,6 @@
 - title 'Выбор способа входа'
 
-- content_for :head do
-  = stylesheet_link_tag 'auth'
-
-%article.page.auth
+%article.page.card.auth
   - if @user.confirmed?
     %h1 Смена способы входа
 
