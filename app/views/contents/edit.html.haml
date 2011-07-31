@@ -2,9 +2,13 @@
 
 %article.page.edit-content
   %h1
-    Изменение страницы
-    - if @content.title
-      «<a href="#{@content.path}">#{@content.title}</a>»
+    Изменение
+    - if @content.root?
+      главной страницы
+    - else
+      страницы
+      - if @content.title
+        «<a href="#{@content.path}">#{@content.title}</a>»
 
   = form_tag @content.path, method: :put do
     %textarea( name="text" role="content-textarea" )= @content.versions.last.try(:text)
