@@ -1,4 +1,5 @@
 # =require 'jquery.elastic'
+# =require 'visibility'
 #
 # =require 'core/flash'
 #

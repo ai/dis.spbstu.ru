@@ -27,7 +27,8 @@ window.app.flash =
   # Автоматически скрывает flash-уведомление
   alive: (flash) ->
     return unless flash.length
-    after '2.5sec', -> app.flash.hide(flash)
+    Visibility.onVisible ->
+      after '2.5sec', -> app.flash.hide(flash)
     flash.click -> app.flash.hide(flash)
 
 jQuery ($) ->
