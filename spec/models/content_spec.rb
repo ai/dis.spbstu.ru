@@ -29,7 +29,7 @@ describe Content do
   
   describe "#deleted?" do
   
-    it "should return true for delete content" do
+    it "should return true for deleted content" do
       content = Fabricate(:content)
       content.should_not be_deleted
       content.deleted_at = Time.now

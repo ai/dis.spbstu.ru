@@ -1,6 +1,6 @@
 jQuery ($) ->
   
   # Отправка формы с помощью ссылки
-  $('[role=submit]').click ->
+  $('@submit').click ->
     $(@).submitForm()
     false

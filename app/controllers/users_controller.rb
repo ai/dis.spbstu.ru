@@ -11,13 +11,13 @@ class UsersController < ApplicationController
   
   # Список всех редакторов
   def index
-    @users = User.order_by(name: :asc)
+    @users = User.undeleted.order_by(name: :asc)
   end
   
   # Создаём нового пользователя и отправляем ему письмо с ссылкой, где он может
   # выбрать сервис авторизации
   def create
-    user = User.new
+    user = User.new_or_restore(params[:user]['email'])
     if save_user(user)
       Mailer.welcome(current_user, user).deliver
       mail = user.email
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     end
     
     mail = @user.email
-    @user.destroy
+    @user.destroy_or_mark_as_deleted!
     flash[:notice] = "Пользователь #{mail} удалён"
     redirect_to users_path
   end

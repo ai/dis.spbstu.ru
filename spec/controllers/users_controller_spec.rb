@@ -20,6 +20,7 @@ describe UsersController do
     it "should display all users" do
       one = Fabricate(:user, name: 'Борис')
       two = Fabricate(:user, name: 'Андрей')
+      del = Fabricate(:user, deleted_at: Time.now)
       
       get :index
       
@@ -106,9 +107,9 @@ describe UsersController do
       Mailer.should_receive(:welcome).with(@user, an_instance_of(User)).
         and_return(mail)
       
-      post :create, id: @user.id, user: { 'email' => 'test@example.com',
-                                          'name'  => 'Test',
-                                          'role'  => 'Sample' }
+      post :create, user: { 'email' => 'test@example.com',
+                            'name'  => 'Test',
+                            'role'  => 'Testing' }
       
       response.should redirect_to(users_path)
       flash[:notice].should be_present
@@ -117,8 +118,25 @@ describe UsersController do
       user = User.last
       user.email.should == 'test@example.com'
       user.name.should  == 'Test'
-      user.role.should  == 'Sample'
+      user.role.should  == 'Testing'
       user.should_not be_confirmed
+    end
+    
+    it "should restore user with edits" do
+      user = Fabricate(:user, deleted_at: Time.now,
+                              auth_provider: 'fake', auth_uid: 'deleted')
+      
+      post :create, user: { 'email' => user.email,
+                            'name'  => 'Test',
+                            'role'  => 'Testing' }
+                            
+      response.should redirect_to(users_path)
+      User.count.should == 2
+      user.reload.should == User.last
+      
+      user.name.should == 'Test'
+      user.role.should == 'Testing'
+      user.should be_confirmed
     end
     
   end
@@ -179,6 +197,18 @@ describe UsersController do
       
       response.should redirect_to(users_path)
       User.count.should == 1
+    end
+    
+    it "should only mark user with edits" do
+      one     = Fabricate(:user)
+      content = Fabricate(:content)
+      content.update_text! 'Text', one
+      
+      delete :destroy, id: one.id
+      
+      response.should redirect_to(users_path)
+      one.reload.should be_deleted
+      User.count.should == 2
     end
     
     it "should not delete current user" do
