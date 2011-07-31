@@ -56,6 +56,15 @@ app.search =
       @init()
       return
 
+    finded = @search(query)
+    # Если пользователь забыл переключить раскладку, то исправляем его ошибку
+    finded = @search(app.keyboard.enToRu(query)) if finded.length == 0
+
+    callback(finded)
+
+  # Выполняет непосредственно поиск, без проверок и допольнительной логики
+  # метода query().
+  search: (query) ->
     starts = query.toLocaleLowerCase().split(/\s+/)
     finded = []
     for page in @pages
@@ -68,8 +77,7 @@ app.search =
       if count == starts.length
         page.highlighted = @highlight(page.title, starts)
         finded.push(page)
-
-    callback(finded)
+    finded
 
   # Подсвечивает найденные слова в заголовке страницы
   highlight: (title, starts) ->
