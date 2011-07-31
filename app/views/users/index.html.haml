@@ -16,12 +16,12 @@
           = form_tag request_auth_user_path(user) do
             - if user.confirmed?
               - if user == current_user
-                - title = 'Привязать к другому аккаунту для входа на сайт'
+                - title = 'Привязать к другому аккаунту'
               - else
-                - title = 'Отправить письмо с ссылкой, чтобы привязать другой аккаунт для входа на сайт'
+                - title = 'Отправить письмо с ссылкой, чтобы привязать другой аккаунт'
               = submit_button('Сменить вход', title: title)
             - else
-              = submit_button('Пригласить ещё раз', title: 'Повторно выслать приглашение, чтобы привязать аккаунт для выхода на сайт')
+              = submit_button('Пригласить ещё раз', title: 'Повторно выслать приглашение, чтобы привязать аккаунт')
           - if user != current_user
             = form_for user, method: :delete do
               = shadowed_button('Удалить', role: 'delete-user')
