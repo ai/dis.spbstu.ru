@@ -3,9 +3,9 @@
 class SessionsController < ApplicationController
   # Отключаем защиту от XSRF для create действия, чтобы побороть ошибку OmniAuth
   protect_from_forgery except: :create
-  
+
   # Аудентификация пользователя.
-  # 
+  #
   # Сначала вызывается OmniAuth, который перенаправляет пользователя на
   # сайт аудентификации (например, Google). Если сайт проверил пользователя,
   # то пользователь перенаправляется обратно на наш сайт и вызывается
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
                                      # аккаунта на Google)
     uid  = auth_hash['uid']          # ID пользователя в этом сервисе
     user = User.where(auth_provider: provider, auth_uid: uid).first
-    
+
     if session[:reset_auth_token]
       # Если пользователь вошёл на сайт первый раз и нам нужно запомнить его
       # сервис и ID пользователя
@@ -48,12 +48,12 @@ class SessionsController < ApplicationController
         flash[:wrong_user] = auth_hash['user_info']['email']
       end
     end
-    
+
     # Возвращаем пользователя на страницу, где он последний раз был или на
     # главную страницу сайта
     redirect_to request.env['omniauth.origin'] || root_path
   end
-  
+
   # Вызывается, если сервис не смог проверить пользователя. Например, если
   # пользователь забыл пароль от своего аккаунта на Google.
   def failure
@@ -62,7 +62,7 @@ class SessionsController < ApplicationController
     # главную страницу сайта
     redirect_to request.env['omniauth.origin'] || root_path
   end
-  
+
   # Выход с нашего сайта — забываем, что пользователь вошёл на сайте
   def destroy
     # Меняем session_token пользователя, чтобы он вышел с нашего сайта и с
@@ -75,16 +75,16 @@ class SessionsController < ApplicationController
     # главную страницу сайта
     redirect_to request.referer || root_path
   end
-  
+
   private
-  
+
   # Запоминаем, что пользователь вошёл на сайт
   def sign_in!(user)
     user.signin_at = Time.now # Запоминаем время, когда он вошёл на сайт
     user.save
     self.current_user = user  # Ставим session_token
   end
-  
+
   # Для удобства тестирования сделаем отдельный метод, из которого create берёт
   # данные
   def auth_hash

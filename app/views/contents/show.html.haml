@@ -17,11 +17,11 @@
   - content_for :controls do
     .page-controls
       = shadowed_button('Изменить', href: edit_content_path(@content))
-      
+
       - unless @content.root?
         = form_tag @content.path, method: :delete, class: 'delete-content' do
           = shadowed_button('Удалить', role: 'submit')
-      
+
       .history
         %h2 История ↓
         %ol

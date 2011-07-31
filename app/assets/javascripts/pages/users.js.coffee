@@ -1,5 +1,5 @@
 app.for 'article.users', ($, $$) ->
-  
+
   # Показываем кнопку Сохранить при редактировании редакторов
   userEdit = $$('input')
   userEdit.focus ->
@@ -13,7 +13,7 @@ app.for 'article.users', ($, $$) ->
     unless li.data('changed')
       li.find('@save-user').hide()
       li.find('@user-controls').show()
-  
+
   # Подтверждение удаления пользователя
   $$('@delete-user').click ->
     email = $(@).closest('li').find('[type=email]').val()

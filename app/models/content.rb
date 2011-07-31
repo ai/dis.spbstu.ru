@@ -2,7 +2,7 @@
 # Модель (класс для работы с данными из базы данных) вики-страницы
 class Content
   include Mongoid::Document
-  
+
   field :path                   # Путь к вики-странице
   field :title                  # Кеш заголовка страницы. Берётся из текста.
   field :deleted_at, type: Time # Отметка, что страница удалена. Не удаляем её
@@ -11,16 +11,16 @@ class Content
   include Mongoid::Timestamps   # Добавляет поля created_at и updated_at,
                                 # чтобы знать когда мы создали страницу,
                                 # и когда последний раз изменили
-  
+
   # Версии текста страницы. Там же хранятся авторы изменений.
   embeds_many :versions
-  
+
   # Проверяем, что указали уникальный путь
   validates :path, presence: true, uniqueness: true
-  
+
   # Создаём индексы, чтобы быстрее искать страницу по пути
   index :path, unique: true
-  
+
   # Достаёт страницу (включая удалённые) по пути к ней. Если страницы с таким
   # путём нет, то выкинет ошибку 404.
   def self.by_path(path)
@@ -28,29 +28,29 @@ class Content
     raise404 unless content
     content
   end
-  
+
   # Выкидывает ошибку 404 (Mongoid::Errors::DocumentNotFound)
   def self.raise404
     raise Mongoid::Errors::DocumentNotFound.new(self.class, [])
   end
-  
+
   # Переместить в корзину
   def mark_as_deleted!
     self.deleted_at = Time.now
     self.save
   end
-  
+
   # Восстановить из корзины
   def restore!
     self.deleted_at = nil
     self.save
   end
-  
+
   # Была ли эта страница отмечена как удалённая
   def deleted?
     not self.deleted_at.nil?
   end
-  
+
   # Возвращает нужную версию страницы. Если номер версии не передан,
   # то возвращает последнюю версию. Если указанной версии нет, то выкидывает
   # ошибку 404.
@@ -59,12 +59,12 @@ class Content
     self.class.raise404 unless version
     version
   end
-  
+
   # Возвращает true для главной страницы (у которой адрес /)
   def root?
     '/' == self.path
   end
-  
+
   # Создаёт новую версию текста страницы и обновляет кеш заголовка
   def update_text!(text, author = nil)
     return if not self.versions.empty? and self.versions.last.text == text
@@ -73,7 +73,7 @@ class Content
     self.title = version.title
     self.save!
   end
-  
+
   # В JSON-виде отдаём только заголовок и путь
   def as_json(options = { })
     { path: self.path, title: (root? ? 'Главная страница' : self.title) }

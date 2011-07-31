@@ -8,7 +8,7 @@
 
   = form_tag @content.path, method: :put do
     %textarea( name="text" role="content-textarea" )= @content.versions.last.try(:text)
-  
+
 - content_for :controls do
   .page-controls.edit-content
     = button('Сохранить', role: 'save-content')

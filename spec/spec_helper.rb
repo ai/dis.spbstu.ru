@@ -10,7 +10,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  
+
   config.after do
     Mongoid.master.collections.select { |i| i.name !~ /system/ }.each(&:drop)
   end

@@ -25,7 +25,7 @@
           - if user != current_user
             = form_for user, method: :delete do
               = shadowed_button('Удалить', role: 'delete-user')
-      
+
   %h2 Новый пользователь
   = form_for User.new do |f|
     = f.email_field :email, placeholder: 'Эл. почта'

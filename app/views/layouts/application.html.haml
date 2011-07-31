@@ -9,22 +9,22 @@
       - else
         = @title + ' — Кафедра РИС'
     = favicon_link_tag
-    
+
     = enable_html5_for_ie
-    
+
     = include_fonts
     = stylesheet_link_tag 'application'
     - if signed_in?
       = stylesheet_link_tag 'user'
-    
+
     = include_jquery
     = javascript_include_tag 'application'
     - if signed_in?
       = javascript_include_tag 'user'
       = csrf_meta_tags
-    
+
     = yield :head
-    
+
     - if Rails.env.production?
       = render 'shared/counter'
   %body
@@ -32,15 +32,15 @@
       - if flash[type]
         .flash{ class: type }
           %div= flash[type]
-      
+
     #root
       #subroot
         = render 'shared/menu'
-      
+
         = yield
-      
+
       #root_footer
-    
+
     - if signed_in?
       = render 'shared/controls'
     - elsif not @no_signin_form

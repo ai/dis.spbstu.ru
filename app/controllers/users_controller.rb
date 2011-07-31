@@ -5,15 +5,15 @@ class UsersController < ApplicationController
   # Кроме просмотра списка редакторов и выбора способа входа для новых
   # пользователей (которые пока ещё не могут войти).
   before_filter :authenticate_user!, except: :auth
-  
+
   # Загружаем пользователя из БД для действий, где он нужен
   before_filter :load_user, only: [:update, :destroy, :request_auth, :auth]
-  
+
   # Список всех редакторов
   def index
     @users = User.undeleted.order_by(name: :asc)
   end
-  
+
   # Создаём нового пользователя и отправляем ему письмо с ссылкой, где он может
   # выбрать сервис авторизации
   def create
@@ -25,13 +25,13 @@ class UsersController < ApplicationController
     end
     redirect_to users_path
   end
-  
+
   # Изменение почты и имени редактора
   def update
     save_user(@user)
     redirect_to users_path
   end
-  
+
   # Удаление редактора
   def destroy
     # Запрещаем редактору удалять самого себя
@@ -39,13 +39,13 @@ class UsersController < ApplicationController
       render text: "Нельзя удалить самого себя", status: :bad_request
       return
     end
-    
+
     mail = @user.email
     @user.destroy_or_mark_as_deleted!
     flash[:notice] = "Пользователь #{mail} удалён"
     redirect_to users_path
   end
-  
+
   # Просим пользователя сменить сервис авторизации (например, если он потерял
   # пароль от прошлого).
   def request_auth
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
-  
+
   # Пользователь выбирает сервис авторизации и свой auth_uid в этом сервисе
   def auth
     if params[:token].blank?
@@ -79,9 +79,9 @@ class UsersController < ApplicationController
       session[:reset_auth_token] = params[:token]
     end
   end
-  
+
   private
-  
+
   # Сохраняет новую почту и имя редактора. Если произошли ошибки, то метод их
   # выводит и возврашает false.
   def save_user(user)
@@ -97,7 +97,7 @@ class UsersController < ApplicationController
       false
     end
   end
-  
+
   # Загружаем пользователя из БД. Используется как фильтр, перед нужными
   # действиями.
   def load_user
