@@ -35,7 +35,8 @@ app.for '#menu', ($, $$) ->
   
   search.blur ->
     form.removeClass('focused')
-    quick.hide()
+    after '100ms', ->
+      quick.hide()
     app.search.lastSearch = null
   
   search.bind 'keyup change search', (e) ->
