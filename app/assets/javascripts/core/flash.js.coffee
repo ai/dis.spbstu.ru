@@ -13,7 +13,7 @@ window.app.flash =
       div  = flash.find('div')
       div.css(borderTopWidth: height, top: -height)
 
-      flash.animate { i: 1 },
+      $({ i: 0 }).animate { i: 1 },
         duration: 600
         easing: 'easeInQuart'
         step: (i) ->

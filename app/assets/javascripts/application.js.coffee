@@ -10,3 +10,4 @@
 #
 # =require 'pages/signin'
 # =require 'pages/menu'
+# =require 'pages/open-source'
