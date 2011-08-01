@@ -7,32 +7,24 @@ app.for '#opensource', ($, $$, opensource) ->
     light     = $$('.light')
     shadow    = $$('.shadow')
     corner    = $$('.corner')
-    animation = null
+    animation = $({ i: 0 })
     link.hover ->
       back = !link.is(':hover')
       prop = 'transform'
       prop = "-#{app.prefix()}-#{prop}" unless document.body.style.transform?
-      animation?.stop()
 
       link.removeClass('bended') if back
-      animation = $({ i: 0 }).animate { i: 1 },
+      animation.stop().animate { i: (if back then 0 else 1) },
         duration: 600
         easing:  'easeInOutQuad'
         step: (i) ->
           angle = Math.round(i * 180)
-          if back
-            angle = 180 - angle
-            if i < 0.5
-              shadow.css(opacity: i / 6)
-            else
-              shadow.css(opacity: 0)
-              light.css(opacity: 2 * (1 - i))
+          if i < 0.5
+            light.css(opacity: 2 * i)
+            shadow.css(opacity: 0)
           else
-            if i < 0.5
-              light.css(opacity: 2 * i)
-            else
-              light.css(opacity: 0)
-              shadow.css(opacity: (1 - i) / 6)
+            light.css(opacity: 0)
+            shadow.css(opacity: (1 - i) / 6)
           corner.css(prop, "rotate3d(1, 1, 0, #{angle}deg)")
           if i > 0.85 and not back
             link.addClass('bended')
@@ -43,16 +35,17 @@ app.for '#opensource', ($, $$, opensource) ->
 
   hack  = $$('.hack')
   techs = $$('.technologies')
-  techsAnimation = null
+  techsAnimation = $({ i: 0 })
   period = 0.5 / techs.find('li').length
-  link.mouseover ->
-    techs.addClass('show')
-    techsAnimation?.stop()
+  link.mouseenter ->
+    techs.show()
+    hack.show()
     next = techs.find('li:first')
     time = 0.5
 
-    techsAnimation = $({ i: 0 }).animate { i: 1 },
+    techsAnimation.stop().animate { i: 1 },
       duration: 1200
+      easing:  'easeInOutQuad'
       step: (i) ->
         if time > 0.5
           hack.addClass('show')
@@ -60,18 +53,19 @@ app.for '#opensource', ($, $$, opensource) ->
           time += period
           next.addClass('show')
           next = next.next()
-  link.mouseout ->
-    techsAnimation?.stop()
+  link.mouseleave ->
     next = techs.find('li:last')
-    time = 0
+    time = 1
 
     hack.removeClass('show')
-    techsAnimation = $({ i: 0 }).animate { i: 1 },
+    techsAnimation.stop().animate { i: 0 },
       duration: 600
+      easing:  'easeInOutQuad'
       step: (i) ->
-        if time < i
-          time += period
+        if time > i
+          time -= period
           next.removeClass('show')
           next = next.prev()
       complete: ->
-        techs.removeClass('show')
+        hack.hide()
+        techs.hide()

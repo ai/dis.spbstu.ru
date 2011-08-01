@@ -40,6 +40,7 @@
     color: #888
     font-size: 12px
     text-align: center
+    letter-spacing: 1px
   .light, .shadow
     display: none
     height: 70%
@@ -79,46 +80,48 @@
     top: -40px
 
 #opensource .hack
+  display: none
   position: absolute
-  right: 95px
-  top: 25px
+  right: 90px
+  top: 15px
   width: 100px
-  color: gray
+  padding: 10px 5px 10px 15px
   color: #555
-  text-shadow: $body-color 1px 1px 1px, $body-color -1px 1px 1px, $body-color 1px -1px 1px, $body-color -1px -1px 1px
   font-size: 13px
   opacity: 0
   +transition(opacity, 600ms)
+  background: $body-color
+  +background(linear-gradient(left, fade-out($body-color, 1), $body-color 5px, $body-color))
   &.show
     opacity: 1
 
 #opensource .technologies
+  display: none
   position: absolute
+  left: -5px
   padding-top: 20px
-  background: $body-color
-  opacity: 0
-  +transition(opacity, 600ms)
-  &.show
-    opacity: 1
   li
     width: 90px
-    padding: 82px 0 20px 0
+    padding: 82px 0 20px 5px
     text-align: center
     position: relative
     font-weight: bold
-    text-shadow: white 0 2px 2px
+    color: #888
     text-shadow: #ccc 1px 1px 0
     font-size: 13px
     opacity: 0
+    background: $body-color
+    +background(linear-gradient(left, fade-out($body-color, 1), $body-color 10px, $body-color))
     +transition(opacity, 400ms)
     &.show
-      opacity: 0.4
+      opacity: 1
   .icon
     position: absolute
     top: 0
-    left: 5px
+    left: 10px
     width: 80px
     height: 80px
+    opacity: 0.4
   .html5 .icon
     background: image-url("opensource/html5.png")
   .css3 .icon
