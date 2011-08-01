@@ -1,4 +1,5 @@
-app.for '#opensource', ($, $$, link) ->
+app.for '#opensource', ($, $$, opensource) ->
+  link = $$('.repository')
 
   # 2 разных анимации, которые будут показывать «исходный код» сайта,
   # в зависимости от возможностей браузера
@@ -37,3 +38,37 @@ app.for '#opensource', ($, $$, link) ->
             link.addClass('bended')
   else
     link.addClass('animated2d')
+
+  # Показываем/скрываем текст и технологии сайта
+
+  hack  = $$('.hack')
+  techs = $$('.technologies')
+  techsAnimation = null
+  period = 0.5 / techs.find('li').length
+  link.mouseover ->
+    techsAnimation?.stop()
+    next = techs.find('li:first')
+    time = 0.5
+
+    techsAnimation = $({ i: 0 }).animate { i: 1 },
+      duration: 1200
+      step: (i) ->
+        if time > 0.5
+          hack.addClass('show')
+        if time < i
+          time += period
+          next.addClass('show')
+          next = next.next()
+  link.mouseout ->
+    techsAnimation?.stop()
+    next = techs.find('li:last')
+    time = 0
+
+    hack.removeClass('show')
+    techsAnimation = $({ i: 0 }).animate { i: 1 },
+      duration: 600
+      step: (i) ->
+        if time < i
+          time += period
+          next.removeClass('show')
+          next = next.prev()

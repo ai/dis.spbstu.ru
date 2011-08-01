@@ -1,17 +1,20 @@
 #opensource
-  display: block
   position: absolute
   top: 0
   right: 0
-  width: 90px
-  height: 90px
-  text-decoration: none
-  overflow: hidden
-  z-index: 2
-  +box-shadow(rgba(0, 0, 0, 0) 0 0 0)
-  +transition(all, 100ms)
-  &.bended
-    +box-shadow(rgba(0, 0, 0, 0.2) 0 0 4px)
+  z-index: 3
+  .repository
+    position: relative
+    display: block
+    width: 90px
+    height: 90px
+    text-decoration: none
+    overflow: hidden
+    +box-shadow(rgba(0, 0, 0, 0) 0 0 10)
+    z-index: 3
+    +transition(all, 100ms)
+    &.bended
+      +box-shadow(rgba(0, 0, 0, 0.2) 0 0 4px)
   .corner
     position: absolute
     top: -1px
@@ -42,8 +45,8 @@
     height: 70%
     padding: 0
   .source
-    +image-size("layout/source.png")
-    background: image-url("layout/source.png")
+    +image-size("opensource/source.png")
+    background: image-url("opensource/source.png")
   .hider
     background: $body-color
     position: absolute
@@ -54,16 +57,10 @@
     +rotate(45deg)
     +box-shadow(black 0 0 7px)
 
-#opensource.animated2d
-  .corner
-    +transition("left top", 400ms)
-  &:hover .corner
-    left: 40px
-    top: -40px
-
 @media all and (transform-3d), all and (-webkit-transform-3d)
   #opensource
-    +perspective(2000px)
+    .repository
+      +perspective(2000px)
     .light, .shadow
       display: block
       opacity: 0
@@ -73,3 +70,56 @@
       background: black
     .border
       +backface-visibility(hidden)
+
+#opensource .animated2d
+  .corner
+    +transition("left top", 400ms)
+  &:hover .corner
+    left: 40px
+    top: -40px
+
+#opensource .hack
+  position: absolute
+  right: 95px
+  top: 25px
+  width: 100px
+  color: gray
+  color: #555
+  text-shadow: $body-color 1px 1px 1px, $body-color -1px 1px 1px, $body-color 1px -1px 1px, $body-color -1px -1px 1px
+  font-size: 13px
+  opacity: 0
+  +transition(opacity, 600ms)
+  &.show
+    opacity: 1
+
+#opensource .technologies
+  position: absolute
+  margin-top: 30px
+  opacity: 0.4
+  li
+    width: 90px
+    padding: 82px 0 20px 0
+    text-align: center
+    position: relative
+    font-weight: bold
+    text-shadow: white 0 2px 2px
+    text-shadow: #ccc 1px 1px 0
+    font-size: 13px
+    opacity: 0
+    +transition(opacity, 400ms)
+    &.show
+      opacity: 1
+  .icon
+    position: absolute
+    top: 0
+    left: 5px
+    width: 80px
+    height: 80px
+  .html5 .icon
+    background: image-url("opensource/html5.png")
+  .css3 .icon
+    background: image-url("opensource/css3.png")
+  .rails .icon
+    background: image-url("opensource/rails.png")
+  .mongodb .icon
+    background: image-url("opensource/mongodb.png")
