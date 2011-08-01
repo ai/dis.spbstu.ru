@@ -8,14 +8,18 @@
   text-decoration: none
   overflow: hidden
   z-index: 2
+  +box-shadow(rgba(0, 0, 0, 0) 0 0 0)
+  +transition(all, 100ms)
+  &.bended
+    +box-shadow(rgba(0, 0, 0, 0.2) 0 0 4px)
   .corner
     position: absolute
     top: -1px
-    left: 1px
+    left: 0
     width: 100%
     height: 100%
     overflow: hidden
-    border: 1px solid #ccc
+    border: 1px solid #d0d0d0
     border-width: 1px 1px 0 0
   .rotate
     position: relative
