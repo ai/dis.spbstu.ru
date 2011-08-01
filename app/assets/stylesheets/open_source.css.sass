@@ -58,19 +58,18 @@
     +rotate(45deg)
     +box-shadow(black 0 0 7px)
 
-@media all and (transform-3d), all and (-webkit-transform-3d)
-  #opensource
-    .repository
-      +perspective(2000px)
-    .light, .shadow
-      display: block
-      opacity: 0
-    .light
-      background: white
-    .shadow
-      background: black
-    .border
-      +backface-visibility(hidden)
+#opensource.animated3d
+  .repository
+    +perspective(2000px)
+  .light, .shadow
+    display: block
+    opacity: 0
+  .light
+    background: white
+  .shadow
+    background: black
+  .border
+    +backface-visibility(hidden)
 
 #opensource .animated2d
   .corner

@@ -4,6 +4,7 @@ app.for '#opensource', ($, $$, opensource) ->
   # 2 разных анимации, которые будут показывать «исходный код» сайта,
   # в зависимости от возможностей браузера
   if app.media('transform-3d')
+    opensource.addClass('animated3d')
     light     = $$('.light')
     shadow    = $$('.shadow')
     corner    = $$('.corner')
