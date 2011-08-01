@@ -46,6 +46,7 @@ app.for '#opensource', ($, $$, opensource) ->
   techsAnimation = null
   period = 0.5 / techs.find('li').length
   link.mouseover ->
+    techs.addClass('show')
     techsAnimation?.stop()
     next = techs.find('li:first')
     time = 0.5
@@ -72,3 +73,5 @@ app.for '#opensource', ($, $$, opensource) ->
           time += period
           next.removeClass('show')
           next = next.prev()
+      complete: ->
+        techs.removeClass('show')

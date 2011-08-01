@@ -94,8 +94,12 @@
 
 #opensource .technologies
   position: absolute
-  margin-top: 20px
-  opacity: 0.4
+  padding-top: 20px
+  background: $body-color
+  opacity: 0
+  +transition(opacity, 600ms)
+  &.show
+    opacity: 1
   li
     width: 90px
     padding: 82px 0 20px 0
@@ -108,7 +112,7 @@
     opacity: 0
     +transition(opacity, 400ms)
     &.show
-      opacity: 1
+      opacity: 0.4
   .icon
     position: absolute
     top: 0
