@@ -3,8 +3,8 @@
   position: absolute
   top: 0
   right: 0
-  width: 80px
-  height: 80px
+  width: 90px
+  height: 90px
   text-decoration: none
   overflow: hidden
   z-index: 2
@@ -26,7 +26,7 @@
     height: 50%
     padding-bottom: 50%
     +rotate(45deg)
-  .border
+  .border, .light, .shadow
     background: $body-color
     position: absolute
     left: -20%
@@ -34,9 +34,13 @@
     bottom: 50%
     padding: 55% 0 2px 0
     border-bottom: 1px dashed #999
-    color: #999
+    color: #888
     font-size: 12px
     text-align: center
+  .light, .shadow
+    display: none
+    height: 70%
+    padding: 0
   .source
     +image-size("layout/source.png")
     background: image-url("layout/source.png")
@@ -60,5 +64,12 @@
 @media all and (transform-3d), all and (-webkit-transform-3d)
   #opensource
     +perspective(2000px)
+    .light, .shadow
+      display: block
+      opacity: 0
+    .light
+      background: white
+    .shadow
+      background: black
     .border
       +backface-visibility(hidden)
