@@ -5,14 +5,15 @@ app.for '#opensource', ($, $$, opensource) ->
   # в зависимости от возможностей браузера
   if app.media('transform-3d')
     opensource.addClass('animated3d')
+    transform = app.css3prop('transform')
+
     light     = $$('.light')
     shadow    = $$('.shadow')
     corner    = $$('.corner')
-    animation = $({ i: 0 })
+    animation =  $({ i: 0 })
+
     link.hover ->
       back = !link.is(':hover')
-      prop = 'transform'
-      prop = "-#{app.prefix()}-#{prop}" unless document.body.style.transform?
 
       link.removeClass('bended') if back
       animation.stop().animate { i: (if back then 0 else 1) },
@@ -20,13 +21,13 @@ app.for '#opensource', ($, $$, opensource) ->
         easing:  'easeInOutQuad'
         step: (i) ->
           angle = Math.round(i * 180)
+          corner.css(transform, "rotate3d(1, 1, 0, #{angle}deg)")
           if i < 0.5
             light.css(opacity: 2 * i)
             shadow.css(opacity: 0)
           else
             light.css(opacity: 0)
             shadow.css(opacity: (1 - i) / 6)
-          corner.css(prop, "rotate3d(1, 1, 0, #{angle}deg)")
           if i > 0.85 and not back
             link.addClass('bended')
   else

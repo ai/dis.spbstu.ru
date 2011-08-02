@@ -1,8 +1,12 @@
 %aside#controls.signin( role="show-signin" )
   .wrap
-    .signin-form( role="signin-form" )
-      - if flash[:wrong_user]
-      - elsif flash[:wrong_auth]
-      - else
-        Редакция
-      = render 'shared/signin_methods'
+    .hole
+      .rotator
+        .light
+        .shadow
+        .signin-form
+          - if flash[:wrong_user]
+          - elsif flash[:wrong_auth]
+          - else
+            Редакция
+          = render 'shared/signin_methods'

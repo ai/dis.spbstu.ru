@@ -4,12 +4,17 @@ window.app =
   log: ->
     console?.log?.apply(console, arguments)
 
-  # Возвращает вендроный префикс браузера для новых API.
+  # Возвращает вендроный префикс браузера для новых API
   prefix: ->
     return 'moz'    if $.browser.mozilla
     return 'webkit' if $.browser.webkit
     return 'o'      if $.browser.opera
     return 'ms'     if $.browser.msie
+
+  # Возвращает имя CSS3 свойства с вендорным префиксом, если это нужно браузеру
+  css3prop: (name) ->
+    name = "-#{@prefix()}-#{name}" unless document.body.style[name]?
+    name
 
   # Проверяет размер экрана или поддержку технологий с помощью
   # CSS Media Queries. Просто обёртка вокруг window.matchMedia().

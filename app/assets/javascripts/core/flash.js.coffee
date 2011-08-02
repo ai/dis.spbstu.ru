@@ -7,10 +7,9 @@ window.app.flash =
 
     height = flash.outerHeight()
     if app.media('transform-3d')
-      prop = 'transform'
-      prop = "-#{app.prefix()}-#{prop}" unless document.body.style.transform?
+      transform = app.css3prop('transform')
 
-      div  = flash.find('div')
+      div = flash.find('div')
       div.css(borderTopWidth: height, top: -height)
 
       $({ i: 0 }).animate { i: 1 },
@@ -18,7 +17,7 @@ window.app.flash =
         easing: 'easeInQuart'
         step: (i) ->
           angle = Math.round(i * 90)
-          div.css(prop, "rotateX(#{angle}deg)")
+          div.css(transform, "rotateX(#{angle}deg)")
         complete: ->
           flash.remove()
     else
