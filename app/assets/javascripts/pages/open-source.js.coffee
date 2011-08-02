@@ -20,7 +20,7 @@ app.for '#opensource', ($, $$, opensource) ->
         duration: 600
         easing:  'easeInOutQuad'
         step: (i) ->
-          angle = Math.round(i * 180)
+          angle = Math.round(180 * i)
           corner.css(transform, "rotate3d(1, 1, 0, #{angle}deg)")
           if i < 0.5
             light.css(opacity: 2 * i)
@@ -30,6 +30,13 @@ app.for '#opensource', ($, $$, opensource) ->
             shadow.css(opacity: (1 - i) / 6)
           if i > 0.85 and not back
             link.addClass('bended')
+
+    link.mousedown ->
+      corner.css(transform, 'rotate3d(1, 1, 0, 190deg)')
+      link.removeClass('bended')
+    link.mouseup ->
+      corner.css(transform, 'rotate3d(1, 1, 0, 180deg)')
+      link.addClass('bended')
   else
     link.addClass('animated2d')
 

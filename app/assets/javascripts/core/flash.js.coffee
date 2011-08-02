@@ -16,7 +16,7 @@ window.app.flash =
         duration: 600
         easing: 'easeInQuart'
         step: (i) ->
-          angle = Math.round(i * 90)
+          angle = Math.round(90 * i)
           div.css(transform, "rotateX(#{angle}deg)")
         complete: ->
           flash.remove()
