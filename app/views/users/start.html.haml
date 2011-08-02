@@ -33,13 +33,17 @@
     <a href="http://www.google.com/chrome?hl=ru">Google Chrome</a> или
     <a href="http://www.mozilla.com/ru/firefox/">Mozilla Firefox</a>.
 
+- content_for(:controls_class) { 'signin' }
 - content_for :controls do
-  .signin-help щёлк-щёлк
-  .signin( role="show-signin" )
-    .signin-form( role="test-signin signin-form" )
-      .test
-        %h2 Редакция
-        = render 'shared/signin_methods'
-      .ok
-        Всё правильно
-        %div Вы молодец!
+  .hole
+    .rotator
+      .light
+      .shadow
+      .signin-help щёлк-щёлк
+      .signin-form
+        .test
+          Редакция
+          = render 'shared/signin_methods'
+        .ok
+          Всё правильно
+          %div Вы молодец!

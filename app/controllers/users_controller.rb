@@ -80,6 +80,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def start
+    @show_signin = true
+  end
+
   private
 
   # Сохраняет новую почту и имя редактора. Если произошли ошибки, то метод их
