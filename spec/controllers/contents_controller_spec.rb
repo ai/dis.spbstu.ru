@@ -55,10 +55,11 @@ describe ContentsController do
   describe "#all" do
 
     it "should return all site pages" do
-      b = Fabricate(:content, title: 'B')
-      a = Fabricate(:content, title: 'A')
+      del = Fabricate(:content, title: 'Deleted', deleted_at: Time.now)
+      b   = Fabricate(:content, title: 'B')
+      a   = Fabricate(:content, title: 'A')
 
-      get :all, format: 'json'
+      get :all
 
       response.should be_success
       assigns(:all).should == [a, b]

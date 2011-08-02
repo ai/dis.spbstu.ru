@@ -39,7 +39,7 @@ class User
   index [:auth_provider, :auth_uid], unique: true
   index :name
 
-  # Возвращает список только не удалённых редакторов
+  # Возвращает редакторов, которых не удалили
   def self.undeleted
     where(deleted_at: nil)
   end

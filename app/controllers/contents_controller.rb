@@ -48,7 +48,7 @@ class ContentsController < ApplicationController
 
   # Список всех вики-страниц сайта
   def all
-    @all = Content.all.order_by(title: :asc)
+    @all = Content.undeleted.order_by(title: :asc)
     render json: @all
   end
 

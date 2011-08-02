@@ -28,7 +28,6 @@ describe User do
 
     it "should return only undeleted users" do
       del = Fabricate(:user, deleted_at: Time.now)
-
       User.undeleted.to_a.should == [@user]
     end
 

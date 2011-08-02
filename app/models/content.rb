@@ -29,6 +29,11 @@ class Content
     content
   end
 
+  # Возвращает страницы, которых не удалили
+  def self.undeleted
+    where(deleted_at: nil)
+  end
+
   # Выкидывает ошибку 404 (Mongoid::Errors::DocumentNotFound)
   def self.raise404
     raise Mongoid::Errors::DocumentNotFound.new(self.class, [])

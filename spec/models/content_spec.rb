@@ -17,6 +17,16 @@ describe Content do
 
   end
 
+  describe ".undeleted" do
+
+    it "should return only undeleted users" do
+      one = Fabricate(:content)
+      del = Fabricate(:content, deleted_at: Time.now)
+      Content.undeleted.to_a.should == [one]
+    end
+
+  end
+
   describe ".raise404" do
 
     it "should raise error" do
@@ -38,7 +48,7 @@ describe Content do
 
   end
 
-  describe "#mark_as_deleted" do
+  describe "#mark_as_deleted!" do
 
     it "should mark content as deleted" do
       time_now = Time.parse('2000-01-01').utc
