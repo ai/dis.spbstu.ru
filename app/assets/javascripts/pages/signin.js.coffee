@@ -34,11 +34,11 @@ app.for '#controls.signin', ($, $$, signin) ->
       light.add(shadow).addClass('show')
       rotator.addClass('bordered')
       animation.animate { i: to },
-        duration: 600
-        easing:  'easeInOutQuad'
+        duration: 1200
+        easing:  'easeInOutBack'
         step: (i) ->
-          angle = Math.round(i * 180)
-          rotator.css(transform, "rotateY(-#{angle}deg)")
+          angle = Math.round(-180 * i)
+          rotator.css(transform, "rotateY(#{angle}deg)")
           if i < 0.5
             form.css(opacity: 1)
             light.css(opacity: 2 * i)
