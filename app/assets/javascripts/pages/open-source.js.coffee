@@ -41,7 +41,7 @@ app.for '#opensource', ($, $$, opensource) ->
   period = 0.5 / techs.find('li').length
   link.mouseenter ->
     techs.show()
-    hack.show()
+    hack.addClass('show-background')
     next = techs.find('li:first')
     time = 0.5
 
@@ -50,16 +50,17 @@ app.for '#opensource', ($, $$, opensource) ->
       easing:  'easeInOutQuad'
       step: (i) ->
         if time > 0.5
-          hack.addClass('show')
+          hack.addClass('show-text')
         if time < i
           time += period
           next.addClass('show')
           next = next.next()
+
   link.mouseleave ->
     next = techs.find('li:last')
     time = 1
 
-    hack.removeClass('show')
+    hack.removeClass('show-text')
     techsAnimation.stop().animate { i: 0 },
       duration: 600
       easing:  'easeInOutQuad'
@@ -69,5 +70,5 @@ app.for '#opensource', ($, $$, opensource) ->
           next.removeClass('show')
           next = next.prev()
       complete: ->
-        hack.hide()
+        hack.removeClass('show-background')
         techs.hide()

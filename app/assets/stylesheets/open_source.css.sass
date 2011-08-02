@@ -79,20 +79,20 @@
     top: -40px
 
 #opensource .hack
-  display: none
   position: absolute
   right: 90px
-  top: 15px
-  width: 100px
+  top: 17px
+  width: 0
   padding: 10px 5px 10px 15px
-  color: #555
   font-size: 13px
-  opacity: 0
-  +transition(opacity, 600ms)
   background: $body-color
+  color: $body-color
   +background(linear-gradient(left, fade-out($body-color, 1), $body-color 5px, $body-color))
-  &.show
-    opacity: 1
+  +transition(all, 600ms)
+  &.show-background
+    width: 100px
+  &.show-text
+    color: #555
 
 #opensource .technologies
   display: none
