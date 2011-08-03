@@ -42,8 +42,10 @@
       .signin-help щёлк-щёлк
       .signin-form
         .test
-          Редакция
-          = render 'shared/signin_methods'
+          %h3
+            Редакция
+          .methods
+            = render 'shared/signin_methods'
         .ok
           Всё правильно
           %div Вы молодец!

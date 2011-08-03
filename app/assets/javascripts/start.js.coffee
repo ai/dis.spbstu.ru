@@ -7,7 +7,7 @@ jQuery ($) ->
     $('.signin-help').hide()
     after '2sec', ->
       $('body').click()
-      after '500ms', -> $('.signin-form').removeClass('passed')
+      after '600ms', -> $('.signin-form').removeClass('passed')
     false
 
   $('@exit').submit ->
