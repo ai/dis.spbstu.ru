@@ -5,18 +5,18 @@
 .shadowed-button
   display: inline-block
   position: relative
-  +line-height(30px)
+  +line-height(28px)
   border: 1px solid #d8d8d8
   color: #c8c8c8
-  padding: 0 16px
+  padding: 0 14px
   margin-bottom: 15px
   font-size: 17px
   text-align: center
   +border-radius(15px)
   .styled-button
     position: absolute
-    top: 0
-    left: 0
+    top: -2px
+    left: -1px
     +transition(opacity, 200ms)
 
 #controls.user
@@ -27,24 +27,24 @@
     font-size: 15px
     +transition(color, 200ms)
     input
-      background: $green
-      width: 20px
-      height: 20px
+      background: lighten($green, 2%)
+      width: 22px
+      height: 22px
       text-align: center
-      +border-radius(10px)
-      border: 1px solid darken($green, 5%)
+      border: none
+      +border-radius(11px)
       +transition(opacity, 200ms)
-      color: white
+      color: black
       padding: 0
       margin-left: 3px
       font-weight: bold
-      text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0
+      text-shadow: rgba(255, 255, 255, 0.4) 0 1px 2px
       +shadow
       cursor: pointer
       &:hover
-        background: lighten($green, 3%)
+        background: lighten($green, 6%)
       &:active
-        background: darken($green, 1%)
+        background: $green
         +box-shadow(rgba(0, 0, 0, 0) 0 0 0)
 
   .page-controls
@@ -122,6 +122,9 @@
   .history
     h2
       color: #d8d8d8
+    li
+      a, .number, .author
+        color: #ddd
     li.last
       a, .number, .author
         color: #bfbfbf

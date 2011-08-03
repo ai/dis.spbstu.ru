@@ -1,46 +1,39 @@
-@mixin half-background($color, $angle: 270deg)
+@mixin button-background($color, $angle: 270deg)
   background: $color
-  +background(linear-gradient($angle, $color 0, $color 50%, darken($color, 3%) 50%, darken($color, 4%) 100%))
+  +background(linear-gradient($angle, lighten($green, 4%), darken($color, 5%)))
 
 .styled-button, .go-button
   display: inline-block
   text-decoration: none
-  +half-background($green)
-  color: white
+  +button-background(lighten($green, 2%))
   font-size: 17px
-  border: 1px solid darken($green, 5%)
-  +shadow
+  border-top: 1px solid lighten($green, 8%)
+  border-bottom: 1px solid darken($green, 8%)
+  +box-shadow(rgba(0, 0, 0, 0.4) 0 1px 6px)
   line-height: 1
-  span
-    display: inline-block
-    +line-height(28px)
-    border: 1px solid lighten($green, 4%)
-    text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0
-    text-align: center
+  color: black
+  text-shadow: rgba(255, 255, 255, 0.4) 0 1px 2px
+  +line-height(30px)
   &:hover, &:focus
     outline: none
-    +half-background(lighten($green, 2%))
-    span
-      border-color: lighten($green, 6%)
+    +button-background(lighten($green, 6%))
+    border-top-color: lighten($green, 10%)
+    border-bottom-color: darken($green, 8%)
   &:active
-    border-color: darken($green, 13%)
-    +half-background(darken($green, 1%))
-    +box-shadow(rgba(0, 0, 0, 0.2) 0 3px 5px 0 inset)
-    span
-      border-color: transparent
+    background: darken($green, 1%)
+    +background(linear-gradient(darken($green, 2%), $green))
+    border-top-color: $green
+    border-bottom-color: darken($green, 2%)
+    +box-shadow(rgba(0, 0, 0, 0.5) 0 0 1px)
 
 .styled-button
-  +border-radius(16px)
-  span
-    +border-radius(15px)
-    padding: 0 15px
+  +border-radius(15px)
+  padding: 0 15px
 
 .go-button
   position: relative
   border-right: none
-  span
-    border-right: none
-    padding: 0 7px 0 8px
+  padding: 0 5px 0 9px
   .crop
     position: absolute
     top: -1px
@@ -52,24 +45,16 @@
     position: absolute
     top: 4px
     left: -12px
-    border: 1px solid darken($green, 5%)
     +rotate(-45deg)
-    +half-background($green, -135deg)
-    +shadow
-    div
-      border: 1px solid lighten($green, 4%)
-      width: 20px
-      height: 20px
+    +button-background(lighten($green, 2%), -135deg)
+    +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 4px)
+    width: 24px
+    height: 24px
   &:hover, &:focus
     .arrow
-      +half-background(lighten($green, 2%), -135deg)
-      div
-        border-color: lighten($green, 6%)
+      +button-background(lighten($green, 6%), -135deg)
   &:active
-    +box-shadow(rgba(0, 0, 0, 0.15) 2px 2px 2px 0 inset)
     .arrow
-      border-color: darken($green, 13%)
-      +half-background(darken($green, 1%), -135deg)
-      +box-shadow(rgba(0, 0, 0, 0.15) -1px 1px 2px 0 inset)
-      div
-        border-color: transparent
+      background: darken($green, 1%)
+      +background(-135deg, linear-gradient(darken($green, 2%), $green))
+      +box-shadow(rgba(0, 0, 0, 0.5) 0 0 1px)
