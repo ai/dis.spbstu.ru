@@ -254,14 +254,14 @@ describe Content do
 
     it "should not change html if filter doesn't exists" do
       @content.should_receive(:filter_haml).and_return(:no)
-      @content.filter('<p>1</p>2').should == '<p>1</p>2'
+      @content.filter('<p>1</p>2', @content).should == '<p>1</p>2'
     end
 
     it "should change html by filter" do
       haml = Haml::Engine.new('= html.css("p").text + path')
       @content.should_receive(:filter_haml).twice.and_return(haml)
 
-      @content.filter('<p>1</p>2').should == "1/one/a.b\n"
+      @content.filter('<p>1</p>2', @content).should == "1/one/a.b\n"
     end
 
   end

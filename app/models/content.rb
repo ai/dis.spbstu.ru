@@ -102,10 +102,10 @@ class Content
 
   # Если для страницы есть фильтр, то он использует его, чтобы добавить
   # дополнительную вёрстку.
-  def filter(html)
+  def filter(html, bindings)
     unless :no == self.filter_haml
       doc = Nokogiri::HTML(html)
-      html = self.filter_haml.render(self, html: doc)
+      html = self.filter_haml.render(bindings, html: doc)
     end
     html
   end

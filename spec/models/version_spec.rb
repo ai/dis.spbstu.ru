@@ -44,15 +44,6 @@ describe Version do
       content.version.html.should == "<p><strong>New</strong> value</p>\n"
     end
 
-    it "should change html by content filter" do
-      content = Fabricate(:content)
-      content.update_text! '**Warning**'
-      haml = Haml::Engine.new('%em= html.css("strong").text.downcase')
-      content.should_receive(:filter_haml).twice.and_return(haml)
-
-      content.version.html.should == "<em>warning</em>\n"
-    end
-
   end
 
   describe "#render_html" do

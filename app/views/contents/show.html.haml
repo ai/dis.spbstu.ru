@@ -11,7 +11,7 @@
     = @version.title
     - unless @version.last?
       .old старая версия
-  = @version.html.html_safe
+  = @content.filter(@version.html, self).html_safe
 
 - if signed_in?
   - content_for :controls do
