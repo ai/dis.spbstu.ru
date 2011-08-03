@@ -83,4 +83,10 @@ class Content
   def as_json(options = { })
     { path: self.path, title: (root? ? 'Главная страница' : self.title) }
   end
+
+  # Возвращает HTML-класс на основе path, чтобы выставить его в <article> и
+  # выставлять стили специфичные для определённой страницы.
+  def html_class
+    root? ? 'root' : path.gsub(/^\//, '').gsub('/', '-')
+  end
 end

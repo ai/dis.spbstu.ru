@@ -6,7 +6,7 @@
   - if @version.description
     %meta{ name: 'description', content: @version.description }
 
-%article.page
+%article.page{ class: @content.html_class }
   %h1
     = @version.title
     - unless @version.last?

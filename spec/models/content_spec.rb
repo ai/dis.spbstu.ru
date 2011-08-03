@@ -211,4 +211,14 @@ describe Content do
 
   end
 
+  describe "#html_class" do
+
+    it "should convert path to HTML class" do
+      Fabricate(:content, path: '/'       ).html_class.should == 'root'
+      Fabricate(:content, path: '/one'    ).html_class.should == 'one'
+      Fabricate(:content, path: '/one/two').html_class.should == 'one-two'
+    end
+
+  end
+
 end
