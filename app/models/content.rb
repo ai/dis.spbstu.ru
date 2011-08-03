@@ -87,6 +87,26 @@ class Content
   # Возвращает HTML-класс на основе path, чтобы выставить его в <article> и
   # выставлять стили специфичные для определённой страницы.
   def html_class
-    root? ? 'root' : path.gsub(/^\//, '').gsub('/', '-')
+    root? ? 'root' : path.gsub(/^\//, '').gsub('/', '-').gsub('.', '')
+  end
+
+  # Читает HAML-код фильтра. Вынесено из метода filter в отдельный метод для
+  # удобства тестирования.
+  def filter_haml
+    @filter ||= begin
+      path = Rails.root.join("app/filters/#{self.html_class}.haml")
+      return :no unless File.exists? path
+      Haml::Engine.new(File.read(path))
+    end
+  end
+
+  # Если для страницы есть фильтр, то он использует его, чтобы добавить
+  # дополнительную вёрстку.
+  def filter(html)
+    unless :no == self.filter_haml
+      doc = Nokogiri::HTML(html)
+      html = self.filter_haml.render(self, html: doc)
+    end
+    html
   end
 end

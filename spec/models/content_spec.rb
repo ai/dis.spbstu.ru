@@ -216,7 +216,52 @@ describe Content do
     it "should convert path to HTML class" do
       Fabricate(:content, path: '/'       ).html_class.should == 'root'
       Fabricate(:content, path: '/one'    ).html_class.should == 'one'
+      Fabricate(:content, path: '/one.txt').html_class.should == 'onetxt'
       Fabricate(:content, path: '/one/two').html_class.should == 'one-two'
+    end
+
+  end
+
+  describe "#filter_haml" do
+
+    before :each do
+      @content = Fabricate(:content, path: '/one/a.b')
+      @filter  = Rails.root.join('app/filters/one-ab.haml')
+    end
+
+    it "should return :no if filter doesn't exists" do
+      File.should_receive(:exists?).with(@filter).and_return(false)
+
+      @content.filter_haml.should == :no
+    end
+
+    it "should return haml engine for correct filter" do
+      File.should_receive(:exists?).with(@filter).and_return(true)
+      File.should_receive(:read).with(@filter).and_return('%p= one')
+
+      haml = @content.filter_haml
+      haml.should be_a(Haml::Engine)
+      haml.render(Object.new, one: 1).should == "<p>1</p>\n"
+    end
+
+  end
+
+  describe "#filter" do
+
+    before :each do
+      @content = Fabricate(:content, path: '/one/a.b')
+    end
+
+    it "should not change html if filter doesn't exists" do
+      @content.should_receive(:filter_haml).and_return(:no)
+      @content.filter('<p>1</p>2').should == '<p>1</p>2'
+    end
+
+    it "should change html by filter" do
+      haml = Haml::Engine.new('= html.css("p").text + path')
+      @content.should_receive(:filter_haml).twice.and_return(haml)
+
+      @content.filter('<p>1</p>2').should == "1/one/a.b\n"
     end
 
   end

@@ -7,6 +7,7 @@ gem 'bson_ext'
 
 gem 'json'
 gem 'haml'
+gem 'nokogiri'
 
 gem 'oa-openid'
 gem 'email_validator'

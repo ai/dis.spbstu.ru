@@ -108,6 +108,7 @@ class Version
     end
     if not @rendered and not only_meta
       render_html
+      @html = self.content.filter(@html)
       @rendered = true
     end
   end
