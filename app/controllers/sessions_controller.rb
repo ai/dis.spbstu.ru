@@ -57,7 +57,7 @@ class SessionsController < ApplicationController
   # Вызывается, если сервис не смог проверить пользователя. Например, если
   # пользователь забыл пароль от своего аккаунта на Google.
   def failure
-    flash[:wrong_auth] = params[:message]
+    flash[:auth_error] = params[:message]
     # Возвращаем пользователя на страницу, где он последний раз был или на
     # главную страницу сайта
     redirect_to request.env['omniauth.origin'] || root_path

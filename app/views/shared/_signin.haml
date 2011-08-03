@@ -1,12 +1,25 @@
+- error = flash[:wrong_user] || flash[:auth_error]
 %aside#controls.signin
   .wrap
     .hole
-      .rotator
+      .rotator{ class_if('open', error) }
         .light
         .shadow
-        .signin-form
-          - if flash[:wrong_user]
-          - elsif flash[:wrong_auth]
-          - else
-            Редакция
-          = render 'shared/signin_methods'
+        .signin-form{ class_if('error', error) }
+          %h3
+            - if flash[:wrong_user]
+              Я не узнаю Вас
+            - elsif flash[:auth_error] == 'timeout'
+              Сервер не отвечает
+            - elsif flash[:auth_error] == 'service_unavailable'
+              Сервер недоступен
+            - elsif flash[:auth_error] == 'invalid_credentials'
+              Неправильный запрос
+            - elsif flash[:auth_error] == 'invalid_response'
+              Неправильный ответ
+            - elsif flash[:auth_error] == 'connection_failed'
+              OpenID не найден
+            - else
+              Редакция
+          .methods
+            = render 'shared/signin_methods'

@@ -123,7 +123,7 @@ describe SessionsController do
       get :failure, message: 'invalid_response'
 
       response.should redirect_to('http://example.com/one')
-      flash[:wrong_auth].should == 'invalid_response'
+      flash[:auth_error].should == 'invalid_response'
     end
 
   end
