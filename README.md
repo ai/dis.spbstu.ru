@@ -26,7 +26,7 @@
 5. Установите гем Bundler, для контроля зависимостей и установки библиотек.
    Например, в Ubuntu:
 
-        sudo gem1.9.1 install bundler
+        sudo gem1.9.1 install bundler --no-user-install --bindir /usr/bin
 
 6. Установите базу данных MongoDB (см. <http://mongodb.org/downloads>). Для
    Ubuntu надо добавить сторонний репозиторий:
