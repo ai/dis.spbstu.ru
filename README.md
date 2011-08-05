@@ -21,7 +21,7 @@
 
 4. Установите Ruby 1.9. Например, в Ubuntu:
 
-        apt-get install ruby-1.9.1 ruby1.9.1-dev
+        apt-get install ruby-1.9.1 ruby1.9.1-dev libxml2-dev libxslt1-dev
 
 5. Установите гем Bundler, для контроля зависимостей и установки библиотек.
    Например, в Ubuntu:
