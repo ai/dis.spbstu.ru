@@ -1,7 +1,31 @@
-- html.css('p').each do |p|
-  = p
+.description
+  - html.css('p').each do |p|
+    - next if p.css_path =~ /li/
+    = p
 
 .features
   %h1
-    = html.css('h1').map(&:content).join
+    = html.css('h1#features').inner_html
     = go_button('Вся информация для абитуриентов', href: '/join')
+  %ul
+    - html.css('h1#features + ul > li').each do |feature|
+      %li.feature
+        - photos = feature.css('li')
+        %h2= feature.css('h2').inner_html
+        %ul.photos
+          - photos.each do |photo, i|
+            %li
+              - image, text = photo.text.split(' ', 2)
+              = image_tag("/images/root/#{image}", alt: text)
+        %p= feature.css('p').text
+
+.science
+  %h1
+    = html.css('h1#science').inner_html
+  %ul
+    - html.css('h1#science + ul li').each do |project|
+      %li
+        - image, text = project.text.split(' ', 2)
+        %figure
+          .image= image_tag("/images/root/#{image}", alt: text)
+          %figcaption= text

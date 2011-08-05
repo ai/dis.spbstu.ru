@@ -1,10 +1,79 @@
 article.root
-  .features
+  padding-right: 0
+  .description
+    margin-right: 20px
+  .features, .science
     h1
-      margin-top: 0
+      margin-top: 10px
       padding: 12px 0 7px 0
-      .go-button
-        margin-right: 20px
-        position: relative
-        float: right
-        top: -2px
+    li
+      list-style: none
+    ul
+      padding: 0
+  .features
+    display: inline-block
+    width: 100%
+    h1 .go-button
+      margin-right: 35px
+      position: relative
+      float: right
+      top: -1px
+  .feature
+    float: left
+    width: 274px
+    margin-right: 19px
+    position: relative
+    h2
+      text-align: center
+      a
+        color: black
+        text-decoration: none
+        &:hover
+          text-decoration: underline
+    p
+      margin-top: 5px
+      font-size: 14px
+      padding: 0 6px
+  ul.photos
+    position: relative
+    border: 1px solid #ccc
+    padding: 4px
+    +box-shadow(rgba(0, 0, 0, 0.2) 0 0 3px)
+    &, img
+      width: 266px
+      height: 177px
+    img
+      position: absolute
+      top: 4px
+      left: 4px
+      z-index: 1
+      &:first-child
+        z-index: 2
+  .science
+    display: inline-block
+    width: 100%
+    margin-top: 5px
+    ul
+      margin: -10px 0 0 0
+    li
+      float: left
+      width: 274px
+      height: 60px
+      margin: 20px 19px 9px 0
+      position: relative
+      &:first-child
+        margin-left: 0
+    .image
+      position: absolute
+      top: 0
+      left: 0
+      border: 1px solid #ccc
+      padding: 3px
+      +box-shadow(rgba(0, 0, 0, 0.1) 0 0 2px)
+      img
+        display: block
+        width: 60px
+        height: 60px
+    figcaption
+      padding: 5px 0 0 77px
+      font-size: 15px
