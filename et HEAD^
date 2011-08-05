@@ -1,0 +1,282 @@
+commit 6d63977f232f51ef33194c84c20fb9fe47cef7b3
+Merge: 1f44301 fed65c0
+Author: ishkildin <artur.ishkildin@gmail.com>
+Date:   Sat Aug 6 02:18:08 2011 +0400
+
+    Merge branch 'master' of git://github.com/spbstu-dis/dis.spbstu.ru
+
+commit 1f4430161e32fa9728ab71e2301d4b0519177398
+Author: ishkildin <artur.ishkildin@gmail.com>
+Date:   Sat Aug 6 02:17:24 2011 +0400
+
+    Typo
+
+commit fed65c0274006a1f5963321ceef698cf39b5c01a
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Fri Aug 5 22:47:35 2011 +0400
+
+    Add -dev packages to install instruction
+
+commit 2dfd2cda8cece3db4222e6cd47974b82fac26520
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Fri Aug 5 18:49:15 2011 +0400
+
+    Fix install instruction
+
+commit dda99c7eedf8fc51398b5c62740c56507cd04a12
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Wed Aug 3 09:12:10 2011 +0400
+
+    Update button style
+
+commit 067cbe051e9c06e5c74107719395a64e5a8fe474
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Wed Aug 3 08:54:57 2011 +0400
+
+    Update start page to use new signin form
+
+commit bdc91d201e30ca34e5e5c93e0bbf92ab8da96f82
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Wed Aug 3 07:30:39 2011 +0400
+
+    Add sample filter for root page
+
+commit 10e5b09ffcd31cf634447f4d6b1ed4cb6159b66b
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Wed Aug 3 06:42:49 2011 +0400
+
+    Add filters to change content by path
+
+commit 769bf91c9ede650b892efc128f964d8e0d97d5ba
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Wed Aug 3 05:28:36 2011 +0400
+
+    Add styles for signin error
+
+commit fe1c486defb85abe45b8da47caf74e1430f0d91a
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Wed Aug 3 04:53:24 2011 +0400
+
+    Add class to article tag to add page specific styles
+
+commit 5ce9b9401b4098d8b010e89165e27b87daf2b593
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 16:14:20 2011 +0400
+
+    Fix start page for new users with new auth form
+
+commit f6e4225fc51181c5a68623f79a3841e02e3a41b2
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 05:46:28 2011 +0400
+
+    Add active effect to open source link
+
+commit 1720ebe0f9fc989026f76865d3ac0ef30ee22192
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 05:40:30 2011 +0400
+
+    Increase open source motivation slogan animation
+
+commit 7f736f322563cc009aeb34d8870463148bc7ea71
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 05:27:53 2011 +0400
+
+    Increase auth form effect by easing function
+
+commit 3dbc10061cef902338f1516acf3495fe14d03372
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 05:13:05 2011 +0400
+
+    Don't show deleted pages in quick search
+
+commit 7275bf3bf005f0e1e84f3a3c998e2c6bb167d974
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 05:08:06 2011 +0400
+
+    Show auth by 3D effect
+
+commit d29ad863a6d49c8f38b054ae8c08cf917ae3a049
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 05:07:22 2011 +0400
+
+    Add little opacity to flash
+
+commit 47efd5b7960942a218aa27996b17a96d875e7e2b
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 03:24:05 2011 +0400
+
+    Enable 3D CSS only when user hover to open source corner
+
+commit aa23dd628698e25c1fc5997f2942aaa7c7d72e7f
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Tue Aug 2 03:10:14 2011 +0400
+
+    Clean up open source animation
+
+commit a50aebdcab548ea8215ced5d0e47fd2e9b788878
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 21:32:38 2011 +0400
+
+    Fix open source corner with user controls
+
+commit 3553bde3ead6fba49673452ba40287c9f1698792
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 20:55:11 2011 +0400
+
+    Fix site technologies position
+
+commit f51b90baf243c98aa71d1bb5e04e9a0dbdbadb81
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 20:54:21 2011 +0400
+
+    Add site technologies and motivation text to open source corner
+
+commit 74714f0ad1f81bad8851e6b4b3fd098cf3cb71fe
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 19:47:51 2011 +0400
+
+    Add styles for selected text
+
+commit e0ccd557a226bed0ce452a8647f6446238cbae80
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 19:43:21 2011 +0400
+
+    Add light and shadow to open source corner animation
+
+commit 4905d06d4ae2d61340fc2ee0a05ee89f485ef1d5
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 14:43:42 2011 +0400
+
+    Add shadow to bended open source corner
+
+commit 8928376ea5cd9549973af25dc7592fc5fa4caad5
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 03:58:25 2011 +0400
+
+    Add text for 404 and 403 error pages
+
+commit 21ec7c9e9467de788f8bb371d75f5429131e8cd1
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 03:47:10 2011 +0400
+
+    Clean up reauth button titles on users page
+
+commit b59e88573aededb48f4de33a9dce617dad01d841
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 03:43:55 2011 +0400
+
+    Add open source badge
+
+commit 5f9d54a72fd0e473da7cef4b0d31076be421ccfe
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 01:05:40 2011 +0400
+
+    Fix edit page cancel link position
+
+commit 9d1225f59dab636acdc8233a0dc42f6afe44ecb4
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Mon Aug 1 01:01:53 2011 +0400
+
+    Change title on root page edit
+
+commit 7810e55ec7be4ee879b208597f02bcc50385593e
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 23:05:29 2011 +0400
+
+    Fix wrong keyboard layout on search
+
+commit f1ed7c33b7e5fc65cf45414e075f922efa9890e8
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 21:50:37 2011 +0400
+
+    Add political slogan to mail signature
+
+commit 744220fd3815a0eb410a64a9cca418b67f0c76f4
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 21:40:49 2011 +0400
+
+    Remove trailing spaces
+
+commit d4621efef554f72822d05c013fae463220ca8314
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 21:21:37 2011 +0400
+
+    Don't delete users with edits
+
+commit 48fae266bde21a8f1575fc70afcfd3b366338f77
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 21:18:49 2011 +0400
+
+    Allow to click on qiuck search results
+
+commit 975d8cfe6f20d193a154ca3494ee07db4be49c3a
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 17:57:23 2011 +0400
+
+    Use Visibility.js in flash autohiding
+
+commit 07a6b85970506738fc1b2bd8d9c3c3fead22c12d
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 02:04:52 2011 +0400
+
+    Set sizes manually for menu items
+
+commit 96db651edb1e7801f18a02a760af15b54f4cd6a9
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sun Jul 31 02:04:38 2011 +0400
+
+    Move JS libraries to vendor/assets
+
+commit 877b8fc4c67fb5b99bcdaf79215e6f4de3688ed2
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sat Jul 30 23:10:37 2011 +0400
+
+    Update Gemfile to use assets bundle
+
+commit 66ad61c5718059be7da8aefaf270263111191ead
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sat Jul 30 22:30:25 2011 +0400
+
+    Fix key tips in search input
+
+commit f1f7078e569065649762925518572481c1315949
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Sat Jul 30 16:25:14 2011 +0400
+
+    Add quick search
+
+commit 3164e20f109733c46d369148aff3fc8b1c966fee
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Fri Jul 29 03:20:18 2011 +0400
+
+    Add university to full department name
+
+commit 3a21a6ce39641e0ecb05f0ac87b8dad5c7f76ee0
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Fri Jul 29 02:55:21 2011 +0400
+
+    Add favicon
+
+commit a0f11c5c74eecdfd93080776ef003e84b4e83618
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Fri Jul 29 02:00:28 2011 +0400
+
+    Add full name to top menu
+
+commit a50ed31fac798127d3989dbe2bdf1dc320f25af4
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Fri Jul 29 00:30:45 2011 +0400
+
+    Use correct HTML5 type for search input
+
+commit 4f4f9556825c2f201ebc7a62d774c19005eec89c
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Fri Jul 29 00:24:48 2011 +0400
+
+    Clean up flash matchers in specs
+
+commit 3d662606a73c01136ebb5a6968478b7ee37e4042
+Author: Andrey A.I. Sitnik <andrey@sitnik.ru>
+Date:   Thu Jul 28 22:49:47 2011 +0400
+
+    Add styles for top menu
