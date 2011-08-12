@@ -27,20 +27,20 @@
 
    и вставьте его в GitHub нажав по странице <https://github.com/account/ssh>
    кнопку «Add another public key».
-3. Скопируйте исходный код сайта себе на компьютер в нужную папку:
+4. Скопируйте исходный код сайта себе на компьютер в нужную папку:
 
         git clone git@github.com:spbstu-dis/dis.spbstu.ru.git
 
-4. Установите Ruby 1.9. Например, в Ubuntu:
+5. Установите Ruby 1.9. Например, в Ubuntu:
 
         apt-get install ruby-1.9.1 ruby1.9.1-dev libxml2-dev libxslt1-dev
 
-5. Установите гем Bundler, для контроля зависимостей и установки библиотек.
+6. Установите гем Bundler, для контроля зависимостей и установки библиотек.
    Например, в Ubuntu:
 
         sudo gem1.9.1 install bundler --no-user-install --bindir /usr/bin
 
-6. Установите базу данных MongoDB (см. <http://mongodb.org/downloads>). Для
+7. Установите базу данных MongoDB (см. <http://mongodb.org/downloads>). Для
    Ubuntu надо добавить сторонний репозиторий:
 
         sudo apt-add-repository 'http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'
@@ -48,25 +48,25 @@
         sudo apt-get update
         sudo apt-get install mongodb-10gen
 
-7. Установите все необходимые библиотеки. Для этого выполните команду в папке
+8. Установите все необходимые библиотеки. Для этого выполните команду в папке
    сайта:
 
         bundle install --path=.bundle
 
-8. Создайте файл настроек MongoDB:
+9. Создайте файл настроек MongoDB:
 
         bundle exec rails generate mongoid:config
 
-9. Запустите все тесты, чтобы убедиться, что всё работает корректно:
+10. Запустите все тесты, чтобы убедиться, что всё работает корректно:
 
         bundle exec rake spec
 
-10. Запустите встроенный веб-сервер:
+11. Запустите встроенный веб-сервер:
 
         bundle exec thin start
 
-11. Откройте в браузере <http://localhost:3000>.
-12. Создайте первого редактора, указав свою почту. Например:
+12. Откройте в браузере <http://localhost:3000>.
+13. Создайте первого редактора, указав свою почту. Например:
 
         bundle exec rake users:create email=test@example.com
 
