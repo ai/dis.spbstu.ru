@@ -15,6 +15,18 @@
         git config --global user.name "Ivan Ivanov"
         git config --global user.email ivanov@example.com
 
+3. Если вы хотите вносить изменения в проект, то зарегистрируйтесь на GitHub по
+   адресу <https://github.com/signup/free>, создайте SSH-ключ для вашей
+   эл. почты:
+
+     ssh-keygen -t rsa -C "test@example.com"
+
+   скопируйте открытую часть ключа:
+
+     cat cat ~/.ssh/id_rsa.pub
+
+   и вставьте его в GitHub нажав по странице <https://github.com/account/ssh>
+   кнопку «Add another public key».
 3. Скопируйте исходный код сайта себе на компьютер в нужную папку:
 
         git clone git@github.com:spbstu-dis/dis.spbstu.ru.git
