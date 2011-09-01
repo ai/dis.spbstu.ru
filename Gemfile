@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc5'
+gem 'rails', '3.1.0'
 
 gem 'mongoid'
 gem 'bson_ext'
@@ -18,9 +18,9 @@ gem 'r18n-core'
 gem 'visibilityjs'
 
 group :assets do
-  gem 'compass', git: 'https://github.com/chriseppstein/compass.git'
-  gem 'sass-rails',   '~> 3.1.0.rc'
-  gem 'coffee-rails', '~> 3.1.0.rc'
+  gem 'compass', '>= 0.12.alpha.0'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier'
   gem 'therubyracer'
 end
