@@ -7,9 +7,9 @@ module LayoutHelper
   # разработки использует локальную версию.
   def include_jquery
     if Rails.env.production?
-      url = 'http://yandex.st/jquery/1.6.2/jquery.min.js'
+      url = 'http://yandex.st/jquery/1.6.3/jquery.min.js'
     else
-      url = 'development/jquery-1.6.2.js'
+      url = 'development/jquery-1.6.3.js'
     end
     javascript_include_tag(url)
   end

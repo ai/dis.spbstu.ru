@@ -18,7 +18,7 @@ gem 'r18n-core'
 gem 'visibilityjs'
 
 group :assets do
-  gem 'compass', '>= 0.12.alpha.0'
+  gem 'compass', '~> 0.12.alpha'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
