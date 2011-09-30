@@ -19,11 +19,11 @@
    адресу <https://github.com/signup/free>, создайте SSH-ключ для вашей
    эл. почты:
 
-     ssh-keygen -t rsa -C "test@example.com"
+        ssh-keygen -t rsa -C "test@example.com"
 
    скопируйте открытую часть ключа:
 
-     cat cat ~/.ssh/id_rsa.pub
+        cat cat ~/.ssh/id_rsa.pub
 
    и вставьте его в GitHub нажав по странице <https://github.com/account/ssh>
    кнопку «Add another public key».
