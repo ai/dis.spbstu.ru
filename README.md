@@ -21,26 +21,23 @@
 
         ssh-keygen -t rsa -C "test@example.com"
 
-   скопируйте открытую часть ключа:
-
-        cat cat ~/.ssh/id_rsa.pub
-
-   и вставьте его в GitHub нажав по странице <https://github.com/account/ssh>
+4. Скопируйте открытую часть ключа: `cat ~/.ssh/id_rsa.pub` и вставьте его в
+   GitHub нажав по странице <https://github.com/account/ssh>
    кнопку «Add another public key».
-4. Скопируйте исходный код сайта себе на компьютер в нужную папку:
+5. Скопируйте исходный код сайта себе на компьютер в нужную папку:
 
         git clone git@github.com:spbstu-dis/dis.spbstu.ru.git
 
-5. Установите Ruby 1.9. Например, в Ubuntu:
+6. Установите Ruby 1.9. Например, в Ubuntu:
 
         apt-get install ruby-1.9.1 ruby1.9.1-dev libxml2-dev libxslt1-dev
 
-6. Установите гем Bundler, для контроля зависимостей и установки библиотек.
+7. Установите гем Bundler, для контроля зависимостей и установки библиотек.
    Например, в Ubuntu:
 
         sudo gem1.9.1 install bundler --no-user-install --bindir /usr/bin
 
-7. Установите базу данных MongoDB (см. <http://mongodb.org/downloads>). Для
+8. Установите базу данных MongoDB (см. <http://mongodb.org/downloads>). Для
    Ubuntu надо добавить сторонний репозиторий:
 
         sudo apt-add-repository 'http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'
@@ -48,25 +45,25 @@
         sudo apt-get update
         sudo apt-get install mongodb-10gen
 
-8. Установите все необходимые библиотеки. Для этого выполните команду в папке
+9. Установите все необходимые библиотеки. Для этого выполните команду в папке
    сайта:
 
         bundle install --path=.bundle
 
-9. Создайте файл настроек MongoDB:
+10. Создайте файл настроек MongoDB:
 
         bundle exec rails generate mongoid:config
 
-10. Запустите все тесты, чтобы убедиться, что всё работает корректно:
+11. Запустите все тесты, чтобы убедиться, что всё работает корректно:
 
         bundle exec rake spec
 
-11. Запустите встроенный веб-сервер:
+12. Запустите встроенный веб-сервер:
 
         bundle exec thin start
 
-12. Откройте в браузере <http://localhost:3000>.
-13. Создайте первого редактора, указав свою почту. Например:
+13. Откройте в браузере <http://localhost:3000>.
+14. Создайте первого редактора, указав свою почту. Например:
 
         bundle exec rake users:create email=test@example.com
 
