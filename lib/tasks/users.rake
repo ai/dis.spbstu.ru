@@ -18,7 +18,7 @@ namespace :users do
       user.save!
     end
 
-    token = user.reset_auth_token
+    token = CGI.escape(user.reset_auth_token)
     puts 'Запустите сервер, перейдите по ссылке и выберите способ входа:'
     puts "http://localhost:3000/users/#{user.id}/auth?token=#{token}"
   end
