@@ -8,7 +8,7 @@
 1. Для контролем за изменениями вам потребуется Git. Например, в Ubuntu его
    можно установить с помощью:
 
-        apt-get install git
+        sudo apt-get install git
 
 2. Настройте Git указав своё имя и адрес эл. почты. Например:
 
@@ -30,7 +30,7 @@
 
 6. Установите Ruby 1.9. Например, в Ubuntu:
 
-        apt-get install ruby-1.9.1 ruby1.9.1-dev libxml2-dev libxslt1-dev
+        sudo apt-get install ruby-1.9.1 ruby1.9.1-dev libxml2-dev libxslt1-dev
 
 7. Установите гем Bundler, для контроля зависимостей и установки библиотек.
    Например, в Ubuntu:
